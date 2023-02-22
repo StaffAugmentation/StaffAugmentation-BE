@@ -1,0 +1,13 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Core.Model;
+
+namespace Core.Data
+{
+    public class DataContext : DbContext
+    {
+        public DataContext() { }
+        public DataContext(DbContextOptions<DataContext> options): base(options) { }
+
+        public DbSet<Company> Companies => Set<Company>();
+    }
+}

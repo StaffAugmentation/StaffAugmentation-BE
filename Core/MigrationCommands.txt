@@ -1,0 +1,2 @@
+﻿dotnet ef migrations add NewMigration --project ../Core
+dotnet ef database update
