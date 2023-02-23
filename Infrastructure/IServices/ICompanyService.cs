@@ -11,6 +11,7 @@ namespace Business.IServices
     public interface ICompanyService
     {
         Task<List<CompanyViewModel>?> GetCompany();
+        Task<CompanyViewModel?> GetCompany(int companyId);
         Task<CompanyViewModel?> CreateCompany(CompanyViewModel company);
         Task<CompanyViewModel?> UpdateCompany(CompanyViewModel company);
         Task<List<CompanyViewModel>?> DeleteCompany(int CompanyId);

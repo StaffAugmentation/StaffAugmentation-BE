@@ -4,6 +4,7 @@ using Core.IRepositories;
 using Core.Data;
 using Core.ViewModel;
 using Core.Model;
+using System.Data.Common;
 
 namespace Core.Repositories
 {
@@ -22,6 +23,14 @@ namespace Core.Repositories
         {
             return await _db.Companies.Where(company => !company.IsDeleted).Select(company => _mapper.Map<CompanyViewModel>(company)).ToListAsync();
         }
+        
+        public async Task<CompanyViewModel?> GetCompany(int companyId)
+        {
+            var dbCompany = await _db.Companies.Where(company => company.IdCompany == companyId && !company.IsDeleted).Select(company => _mapper.Map<CompanyViewModel>(company)).FirstOrDefaultAsync();
+            if (dbCompany == null)
+                throw new Exception("Company not found!");
+            return dbCompany; 
+        }
 
         public async Task<CompanyViewModel?> CreateCompany(CompanyViewModel company) 
         {
@@ -35,7 +44,9 @@ namespace Core.Repositories
         {
             var dbCompany = await _db.Companies.FindAsync(company.IdCompany);
             if (dbCompany == null)
-                return null;
+                throw new Exception("Company not found!");
+            if (dbCompany.IsDeleted)
+                throw new Exception("Company deleted!");
 
             dbCompany.CompanyName = company.CompanyName;
             dbCompany.BankAccount = company.BankAccount;
@@ -53,11 +64,11 @@ namespace Core.Repositories
 
         public async Task<List<CompanyViewModel>?> DeleteCompany(int CompanyId)
         {
-            var dbHero = await _db.Companies.FindAsync(CompanyId);
-            if (dbHero == null)
-                return null;
+            var dbCompany = await _db.Companies.FindAsync(CompanyId);
+            if (dbCompany == null)
+                throw new Exception("Company not found!");
 
-            _db.Companies.Remove(dbHero);
+            dbCompany.IsDeleted = true;
             await _db.SaveChangesAsync();
 
             return await GetCompany();

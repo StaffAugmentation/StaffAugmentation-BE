@@ -39,6 +39,9 @@ namespace Core.Migrations
                     b.Property<string>("CmpEmail")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CmpTest")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double?>("CmpVatRate")
                         .HasColumnType("float");
 

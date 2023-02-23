@@ -18,6 +18,11 @@ namespace Business.Services
             return await repo.GetCompany();
         }
 
+        public async Task<CompanyViewModel?> GetCompany(int companyId)
+        {
+            return await repo.GetCompany(companyId);
+        }
+
         public async Task<CompanyViewModel?> CreateCompany(CompanyViewModel company)
         {
             return await repo.CreateCompany(company);
@@ -32,5 +37,6 @@ namespace Business.Services
         {
             return await repo.DeleteCompany(CompanyId);
         }
+
     }
 }

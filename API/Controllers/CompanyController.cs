@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Business.IServices;
 using Core.Model;
 using Core.ViewModel;
 
-namespace SuperHero.API.Controllers
+namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -20,7 +18,7 @@ namespace SuperHero.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Company>>> GetAll()
+        public async Task<ActionResult<List<CompanyViewModel>?>> GetAll()
         {
             try
             {
@@ -33,8 +31,23 @@ namespace SuperHero.API.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CompanyViewModel?>> GetCompany(int id)
+        {
+            try
+            {
+                _logger.LogInformation("GetCompanies");
+                return Ok(await _service.GetCompany(id));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.StackTrace);
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
-        public async Task<ActionResult<List<CompanyViewModel>>> CreateCompany(CompanyViewModel company)
+        public async Task<ActionResult<CompanyViewModel?>> CreateCompany(CompanyViewModel company)
         {
             try
             {
@@ -49,16 +62,12 @@ namespace SuperHero.API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<List<CompanyViewModel>>> UpdateCompany(CompanyViewModel company)
+        public async Task<ActionResult<CompanyViewModel?>> UpdateCompany(CompanyViewModel company)
         {
             try
             {
                 _logger.LogInformation("Update Company");
-                var dbHeroes = await _service.UpdateCompany(company);
-                if (dbHeroes == null)
-                    return NotFound("Company not found");
-
-                return Ok(dbHeroes);
+                return Ok(await _service.UpdateCompany(company));
             }
             catch (Exception ex)
             {
@@ -69,16 +78,12 @@ namespace SuperHero.API.Controllers
         }
     
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<CompanyViewModel>>> DeleteCompany(int id)
+        public async Task<ActionResult<List<CompanyViewModel>?>> DeleteCompany(int id)
         {
             try
             {
                 _logger.LogInformation("Delete Company");
-                var dbHeroes = await _service.DeleteCompany(id);
-                if (dbHeroes == null)
-                    return NotFound("Company not found.");
-
-                return Ok(dbHeroes);
+                return Ok(await _service.DeleteCompany(id));
             }
             catch (Exception ex)
             {
