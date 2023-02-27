@@ -8,6 +8,7 @@ namespace Core.Data
         public DataContext() { }
         public DataContext(DbContextOptions<DataContext> options): base(options) { }
 
-        public DbSet<Company> Companies => Set<Company>();
+        public DbSet<Company> Company => Set<Company>();
+        public DbSet<Department> Department => Set<Department>();
     }
 }

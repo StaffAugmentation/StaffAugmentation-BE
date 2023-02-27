@@ -1,3 +1,3 @@
 ﻿cd API
-dotnet ef migrations add NewMigration --project ../Core
+dotnet ef migrations add '<NAME>' --project ../Core
 dotnet ef database update

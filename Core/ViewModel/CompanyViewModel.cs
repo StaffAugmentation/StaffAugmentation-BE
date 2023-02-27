@@ -5,7 +5,6 @@
         public int IdCompany { get; set; }
         public string CompanyName { get; set; } = null!;
         public string? BankAccount { get; set; }
-        public bool IsDeleted { get; set; }
         public bool IsEveris { get; set; }
         public string? CmpVatlegalEntity { get; set; }
         public string? CmpBicsw { get; set; }

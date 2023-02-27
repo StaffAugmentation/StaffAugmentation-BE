@@ -21,12 +21,12 @@ namespace Core.Repositories
 
         public async Task<List<CompanyViewModel>?> GetCompany()
         {
-            return await _db.Companies.Where(company => !company.IsDeleted).Select(company => _mapper.Map<CompanyViewModel>(company)).ToListAsync();
+            return await _db.Company.Where(company => !company.IsDeleted).Select(company => _mapper.Map<CompanyViewModel>(company)).ToListAsync();
         }
         
         public async Task<CompanyViewModel?> GetCompany(int companyId)
         {
-            var dbCompany = await _db.Companies.Where(company => company.IdCompany == companyId && !company.IsDeleted).Select(company => _mapper.Map<CompanyViewModel>(company)).FirstOrDefaultAsync();
+            var dbCompany = await _db.Company.Where(company => company.IdCompany == companyId && !company.IsDeleted).Select(company => _mapper.Map<CompanyViewModel>(company)).FirstOrDefaultAsync();
             if (dbCompany == null)
                 throw new Exception("Company not found!");
             return dbCompany; 
@@ -34,7 +34,7 @@ namespace Core.Repositories
 
         public async Task<CompanyViewModel?> CreateCompany(CompanyViewModel company) 
         {
-            var dbCompany = await _db.Companies.AddAsync(_mapper.Map<Company>(company));
+            var dbCompany = await _db.Company.AddAsync(_mapper.Map<Company>(company));
             await _db.SaveChangesAsync();
 
             return _mapper.Map<CompanyViewModel>(dbCompany.Entity);
@@ -42,7 +42,7 @@ namespace Core.Repositories
 
         public async Task<CompanyViewModel?> UpdateCompany(CompanyViewModel company)
         {
-            var dbCompany = await _db.Companies.FindAsync(company.IdCompany);
+            var dbCompany = await _db.Company.FindAsync(company.IdCompany);
             if (dbCompany == null)
                 throw new Exception("Company not found!");
             if (dbCompany.IsDeleted)
@@ -50,7 +50,6 @@ namespace Core.Repositories
 
             dbCompany.CompanyName = company.CompanyName;
             dbCompany.BankAccount = company.BankAccount;
-            dbCompany.IsDeleted = company.IsDeleted;
             dbCompany.IsEveris = company.IsEveris;
             dbCompany.CmpVatlegalEntity = company.CmpVatlegalEntity;
             dbCompany.CmpBicsw = company.CmpBicsw;
@@ -64,7 +63,7 @@ namespace Core.Repositories
 
         public async Task<List<CompanyViewModel>?> DeleteCompany(int CompanyId)
         {
-            var dbCompany = await _db.Companies.FindAsync(CompanyId);
+            var dbCompany = await _db.Company.FindAsync(CompanyId);
             if (dbCompany == null)
                 throw new Exception("Company not found!");
 
