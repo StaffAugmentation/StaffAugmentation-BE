@@ -14,9 +14,11 @@ builder.Services.AddSwaggerGen();
 
 /*  Services  */
 builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
 /*  Repositories  */
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
 /*  EF Configuration  */
 builder.Services.AddDbContext<DataContext>(options =>

@@ -1,9 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-
-namespace Core.Model
+﻿namespace Core.Model
 {
-    public class Department
+    public class DepartmentViewModel
     {
         public int Id { get; set; }
 
