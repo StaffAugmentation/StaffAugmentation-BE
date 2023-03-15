@@ -6,23 +6,23 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CompanyController : ControllerBase
+    public class DepartmentController : ControllerBase
     {
-        private readonly ILogger<CompanyController> _logger;
-        private readonly ICompanyService _service;
-        public CompanyController(ILogger<CompanyController> logger, ICompanyService service) 
+        private readonly ILogger<DepartmentController> _logger;
+        private readonly IDepartmentService _service;
+        public DepartmentController(ILogger<DepartmentController> logger, IDepartmentService service) 
         {
             _logger = logger;
             _service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CompanyViewModel>?>> GetAll()
+        public async Task<ActionResult<List<DepartmentViewModel>?>> GetAll()
         {
             try
             {
-                _logger.LogInformation("GetCompanies");
-                return Ok(await _service.GetCompany());
+                _logger.LogInformation("GetDepartments");
+                return Ok(await _service.GetDepartment());
             }catch (Exception ex)
             {
                 _logger.LogError(ex.StackTrace);
@@ -31,12 +31,12 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CompanyViewModel?>> GetCompany(int id)
+        public async Task<ActionResult<DepartmentViewModel?>> GetDepartment(int id)
         {
             try
             {
-                _logger.LogInformation("GetCompanies");
-                return Ok(await _service.GetCompany(id));
+                _logger.LogInformation("GetDepartments");
+                return Ok(await _service.GetDepartment(id));
             }
             catch (Exception ex)
             {
@@ -46,12 +46,12 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CompanyViewModel?>> CreateCompany(CompanyViewModel company)
+        public async Task<ActionResult<DepartmentViewModel?>> CreateDepartment(DepartmentViewModel department)
         {
             try
             {
-                _logger.LogInformation("Add Company");
-                return Accepted(await _service.CreateCompany(company));
+                _logger.LogInformation("Add Department");
+                return Accepted(await _service.CreateDepartment(department));
             }
             catch (Exception ex)
             {
@@ -61,12 +61,12 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<CompanyViewModel?>> UpdateCompany(CompanyViewModel company)
+        public async Task<ActionResult<DepartmentViewModel?>> UpdateDepartment(DepartmentViewModel department)
         {
             try
             {
-                _logger.LogInformation("Update Company");
-                return Accepted(await _service.UpdateCompany(company));
+                _logger.LogInformation("Update Department");
+                return Accepted(await _service.UpdateDepartment(department));
             }
             catch (Exception ex)
             {
@@ -77,12 +77,12 @@ namespace API.Controllers
         }
     
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<CompanyViewModel>?>> DeleteCompany(int id)
+        public async Task<ActionResult<List<DepartmentViewModel>?>> DeleteDepartment(int id)
         {
             try
             {
-                _logger.LogInformation("Delete Company");
-                return Accepted(await _service.DeleteCompany(id));
+                _logger.LogInformation("Delete Department");
+                return Accepted(await _service.DeleteDepartment(id));
             }
             catch (Exception ex)
             {

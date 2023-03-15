@@ -1,4 +1,5 @@
-﻿namespace Core.Model
+﻿
+namespace Core.Model
 {
     public class Department
     {

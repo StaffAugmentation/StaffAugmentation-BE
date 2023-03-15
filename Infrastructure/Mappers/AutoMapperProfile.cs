@@ -11,8 +11,9 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<Company, CompanyViewModel>();
         CreateMap<CompanyViewModel, Company>();
-
         CreateMap<Approvers, ApproversViewModel>();
         CreateMap<ApproversViewModel, Approvers>();
+        CreateMap<Department, DepartmentViewModel>();
+        CreateMap<DepartmentViewModel, Department>();
     }
 }
