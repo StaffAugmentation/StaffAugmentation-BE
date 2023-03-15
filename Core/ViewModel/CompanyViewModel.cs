@@ -10,6 +10,7 @@
         public string? CmpBicsw { get; set; }
         public double? CmpVatRate { get; set; }
         public int? IdApproverCmp { get; set; }
+        public string? ApproverName { get; set; }
         public string? CmpEmail { get; set; }
     }
 }
