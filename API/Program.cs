@@ -14,14 +14,16 @@ builder.Services.AddSwaggerGen();
 
 /*  Services  */
 builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IApproverService, ApproverService>();
 
 /*  Repositories  */
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<IApproverRepository, ApproverRepository>();
 
 /*  EF Configuration  */
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), op => op.CommandTimeout(50000));
 });
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);

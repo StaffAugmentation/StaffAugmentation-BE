@@ -21,12 +21,49 @@ namespace Core.Repositories
 
         public async Task<List<CompanyViewModel>?> GetCompany()
         {
-            return await _db.Company.Where(company => !company.IsDeleted).Select(company => _mapper.Map<CompanyViewModel>(company)).ToListAsync();
+            //return await _db.Company
+            //    .Where(company => !company.IsDeleted)
+            //    .OrderByDescending(cmp => cmp.IdCompany)
+            //    .Select(company => _mapper.Map<CompanyViewModel>(company))
+            //    .Select(cmp => new CompanyViewModel
+            //    {
+            //        IdCompany = cmp.IdCompany,
+            //        CompanyName = cmp.CompanyName,
+            //        CmpEmail = cmp.CmpEmail,
+            //        BankAccount = cmp.BankAccount,
+            //        CmpBicsw = cmp.CmpBicsw,
+            //        CmpVatlegalEntity = cmp.CmpVatlegalEntity,
+            //        CmpVatRate = cmp.CmpVatRate,
+            //        IdApproverCmp = cmp.IdApproverCmp,
+            //        IsEveris = cmp.IsEveris,
+            //        ApproverName = cmp.IdApproverCmp != null ? _db.Approvers.Where(appr => appr.Id == cmp.IdApproverCmp).Select(appr =>  appr.AppFirstName + " " + appr.AppLastName).FirstOrDefault() : ""
+            //    })
+            //    .ToListAsync();
+
+            return await (from company in _db.Company
+                    join approver in _db.Approvers on company.IdApproverCmp equals approver.Id into approver from approvers in approver.DefaultIfEmpty()
+                    where !company.IsDeleted
+                    select new CompanyViewModel
+                    {
+                        IdCompany = company.IdCompany,
+                        CompanyName = company.CompanyName,
+                        CmpEmail = company.CmpEmail,
+                        BankAccount = company.BankAccount,
+                        CmpBicsw = company.CmpBicsw,
+                        CmpVatlegalEntity = company.CmpVatlegalEntity,
+                        CmpVatRate = company.CmpVatRate,
+                        IdApproverCmp = company.IdApproverCmp,
+                        IsEveris = company.IsEveris,
+                        ApproverName = approvers!=null ? approvers.AppFirstName + " " + approvers.AppLastName : ""
+                     }).ToListAsync();
         }
-        
+
         public async Task<CompanyViewModel?> GetCompany(int companyId)
         {
-            var dbCompany = await _db.Company.Where(company => company.IdCompany == companyId && !company.IsDeleted).Select(company => _mapper.Map<CompanyViewModel>(company)).FirstOrDefaultAsync();
+            var dbCompany = await _db.Company
+                .Where(company => company.IdCompany == companyId && !company.IsDeleted)
+                .Select(company => _mapper.Map<CompanyViewModel>(company))
+                .FirstOrDefaultAsync();
             if (dbCompany == null)
                 throw new Exception("Company not found!");
             return dbCompany; 
