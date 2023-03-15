@@ -23,7 +23,7 @@ builder.Services.AddScoped<IApproverRepository, ApproverRepository>();
 /*  EF Configuration  */
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), op => op.CommandTimeout(50000));
 });
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);

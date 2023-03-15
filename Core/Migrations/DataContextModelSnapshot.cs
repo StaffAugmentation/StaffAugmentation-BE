@@ -22,7 +22,7 @@ namespace Core.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Core.Model.Approver", b =>
+            modelBuilder.Entity("Core.Model.Approvers", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Approver");
+                    b.ToTable("Approvers");
                 });
 
             modelBuilder.Entity("Core.Model.Company", b =>

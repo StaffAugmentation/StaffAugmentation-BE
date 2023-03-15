@@ -1,6 +1,6 @@
 namespace Core.ViewModel
 {
-    public class ApproverViewModel
+    public class ApproversViewModel
     {
         public int Id { get; set; }
 

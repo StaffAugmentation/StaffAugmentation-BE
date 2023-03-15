@@ -2,12 +2,13 @@ using Core.ViewModel;
 
 namespace Core.IRepositories
 {
-    public interface IApproverRepository
+    public interface IApproverRepository 
+        //: IGenericRepository<ApproversViewModel>
     {
-        Task<List<ApproverViewModel>?> GetApprover();
-        Task<ApproverViewModel?> GetApprover(int Id);
-        Task<ApproverViewModel?> CreateApprover(ApproverViewModel approver);
-        Task<ApproverViewModel?> UpdateApprover(ApproverViewModel approver);
-        Task<List<ApproverViewModel>?> DeleteApprover(int Id);
+        Task<List<ApproversViewModel>?> GetApprover();
+        Task<ApproversViewModel?> GetApprover(int Id);
+        Task<ApproversViewModel?> CreateApprover(ApproversViewModel approver);
+        Task<ApproversViewModel?> UpdateApprover(ApproversViewModel approver);
+        Task<List<ApproversViewModel>?> DeleteApprover(int Id);
     }
 }

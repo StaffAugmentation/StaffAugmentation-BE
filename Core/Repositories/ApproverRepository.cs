@@ -19,47 +19,47 @@ namespace Core.Repositories
             _mapper = mapper;
         }
 
-        public async Task<List<ApproverViewModel>?> GetApprover()
+        public async Task<List<ApproversViewModel>?> GetApprover()
         {
-            return await _db.Approver.Select(approver => _mapper.Map<ApproverViewModel>(approver)).ToListAsync();
+            return await _db.Approvers.Select(approver => _mapper.Map<ApproversViewModel>(approver)).ToListAsync();
         }
 
-        public async Task<ApproverViewModel?> GetApprover(int Id)
+        public async Task<ApproversViewModel?> GetApprover(int Id)
         {
-            var dbApprover = await _db.Approver.Where(approver => approver.Id == Id).Select(approver => _mapper.Map<ApproverViewModel>(approver)).FirstOrDefaultAsync();
+            var dbApprover = await _db.Approvers.Where(approver => approver.Id == Id).Select(approver => _mapper.Map<ApproversViewModel>(approver)).FirstOrDefaultAsync();
             if (dbApprover == null)
-                throw new Exception("Approver not found!");
+                throw new Exception("Approvers not found!");
             return dbApprover;
         }
 
-        public async Task<ApproverViewModel?> CreateApprover(ApproverViewModel approver)
+        public async Task<ApproversViewModel?> CreateApprover(ApproversViewModel approver)
         {
-            var dbApprover = await _db.Approver.AddAsync(_mapper.Map<Approver>(approver));
+            var dbApprover = await _db.Approvers.AddAsync(_mapper.Map<Approvers>(approver));
             await _db.SaveChangesAsync();
 
-            return _mapper.Map<ApproverViewModel>(dbApprover.Entity);
+            return _mapper.Map<ApproversViewModel>(dbApprover.Entity);
         }
 
-        public async Task<ApproverViewModel?> UpdateApprover(ApproverViewModel approver)
+        public async Task<ApproversViewModel?> UpdateApprover(ApproversViewModel approver)
         {
-            var dbApprover = await _db.Approver.FindAsync(approver.Id);
+            var dbApprover = await _db.Approvers.FindAsync(approver.Id);
             if (dbApprover == null)
-                throw new Exception("Approver not found!");
+                throw new Exception("Approvers not found!");
 
             dbApprover.AppFirstName = approver.AppFirstName;
             dbApprover.AppLastName = approver.AppLastName;
 
             await _db.SaveChangesAsync();
-            return _mapper.Map<ApproverViewModel>(dbApprover);
+            return _mapper.Map<ApproversViewModel>(dbApprover);
         }
 
-        public async Task<List<ApproverViewModel>?> DeleteApprover(int Id)
+        public async Task<List<ApproversViewModel>?> DeleteApprover(int Id)
         {
-            var dbApprover = await _db.Approver.FindAsync(Id);
+            var dbApprover = await _db.Approvers.FindAsync(Id);
             if (dbApprover == null)
-                throw new Exception("Approver not found!");
+                throw new Exception("Approvers not found!");
 
-            _db.Approver.Remove(dbApprover);
+            _db.Approvers.Remove(dbApprover);
             await _db.SaveChangesAsync();
 
             return await GetApprover();

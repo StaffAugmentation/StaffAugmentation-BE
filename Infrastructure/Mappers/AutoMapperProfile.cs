@@ -12,7 +12,7 @@ public class AutoMapperProfile : Profile
         CreateMap<Company, CompanyViewModel>();
         CreateMap<CompanyViewModel, Company>();
 
-        CreateMap<Approver, ApproverViewModel>();
-        CreateMap<ApproverViewModel, Approver>();
+        CreateMap<Approvers, ApproversViewModel>();
+        CreateMap<ApproversViewModel, Approvers>();
     }
 }

@@ -1,6 +1,6 @@
 namespace Core.Model
 {
-    public class Approver
+    public class Approvers
     {
         public int Id { get; set; }
 

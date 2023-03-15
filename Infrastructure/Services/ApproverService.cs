@@ -13,27 +13,27 @@ namespace Business.Services
             repo = approverRepository;
         }
 
-        public async Task<List<ApproverViewModel>?> GetApprover()
+        public async Task<List<ApproversViewModel>?> GetApprover()
         {
             return await repo.GetApprover();
         }
 
-        public async Task<ApproverViewModel?> GetApprover(int approverId)
+        public async Task<ApproversViewModel?> GetApprover(int approverId)
         {
             return await repo.GetApprover(approverId);
         }
 
-        public async Task<ApproverViewModel?> CreateApprover(ApproverViewModel approver)
+        public async Task<ApproversViewModel?> CreateApprover(ApproversViewModel approver)
         {
             return await repo.CreateApprover(approver);
         }
 
-        public async Task<ApproverViewModel?> UpdateApprover(ApproverViewModel approver)
+        public async Task<ApproversViewModel?> UpdateApprover(ApproversViewModel approver)
         {
             return await repo.UpdateApprover(approver);
         }
 
-        public async Task<List<ApproverViewModel>?> DeleteApprover(int ApproverId)
+        public async Task<List<ApproversViewModel>?> DeleteApprover(int ApproverId)
         {
             return await repo.DeleteApprover(ApproverId);
         }

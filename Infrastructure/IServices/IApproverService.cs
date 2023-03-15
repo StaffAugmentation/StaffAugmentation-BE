@@ -10,10 +10,10 @@ namespace Business.IServices
 {
     public interface IApproverService
     {
-        Task<List<ApproverViewModel>?> GetApprover();
-        Task<ApproverViewModel?> GetApprover(int approverId);
-        Task<ApproverViewModel?> CreateApprover(ApproverViewModel approver);
-        Task<ApproverViewModel?> UpdateApprover(ApproverViewModel approver);
-        Task<List<ApproverViewModel>?> DeleteApprover(int ApproverId);
+        Task<List<ApproversViewModel>?> GetApprover();
+        Task<ApproversViewModel?> GetApprover(int approverId);
+        Task<ApproversViewModel?> CreateApprover(ApproversViewModel approver);
+        Task<ApproversViewModel?> UpdateApprover(ApproversViewModel approver);
+        Task<List<ApproversViewModel>?> DeleteApprover(int ApproverId);
     }
 }

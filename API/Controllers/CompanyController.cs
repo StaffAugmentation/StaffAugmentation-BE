@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Business.IServices;
-using Core.Model;
 using Core.ViewModel;
 
 namespace API.Controllers
@@ -52,7 +51,7 @@ namespace API.Controllers
             try
             {
                 _logger.LogInformation("Add Company");
-                return Ok(await _service.CreateCompany(company));
+                return Accepted(await _service.CreateCompany(company));
             }
             catch (Exception ex)
             {

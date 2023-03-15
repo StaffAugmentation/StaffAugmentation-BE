@@ -1,13 +1,10 @@
-using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Moq;
 using Xunit;
 using API.Controllers;
 using Business.IServices;
 using Core.ViewModel;
 using Microsoft.Extensions.Logging;
-using Castle.Core.Logging;
 
 namespace TestProject.UnitTests.Systems.Controllers
 {
@@ -20,11 +17,11 @@ namespace TestProject.UnitTests.Systems.Controllers
             var loggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
             var logger = loggerFactory.CreateLogger<CompanyController>();
             var mockCompanyService = new Mock<ICompanyService>();
-                mockCompanyService.Setup(svc => svc.GetCompany().Result).Returns(new List<CompanyViewModel>
+            mockCompanyService.Setup(svc => svc.GetCompany().Result).Returns(new List<CompanyViewModel>
                 {
-                    new CompanyViewModel { IdCompany = 1, CompanyName = "Company 1", IsDeleted = false, IsEveris = false },
-                    new CompanyViewModel { IdCompany = 2, CompanyName = "Company 2", IsDeleted = false, IsEveris = true },
-                    new CompanyViewModel { IdCompany = 3, CompanyName = "Company 3", IsDeleted = false, IsEveris = false }
+                    new CompanyViewModel { IdCompany = 1, CompanyName = "Company 1", IsEveris = false },
+                    new CompanyViewModel { IdCompany = 2, CompanyName = "Company 2", IsEveris = true },
+                    new CompanyViewModel { IdCompany = 3, CompanyName = "Company 3", IsEveris = false }
                 });
             _controller = new CompanyController(logger, mockCompanyService.Object);
         }
