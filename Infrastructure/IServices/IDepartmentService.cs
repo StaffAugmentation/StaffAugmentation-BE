@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Model;
-using Core.ViewModel;
+﻿using Core.ViewModel;
 
 namespace Business.IServices
 {

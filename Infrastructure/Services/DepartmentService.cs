@@ -1,6 +1,5 @@
 ﻿using Business.IServices;
 using Core.IRepositories;
-using Core.Model;
 using Core.ViewModel;
 
 namespace Business.Services

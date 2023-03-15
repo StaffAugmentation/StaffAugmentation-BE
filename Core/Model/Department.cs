@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-
+﻿
 namespace Core.Model
 {
     public class Department

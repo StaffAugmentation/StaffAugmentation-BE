@@ -1,4 +1,4 @@
-﻿namespace Core.Model
+﻿namespace Core.ViewModel
 {
     public class DepartmentViewModel
     {
@@ -8,6 +8,5 @@
 
         public bool IsActive { get; set; }
 
-        //public virtual ICollection<BusinessRequest> BusinessRequests { get; } = new List<BusinessRequest>();
     }
 }

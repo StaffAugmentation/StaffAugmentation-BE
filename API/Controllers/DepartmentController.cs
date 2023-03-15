@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Business.IServices;
-using Core.Model;
 using Core.ViewModel;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartementController : ControllerBase
+    public class DepartmentController : ControllerBase
     {
-        private readonly ILogger<DepartementController> _logger;
+        private readonly ILogger<DepartmentController> _logger;
         private readonly IDepartmentService _service;
-        public DepartementController(ILogger<DepartementController> logger, IDepartmentService service) 
+        public DepartmentController(ILogger<DepartmentController> logger, IDepartmentService service) 
         {
             _logger = logger;
             _service = service;
@@ -52,7 +51,7 @@ namespace API.Controllers
             try
             {
                 _logger.LogInformation("Add Department");
-                return Ok(await _service.CreateDepartment(department));
+                return Accepted(await _service.CreateDepartment(department));
             }
             catch (Exception ex)
             {
@@ -67,7 +66,7 @@ namespace API.Controllers
             try
             {
                 _logger.LogInformation("Update Department");
-                return Ok(await _service.UpdateDepartment(department));
+                return Accepted(await _service.UpdateDepartment(department));
             }
             catch (Exception ex)
             {
@@ -83,7 +82,7 @@ namespace API.Controllers
             try
             {
                 _logger.LogInformation("Delete Department");
-                return Ok(await _service.DeleteDepartment(id));
+                return Accepted(await _service.DeleteDepartment(id));
             }
             catch (Exception ex)
             {

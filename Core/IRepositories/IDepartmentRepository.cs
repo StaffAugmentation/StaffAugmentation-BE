@@ -1,5 +1,4 @@
-﻿using Core.Model;
-using Core.ViewModel;
+﻿using Core.ViewModel;
 
 namespace Core.IRepositories
 {

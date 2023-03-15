@@ -4,7 +4,6 @@ using Core.IRepositories;
 using Core.Data;
 using Core.ViewModel;
 using Core.Model;
-using System.Data.Common;
 
 namespace Core.Repositories
 {
@@ -59,6 +58,7 @@ namespace Core.Repositories
             if (dbDepartment == null)
                 throw new Exception("Department not found!");
 
+            _db.Department.Remove(dbDepartment);
             await _db.SaveChangesAsync();
 
             return await GetDepartment();
