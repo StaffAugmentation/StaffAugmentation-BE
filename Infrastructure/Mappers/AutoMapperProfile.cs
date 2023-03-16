@@ -19,5 +19,7 @@ public class AutoMapperProfile : Profiles
         CreateMap<DepartmentViewModel, Department>();
         CreateMap<Profile, ProfileViewModel>();
         CreateMap<ProfileViewModel, Profile>();
+        CreateMap<BrSource, BrSourceViewModel>();
+        CreateMap<BrSourceViewModel, BrSource>();
     }
 }
