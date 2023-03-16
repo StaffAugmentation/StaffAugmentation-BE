@@ -13,7 +13,6 @@ namespace Core.Data
         public DbSet<Company> Company => Set<Company>();
         public DbSet<Department> Department => Set<Department>();
         public DbSet<Approvers> Approvers => Set<Approvers>();
-
         public DbSet<Profile> Profile => Set<Profile>();
     }
 }
