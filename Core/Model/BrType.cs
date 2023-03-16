@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Model
 {
+    //[Table("TypeBR")]
     public class BrType
     {
         public int Id { get; set; }

@@ -34,10 +34,16 @@ namespace Core.Repositories
 
         public async Task<BrSourceViewModel?> CreateBrSource(BrSourceViewModel brSource)
         {
-            var dbBrSource = await _db.BrSource.AddAsync(_mapper.Map<BrSource>(brSource));
-            await _db.SaveChangesAsync();
+            var dbBrSource = await _db.BrSource
+                .Where(brSrc => brSrc.IdSource == brSource.IdSource)
+                .Select(brSource => _mapper.Map<BrSourceViewModel>(brSource))
+                .FirstOrDefaultAsync();
+            if(dbBrSource != null)
+                throw new Exception("BrSource with this id already exists!");
 
-            return _mapper.Map<BrSourceViewModel>(dbBrSource.Entity);
+            var dbBrSrc = await _db.BrSource.AddAsync(_mapper.Map<BrSource>(brSource));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<BrSourceViewModel>(dbBrSrc.Entity);
         }
 
         public async Task<BrSourceViewModel?> UpdateBrSource(BrSourceViewModel brSource)
