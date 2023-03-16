@@ -15,5 +15,7 @@ public class AutoMapperProfile : Profile
         CreateMap<ApproversViewModel, Approvers>();
         CreateMap<Department, DepartmentViewModel>();
         CreateMap<DepartmentViewModel, Department>();
+        CreateMap<BrType, BrTypeViewModel>();
+        CreateMap<BrTypeViewModel, BrType>();
     }
 }

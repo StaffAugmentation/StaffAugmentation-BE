@@ -16,11 +16,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IApproverService, ApproverService>();
+builder.Services.AddScoped<IBrTypeService, BrTypeService>();
+
 
 /*  Repositories  */
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IApproverRepository, ApproverRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IBrTypeRepository, BrTypeRepository>();
+
 
 /*  EF Configuration  */
 builder.Services.AddDbContext<DataContext>(options =>
