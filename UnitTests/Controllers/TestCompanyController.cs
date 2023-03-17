@@ -6,7 +6,7 @@ using Business.IServices;
 using Core.ViewModel;
 using Microsoft.Extensions.Logging;
 
-namespace TestProject.UnitTests.Systems.Controllers
+namespace UnitTests.Controllers
 {
     public class TestCompanyController
     {

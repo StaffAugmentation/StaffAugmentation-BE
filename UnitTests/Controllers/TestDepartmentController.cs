@@ -1,15 +1,12 @@
-using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Moq;
 using Xunit;
 using API.Controllers;
 using Business.IServices;
 using Core.ViewModel;
 using Microsoft.Extensions.Logging;
-using Castle.Core.Logging;
 
-namespace TestProject.UnitTests.Systems.Controllers
+namespace UnitTests.Controllers
 {
     public class TestDepartmentController
     {
@@ -20,7 +17,7 @@ namespace TestProject.UnitTests.Systems.Controllers
             var loggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
             var logger = loggerFactory.CreateLogger<DepartmentController>();
             var mockDepartmentService = new Mock<IDepartmentService>();
-                mockDepartmentService.Setup(svc => svc.GetDepartment().Result).Returns(new List<DepartmentViewModel>
+            mockDepartmentService.Setup(svc => svc.GetDepartment().Result).Returns(new List<DepartmentViewModel>
                 {
                     new DepartmentViewModel { Id = 1, ValueId = "Department 1", IsActive = false },
                     new DepartmentViewModel { Id = 2, ValueId = "Department 2", IsActive = true },

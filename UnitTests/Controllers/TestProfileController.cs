@@ -1,15 +1,12 @@
-using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Moq;
 using Xunit;
 using API.Controllers;
 using Business.IServices;
 using Core.ViewModel;
 using Microsoft.Extensions.Logging;
-using Castle.Core.Logging;
 
-namespace TestProject.UnitTests.Systems.Controllers
+namespace UnitTests.Controllers
 {
     public class TestProfileController
     {
@@ -20,7 +17,7 @@ namespace TestProject.UnitTests.Systems.Controllers
             var loggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
             var logger = loggerFactory.CreateLogger<ProfileController>();
             var mockProfileService = new Mock<IProfileService>();
-                mockProfileService.Setup(svc => svc.GetProfile().Result).Returns(new List<ProfileViewModel>
+            mockProfileService.Setup(svc => svc.GetProfile().Result).Returns(new List<ProfileViewModel>
                 {
                     new ProfileViewModel { Id = 1, ValueId = "Profile 1", IsActive = true },
                     new ProfileViewModel { Id = 2, ValueId = "Profile 2", IsActive = true },

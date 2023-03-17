@@ -1,15 +1,12 @@
-using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Moq;
 using Xunit;
 using API.Controllers;
 using Business.IServices;
 using Core.ViewModel;
 using Microsoft.Extensions.Logging;
-using Castle.Core.Logging;
 
-namespace TestProject.UnitTests.Systems.Controllers
+namespace UnitTests.Controllers
 {
     public class TestApproverController
     {
@@ -20,7 +17,7 @@ namespace TestProject.UnitTests.Systems.Controllers
             var loggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
             var logger = loggerFactory.CreateLogger<ApproverController>();
             var mockApproverService = new Mock<IApproverService>();
-                mockApproverService.Setup(svc => svc.GetApprover().Result).Returns(new List<ApproversViewModel>
+            mockApproverService.Setup(svc => svc.GetApprover().Result).Returns(new List<ApproversViewModel>
                 {
                     new ApproversViewModel { Id = 1, AppFirstName = "First name 1", AppLastName = "Last name 1" },
                     new ApproversViewModel { Id = 2, AppFirstName = "First name 2", AppLastName = "Last name 2" },

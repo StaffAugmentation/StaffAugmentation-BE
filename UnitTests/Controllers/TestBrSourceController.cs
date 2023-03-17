@@ -1,16 +1,12 @@
-﻿using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 using API.Controllers;
 using Business.IServices;
 using Core.ViewModel;
 using Microsoft.Extensions.Logging;
-using Castle.Core.Logging;
-using System.ComponentModel.Design;
 
-namespace TestProject.UnitTests.Systems.Controllers
+namespace UnitTests.Controllers
 {
     public class TestBrSourceController
     {
