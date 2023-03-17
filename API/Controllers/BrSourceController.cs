@@ -62,7 +62,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<BrSourceViewModel?>> UpdateDepartment(BrSourceViewModel brSource)
+        public async Task<ActionResult<BrSourceViewModel?>> UpdateBrSource(BrSourceViewModel brSource)
         {
             try
             {

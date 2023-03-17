@@ -23,9 +23,9 @@ namespace TestProject.UnitTests.Systems.Controllers
             var mockBrSourceService = new Mock<IBrSourceService>();
             mockBrSourceService.Setup(svc => svc.GetBrSource().Result).Returns(new List<BrSourceViewModel>
                 {
-                    new BrSourceViewModel { IdSource= 1, SourceName = "string" },
-                    new BrSourceViewModel { IdSource = 2, SourceName = "string" },
-                    new BrSourceViewModel { IdSource = 3, SourceName = "string" },
+                    new BrSourceViewModel { IdSource= "Source 1", SourceName = "Source 1" },
+                    new BrSourceViewModel { IdSource = "Source 2", SourceName = "Source 2" },
+                    new BrSourceViewModel { IdSource = "Source 3", SourceName = "Source 3" },
                 });
             _controller = new BrSourceController(logger, mockBrSourceService.Object);
         }
@@ -44,7 +44,7 @@ namespace TestProject.UnitTests.Systems.Controllers
         public async Task GetBrSource_OnReturnsData()
         {
             // Act
-            var result = await _controller.GetBrSource(100);
+            var result = await _controller.GetBrSource("Source 1");
 
             // Assert
             Assert.IsType<ActionResult<BrSourceViewModel?>?>(result);
@@ -54,7 +54,7 @@ namespace TestProject.UnitTests.Systems.Controllers
         public async Task Create_OnReturnsData()
         {
             // Act
-            var result = await _controller.CreateBrSource(new BrSourceViewModel { IdSource = 4, SourceName = "string" });
+            var result = await _controller.CreateBrSource(new BrSourceViewModel { IdSource = "Source 4", SourceName = "Source 4" });
 
             // Assert
             Assert.IsType<ActionResult<BrSourceViewModel?>>(result);
@@ -64,7 +64,7 @@ namespace TestProject.UnitTests.Systems.Controllers
         public async Task Update_OnReturnsData()
         {
             // Act
-            var result = await _controller.UpdateBrSource(new BrSourceViewModel { IdSource = 4  , SourceName = "string" });
+            var result = await _controller.UpdateBrSource(new BrSourceViewModel { IdSource = "Source 4", SourceName = "Source 4" });
 
             // Assert
             Assert.IsType<ActionResult<BrSourceViewModel?>>(result);
@@ -74,7 +74,7 @@ namespace TestProject.UnitTests.Systems.Controllers
         public async Task Delete_OnReturnsData()
         {
             // Act
-            var result = await _controller.DeleteBrSource(4);
+            var result = await _controller.DeleteBrSource("Source 4");
 
             // Assert
             Assert.IsType<ActionResult<List<BrSourceViewModel>>>(result);
