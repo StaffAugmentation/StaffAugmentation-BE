@@ -23,9 +23,9 @@ namespace TestProject.UnitTests.Systems.Controllers
             var mockBrTypeService = new Mock<IBrTypeService>();
             mockBrTypeService.Setup(svc => svc.GetBrType().Result).Returns(new List<BrTypeViewModel>
                 {
-                    new BrTypeViewModel { Id = 1, ValueId = "1", IsActive = false },
-                    new BrTypeViewModel { Id = 2, ValueId = "2", IsActive = true },
-                    new BrTypeViewModel { Id = 3, ValueId = "3", IsActive = false },
+                    new BrTypeViewModel { Id = 1, ValueId = "Type 1", IsActive = false },
+                    new BrTypeViewModel { Id = 2, ValueId = "Type 2", IsActive = true },
+                    new BrTypeViewModel { Id = 3, ValueId = "Type 3", IsActive = false },
                 });
             _controller = new BrTypeController(logger, mockBrTypeService.Object);
         }
@@ -54,7 +54,7 @@ namespace TestProject.UnitTests.Systems.Controllers
         public async Task Create_OnReturnsData()
         {
             // Act
-            var result = await _controller.CreateBrType(new BrTypeViewModel { Id = 4, ValueId = "4", IsActive = false });
+            var result = await _controller.CreateBrType(new BrTypeViewModel { Id = 4, ValueId = "Type 4", IsActive = false });
 
             // Assert
             Assert.IsType<ActionResult<BrTypeViewModel?>>(result);
@@ -64,7 +64,7 @@ namespace TestProject.UnitTests.Systems.Controllers
         public async Task Update_OnReturnsData()
         {
             // Act
-            var result = await _controller.UpdateBrType(new BrTypeViewModel { Id = 4, ValueId = "4", IsActive = false });
+            var result = await _controller.UpdateBrType(new BrTypeViewModel { Id = 4, ValueId = "Type 4", IsActive = false });
 
             // Assert
             Assert.IsType<ActionResult<BrTypeViewModel?>>(result);

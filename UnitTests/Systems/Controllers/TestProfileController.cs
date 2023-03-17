@@ -22,9 +22,9 @@ namespace TestProject.UnitTests.Systems.Controllers
             var mockProfileService = new Mock<IProfileService>();
                 mockProfileService.Setup(svc => svc.GetProfile().Result).Returns(new List<ProfileViewModel>
                 {
-                    new ProfileViewModel { Id = 1, ValueId = "1", IsActive = true },
-                    new ProfileViewModel { Id = 2, ValueId = "2", IsActive = true },
-                    new ProfileViewModel { Id = 3, ValueId = "3", IsActive = false }
+                    new ProfileViewModel { Id = 1, ValueId = "Profile 1", IsActive = true },
+                    new ProfileViewModel { Id = 2, ValueId = "Profile 2", IsActive = true },
+                    new ProfileViewModel { Id = 3, ValueId = "Profile 3", IsActive = false }
                 });
             _controller = new ProfileController(logger, mockProfileService.Object);
         }
@@ -53,7 +53,7 @@ namespace TestProject.UnitTests.Systems.Controllers
         public async Task Create_OnReturnsData()
         {
             // Act
-            var result = await _controller.CreateProfile(new ProfileViewModel { Id = 4, ValueId = "4", IsActive = false });
+            var result = await _controller.CreateProfile(new ProfileViewModel { Id = 4, ValueId = "Profile 4", IsActive = false });
 
             // Assert
             Assert.IsType<ActionResult<ProfileViewModel?>>(result);
