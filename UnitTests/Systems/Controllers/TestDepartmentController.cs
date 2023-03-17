@@ -22,9 +22,9 @@ namespace TestProject.UnitTests.Systems.Controllers
             var mockDepartmentService = new Mock<IDepartmentService>();
                 mockDepartmentService.Setup(svc => svc.GetDepartment().Result).Returns(new List<DepartmentViewModel>
                 {
-                    new DepartmentViewModel { Id = 1, ValueId = "1", IsActive = false },
-                    new DepartmentViewModel { Id = 2, ValueId = "2", IsActive = true },
-                    new DepartmentViewModel { Id = 3, ValueId = "3", IsActive = false },
+                    new DepartmentViewModel { Id = 1, ValueId = "Department 1", IsActive = false },
+                    new DepartmentViewModel { Id = 2, ValueId = "Department 2", IsActive = true },
+                    new DepartmentViewModel { Id = 3, ValueId = "Department 3", IsActive = false },
                 });
             _controller = new DepartmentController(logger, mockDepartmentService.Object);
         }
@@ -53,7 +53,7 @@ namespace TestProject.UnitTests.Systems.Controllers
         public async Task Create_OnReturnsData()
         {
             // Act
-            var result = await _controller.CreateDepartment(new DepartmentViewModel { Id = 4, ValueId = "4", IsActive = false });
+            var result = await _controller.CreateDepartment(new DepartmentViewModel { Id = 4, ValueId = "Department 4", IsActive = false });
 
             // Assert
             Assert.IsType<ActionResult<DepartmentViewModel?>>(result);
@@ -63,7 +63,7 @@ namespace TestProject.UnitTests.Systems.Controllers
         public async Task Update_OnReturnsData()
         {
             // Act
-            var result = await _controller.UpdateDepartment(new DepartmentViewModel { Id = 4, ValueId = "4", IsActive = false });
+            var result = await _controller.UpdateDepartment(new DepartmentViewModel { Id = 4, ValueId = "Department 4", IsActive = false });
 
             // Assert
             Assert.IsType<ActionResult<DepartmentViewModel?>>(result);
