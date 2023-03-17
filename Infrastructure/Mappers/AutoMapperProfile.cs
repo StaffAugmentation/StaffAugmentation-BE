@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Core.Model;
 using Core.ViewModel;
+using Profile = Core.Model.Profile;
+using Profiles = AutoMapper.Profile;
 
 namespace Business.Mappers;
 
-public class AutoMapperProfile : Profile
+public class AutoMapperProfile : Profiles
 {
 
     public AutoMapperProfile()
@@ -15,5 +17,11 @@ public class AutoMapperProfile : Profile
         CreateMap<ApproversViewModel, Approvers>();
         CreateMap<Department, DepartmentViewModel>();
         CreateMap<DepartmentViewModel, Department>();
+        CreateMap<Profile, ProfileViewModel>();
+        CreateMap<ProfileViewModel, Profile>();
+        CreateMap<BrSource, BrSourceViewModel>();
+        CreateMap<BrSourceViewModel, BrSource>();
+        CreateMap<BrType, BrTypeViewModel>();
+        CreateMap<BrTypeViewModel, BrType>();
     }
 }
