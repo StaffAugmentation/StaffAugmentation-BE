@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Core.Model;
+using Type = Core.Model.Type;
 
 namespace Core.Data
 {
@@ -14,5 +15,7 @@ namespace Core.Data
         public DbSet<Profile> Profile => Set<Profile>();
         public DbSet<BrSource> BrSource => Set<BrSource>();
         public DbSet<BrType> BrType => Set<BrType>();
+        public DbSet<Type> Type => Set<Type>();
+
     }
 }
