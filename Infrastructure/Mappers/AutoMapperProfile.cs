@@ -2,6 +2,7 @@
 using Core.Model;
 using Core.ViewModel;
 using Profile = Core.Model.Profile;
+using Type = Core.Model.Type;
 using Profiles = AutoMapper.Profile;
 
 namespace Business.Mappers;
@@ -25,5 +26,7 @@ public class AutoMapperProfile : Profiles
         CreateMap<BrTypeViewModel, BrType>();
         CreateMap<Level, LevelViewModel>();
         CreateMap<LevelViewModel, Level>();
+        CreateMap<Type, TypeViewModel>();
+        CreateMap<TypeViewModel, Type>();
     }
 }
