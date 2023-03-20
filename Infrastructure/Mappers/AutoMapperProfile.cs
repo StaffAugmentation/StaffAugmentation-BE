@@ -23,5 +23,7 @@ public class AutoMapperProfile : Profiles
         CreateMap<BrSourceViewModel, BrSource>();
         CreateMap<BrType, BrTypeViewModel>();
         CreateMap<BrTypeViewModel, BrType>();
+        CreateMap<Level, LevelViewModel>();
+        CreateMap<LevelViewModel, Level>();
     }
 }

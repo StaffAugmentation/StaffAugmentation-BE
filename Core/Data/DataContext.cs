@@ -14,5 +14,6 @@ namespace Core.Data
         public DbSet<Profile> Profile => Set<Profile>();
         public DbSet<BrSource> BrSource => Set<BrSource>();
         public DbSet<BrType> BrType => Set<BrType>();
+        public DbSet<Level> Level => Set<Level>();
     }
 }
