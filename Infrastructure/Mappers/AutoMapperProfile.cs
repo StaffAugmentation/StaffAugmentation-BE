@@ -24,5 +24,7 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<LevelViewModel, Level>();
         CreateMap<Core.Model.Type, TypeViewModel>();
         CreateMap<TypeViewModel, Core.Model.Type>();
+        CreateMap<Category, CategoryViewModel>();
+        CreateMap<CategoryViewModel, Category>();
     }
 }

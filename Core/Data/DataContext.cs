@@ -17,5 +17,6 @@ namespace Core.Data
         public DbSet<BrType> BrType => Set<BrType>();
         public DbSet<Level> Level => Set<Level>();
         public DbSet<Type> Type => Set<Type>();
+        public DbSet<Category> Category => Set<Category>();
     }
 }
