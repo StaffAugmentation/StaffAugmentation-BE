@@ -19,6 +19,9 @@ builder.Services.AddScoped<IApproverService, ApproverService>();
 builder.Services.AddScoped<IBrSourceService, BrSourceService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IBrTypeService, BrTypeService>();
+builder.Services.AddScoped<ISubContractorService, SubContractorService>();
+builder.Services.AddScoped<ITypeOfCostService, TypeOfCostService>();
+builder.Services.AddScoped<IPaymentTermService, PaymentTermService>();
 
 /*  Repositories  */
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
@@ -27,6 +30,9 @@ builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IBrTypeRepository, BrTypeRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 builder.Services.AddScoped<IBrSourceRepository, BrSourceRepository>();
+builder.Services.AddScoped<ISubContractorRepository, SubContractorRepository>();
+builder.Services.AddScoped<ITypeOfCostRepository, TypeOfCostRepository>();
+builder.Services.AddScoped<IPaymentTermRepository, PaymentTermRepository>();
 
 /*  EF Configuration  */
 builder.Services.AddDbContext<DataContext>(options =>

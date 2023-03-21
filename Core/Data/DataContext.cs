@@ -14,5 +14,8 @@ namespace Core.Data
         public DbSet<Profile> Profile => Set<Profile>();
         public DbSet<BrSource> BrSource => Set<BrSource>();
         public DbSet<BrType> BrType => Set<BrType>();
+        public DbSet<SubContractor> SubContractor => Set<SubContractor>();
+        public DbSet<TypeOfCost> TypeOfCost => Set<TypeOfCost>();
+        public DbSet<PaymentTerm> PaymentTerm => Set<PaymentTerm>();
     }
 }

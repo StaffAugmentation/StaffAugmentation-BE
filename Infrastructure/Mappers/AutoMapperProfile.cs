@@ -23,5 +23,11 @@ public class AutoMapperProfile : Profiles
         CreateMap<BrSourceViewModel, BrSource>();
         CreateMap<BrType, BrTypeViewModel>();
         CreateMap<BrTypeViewModel, BrType>();
+        CreateMap<SubContractor, SubContractorViewModel>();
+        CreateMap<SubContractorViewModel, SubContractor>();
+        CreateMap<TypeOfCost, TypeOfCostViewModel>();
+        CreateMap<TypeOfCostViewModel, TypeOfCost>();
+        CreateMap<PaymentTerm, PaymentTermViewModel>();
+        CreateMap<PaymentTermViewModel, PaymentTerm>();
     }
 }
