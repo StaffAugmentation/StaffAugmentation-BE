@@ -20,6 +20,8 @@ builder.Services.AddScoped<IBrSourceService, BrSourceService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IBrTypeService, BrTypeService>();
 builder.Services.AddScoped<ILevelService, LevelService>();
+builder.Services.AddScoped<IPTMOwnerService, PTMOwnerService>();
+
 
 /*  Repositories  */
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
@@ -29,6 +31,8 @@ builder.Services.AddScoped<IBrTypeRepository, BrTypeRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 builder.Services.AddScoped<IBrSourceRepository, BrSourceRepository>();
 builder.Services.AddScoped<ILevelRepository, LevelRepository>();
+builder.Services.AddScoped<IPTMOwnerRepository, PTMOwnerRepository>();
+
 
 /*  EF Configuration  */
 builder.Services.AddDbContext<DataContext>(options =>

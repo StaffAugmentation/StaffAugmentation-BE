@@ -25,5 +25,7 @@ public class AutoMapperProfile : Profiles
         CreateMap<BrTypeViewModel, BrType>();
         CreateMap<Level, LevelViewModel>();
         CreateMap<LevelViewModel, Level>();
+        CreateMap<PTMOwner, PTMOwnerViewModel>();
+        CreateMap<PTMOwnerViewModel, PTMOwner>();
     }
 }
