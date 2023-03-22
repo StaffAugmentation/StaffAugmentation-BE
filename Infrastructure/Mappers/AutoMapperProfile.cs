@@ -26,5 +26,11 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<PTMOwnerViewModel, PTMOwner>();
         CreateMap<Core.Model.Type, TypeViewModel>();
         CreateMap<TypeViewModel, Core.Model.Type>();
+        CreateMap<SubContractor, SubContractorViewModel>();
+        CreateMap<SubContractorViewModel, SubContractor>();
+        CreateMap<TypeOfCost, TypeOfCostViewModel>();
+        CreateMap<TypeOfCostViewModel, TypeOfCost>();
+        CreateMap<PaymentTerm, PaymentTermViewModel>();
+        CreateMap<PaymentTermViewModel, PaymentTerm>();
     }
 }
