@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Core.Model;
+using Type = Core.Model.Type;
 
 namespace Core.Data
 {
@@ -16,6 +17,6 @@ namespace Core.Data
         public DbSet<BrType> BrType => Set<BrType>();
         public DbSet<Level> Level => Set<Level>();
         public DbSet<PTMOwner> PTMOwner => Set<PTMOwner>();
-
+        public DbSet<Type> Type => Set<Type>();
     }
 }
