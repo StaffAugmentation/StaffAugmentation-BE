@@ -4,6 +4,7 @@ using Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230320190549_add-PaymentTerm")]
+    partial class addPaymentTerm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,26 +80,6 @@ namespace Core.Migrations
                     b.ToTable("BrType");
                 });
 
-            modelBuilder.Entity("Core.Model.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ValueId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
             modelBuilder.Entity("Core.Model.Company", b =>
                 {
                     b.Property<int>("IdCompany")
@@ -158,61 +141,6 @@ namespace Core.Migrations
                     b.ToTable("Department");
                 });
 
-            modelBuilder.Entity("Core.Model.Level", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ValueId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Level");
-                });
-
-            modelBuilder.Entity("Core.Model.PTMOwner", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("IdApprover")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsEveris")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("PTMOwnerBA")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PTMOwnerBICSW")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PTMOwnerVatNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("PTMOwnerVatRate")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ValueId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PTMOwner");
-                });
-
             modelBuilder.Entity("Core.Model.PaymentTerm", b =>
                 {
                     b.Property<string>("Id")
@@ -225,26 +153,6 @@ namespace Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PaymentTerm");
-                });
-
-            modelBuilder.Entity("Core.Model.PlaceOfDelivery", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ValueId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PlaceOfDelivery");
                 });
 
             modelBuilder.Entity("Core.Model.Profile", b =>
@@ -329,26 +237,6 @@ namespace Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TypeOfCost");
-                });
-
-            modelBuilder.Entity("Core.Model.Type", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ValueId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Type");
                 });
 #pragma warning restore 612, 618
         }

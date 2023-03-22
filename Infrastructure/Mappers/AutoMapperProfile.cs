@@ -22,8 +22,18 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<BrTypeViewModel, BrType>();
         CreateMap<Level, LevelViewModel>();
         CreateMap<LevelViewModel, Level>();
+        CreateMap<PTMOwner, PTMOwnerViewModel>();
+        CreateMap<PTMOwnerViewModel, PTMOwner>();
         CreateMap<Core.Model.Type, TypeViewModel>();
         CreateMap<TypeViewModel, Core.Model.Type>();
+        CreateMap<SubContractor, SubContractorViewModel>();
+        CreateMap<SubContractorViewModel, SubContractor>();
+        CreateMap<TypeOfCost, TypeOfCostViewModel>();
+        CreateMap<TypeOfCostViewModel, TypeOfCost>();
+        CreateMap<PaymentTerm, PaymentTermViewModel>();
+        CreateMap<PaymentTermViewModel, PaymentTerm>();
+        CreateMap<Category, CategoryViewModel>();
+        CreateMap<CategoryViewModel, Category>();
         CreateMap<PlaceOfDelivery, PlaceOfDeliveryViewModel>();
         CreateMap<PlaceOfDeliveryViewModel, PlaceOfDelivery>();
     }
