@@ -22,6 +22,10 @@ builder.Services.AddScoped<IBrTypeService, BrTypeService>();
 builder.Services.AddScoped<ILevelService, LevelService>();
 builder.Services.AddScoped<ITypeService, TypeService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IPTMOwnerService, PTMOwnerService>();
+builder.Services.AddScoped<ISubContractorService, SubContractorService>();
+builder.Services.AddScoped<ITypeOfCostService, TypeOfCostService>();
+builder.Services.AddScoped<IPaymentTermService, PaymentTermService>();
 
 /*  Repositories  */
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
@@ -30,7 +34,11 @@ builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IBrTypeRepository, BrTypeRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 builder.Services.AddScoped<IBrSourceRepository, BrSourceRepository>();
+builder.Services.AddScoped<ISubContractorRepository, SubContractorRepository>();
+builder.Services.AddScoped<ITypeOfCostRepository, TypeOfCostRepository>();
+builder.Services.AddScoped<IPaymentTermRepository, PaymentTermRepository>();
 builder.Services.AddScoped<ILevelRepository, LevelRepository>();
+builder.Services.AddScoped<IPTMOwnerRepository, PTMOwnerRepository>();
 builder.Services.AddScoped<ITypeRepository, TypeRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
