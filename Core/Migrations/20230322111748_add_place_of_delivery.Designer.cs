@@ -4,6 +4,7 @@ using Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230322111748_add_place_of_delivery")]
+    partial class add_place_of_delivery
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,26 +78,6 @@ namespace Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BrType");
-                });
-
-            modelBuilder.Entity("Core.Model.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ValueId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Core.Model.Company", b =>
@@ -178,55 +161,6 @@ namespace Core.Migrations
                     b.ToTable("Level");
                 });
 
-            modelBuilder.Entity("Core.Model.PTMOwner", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("IdApprover")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsEveris")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("PTMOwnerBA")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PTMOwnerBICSW")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PTMOwnerVatNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("PTMOwnerVatRate")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ValueId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PTMOwner");
-                });
-
-            modelBuilder.Entity("Core.Model.PaymentTerm", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PaymentTermValue")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PaymentTerm");
-                });
-
             modelBuilder.Entity("Core.Model.PlaceOfDelivery", b =>
                 {
                     b.Property<int>("Id")
@@ -265,70 +199,6 @@ namespace Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Profile");
-                });
-
-            modelBuilder.Entity("Core.Model.SubContractor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("IdApproverSub")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IdNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdPaymentTerm")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdTypeOfCost")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsOfficial")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LegalEntityAdress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LegalEntityName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubContBa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubContBicsw")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("SubContVatRate")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ValueId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VatNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SubContractor");
-                });
-
-            modelBuilder.Entity("Core.Model.TypeOfCost", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TypeOfCostValue")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypeOfCost");
                 });
 
             modelBuilder.Entity("Core.Model.Type", b =>

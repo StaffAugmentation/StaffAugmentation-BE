@@ -21,6 +21,7 @@ builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IBrTypeService, BrTypeService>();
 builder.Services.AddScoped<ILevelService, LevelService>();
 builder.Services.AddScoped<ITypeService, TypeService>();
+builder.Services.AddScoped<IPlaceOfDeliveryService, PlaceOfDeliveryService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IPTMOwnerService, PTMOwnerService>();
 builder.Services.AddScoped<ISubContractorService, SubContractorService>();
@@ -41,6 +42,7 @@ builder.Services.AddScoped<ILevelRepository, LevelRepository>();
 builder.Services.AddScoped<IPTMOwnerRepository, PTMOwnerRepository>();
 builder.Services.AddScoped<ITypeRepository, TypeRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPlaceOfDeliveryRepository, PlaceOfDeliveryRepository>();
 
 /*  EF Configuration  */
 builder.Services.AddDbContext<DataContext>(options =>
