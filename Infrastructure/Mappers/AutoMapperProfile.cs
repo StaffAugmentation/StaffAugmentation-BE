@@ -32,5 +32,7 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<TypeOfCostViewModel, TypeOfCost>();
         CreateMap<PaymentTerm, PaymentTermViewModel>();
         CreateMap<PaymentTermViewModel, PaymentTerm>();
+        CreateMap<Category, CategoryViewModel>();
+        CreateMap<CategoryViewModel, Category>();
     }
 }

@@ -21,5 +21,6 @@ namespace Core.Data
         public DbSet<Level> Level => Set<Level>();
         public DbSet<PTMOwner> PTMOwner => Set<PTMOwner>();
         public DbSet<Type> Type => Set<Type>();
+        public DbSet<Category> Category => Set<Category>();
     }
 }
