@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Core.Model;
+using Type = Core.Model.Type;
 
 namespace Core.Data
 {
@@ -17,5 +18,8 @@ namespace Core.Data
         public DbSet<SubContractor> SubContractor => Set<SubContractor>();
         public DbSet<TypeOfCost> TypeOfCost => Set<TypeOfCost>();
         public DbSet<PaymentTerm> PaymentTerm => Set<PaymentTerm>();
+        public DbSet<Level> Level => Set<Level>();
+        public DbSet<PTMOwner> PTMOwner => Set<PTMOwner>();
+        public DbSet<Type> Type => Set<Type>();
     }
 }
