@@ -36,5 +36,7 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<CategoryViewModel, Category>();
         CreateMap<PlaceOfDelivery, PlaceOfDeliveryViewModel>();
         CreateMap<PlaceOfDeliveryViewModel, PlaceOfDelivery>();
+        CreateMap<RecruitmentResp, RecruitmentRespViewModel>();
+        CreateMap<RecruitmentRespViewModel, RecruitmentResp>();
     }
 }
