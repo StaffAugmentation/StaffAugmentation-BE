@@ -10,7 +10,7 @@ namespace Core.Data
 
         public DbSet<Company> Company => Set<Company>();
         public DbSet<Department> Department => Set<Department>();
-        public DbSet<Approvers> Approvers => Set<Approvers>();
+        public DbSet<Approver> Approver => Set<Approver>();
         public DbSet<Profile> Profile => Set<Profile>();
         public DbSet<BrSource> BrSource => Set<BrSource>();
         public DbSet<BrType> BrType => Set<BrType>();
@@ -23,6 +23,6 @@ namespace Core.Data
         public DbSet<Category> Category => Set<Category>();
         public DbSet<PlaceOfDelivery> PlaceOfDelivery => Set<PlaceOfDelivery>();
         public DbSet<HighestDegree> HighestDegree => Set<HighestDegree>();
-
+        public DbSet<RequestFormStatus> RequestFormStatus => Set<RequestFormStatus>();
     }
 }

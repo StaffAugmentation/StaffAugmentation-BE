@@ -4,7 +4,7 @@ namespace Core.ViewModel
     {
         public string Id { get; set; } = null!;
 
-        public string TypeOfCostValue { get; set; } = null!;
+        public string Value { get; set; } = null!;
 
     }
 }

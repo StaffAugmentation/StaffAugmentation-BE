@@ -5,63 +5,61 @@ using Core.Data;
 using Core.ViewModel;
 using Core.Model;
 
-namespace Core.Repositories
+namespace Core.Repositories;
+
+public class HighestDegreeRepository : IHighestDegreeRepository
 {
-    public class HighestDegreeRepository : IHighestDegreeRepository
+    private readonly DataContext _db;
+    private readonly IMapper _mapper;
+
+    public HighestDegreeRepository(DataContext context, IMapper mapper)
     {
-        private readonly DataContext _db;
-        private readonly IMapper _mapper;
+        _db = context;
+        _mapper = mapper;
+    }
 
-        public HighestDegreeRepository(DataContext context, IMapper mapper)
-        {
-            _db = context;
-            _mapper = mapper;
-        }
+    public async Task<List<HighestDegreeViewModel>?> GetHighestDegree()
+    {
+        return await _db.HighestDegree.Select(HighestDegree => _mapper.Map<HighestDegreeViewModel>(HighestDegree)).ToListAsync();
+    }
 
-        public async Task<List<HighestDegreeViewModel>?> GetHighestDegree()
-        {
-            return await _db.HighestDegree.Select(HighestDegree => _mapper.Map<HighestDegreeViewModel>(HighestDegree)).ToListAsync();
-        }
+    public async Task<HighestDegreeViewModel?> GetHighestDegree(int Id)
+    {
+        HighestDegreeViewModel highestDegreeVM = await _db.HighestDegree
+            .Where(HighestDegree => HighestDegree.Id == Id)
+            .Select(HighestDegree => _mapper.Map<HighestDegreeViewModel>(HighestDegree))
+            .FirstOrDefaultAsync() ?? throw new Exception("HighestDegree not found!");
+        return highestDegreeVM;
+    }
 
-        public async Task<HighestDegreeViewModel?> GetHighestDegree(int Id)
-        {
-            var dbHighestDegree = await _db.HighestDegree.Where(HighestDegree => HighestDegree.Id == Id).Select(HighestDegree => _mapper.Map<HighestDegreeViewModel>(HighestDegree)).FirstOrDefaultAsync();
-            if (dbHighestDegree == null)
-                throw new Exception("HighestDegree not found!");
-            return dbHighestDegree;
-        }
+    public async Task<HighestDegreeViewModel?> CreateHighestDegree(HighestDegreeViewModel highestDegreeVM)
+    {
+        HighestDegree highestDegree = _mapper.Map<HighestDegree>(highestDegreeVM);
 
-        public async Task<HighestDegreeViewModel?> CreateHighestDegree(HighestDegreeViewModel HighestDegree)
-        {
-            var dbHighestDegree = await _db.HighestDegree.AddAsync(_mapper.Map<HighestDegree>(HighestDegree));
-            await _db.SaveChangesAsync();
+        highestDegree = (await _db.HighestDegree.AddAsync(highestDegree)).Entity;
+        await _db.SaveChangesAsync();
 
-            return _mapper.Map<HighestDegreeViewModel>(dbHighestDegree.Entity);
-        }
+        return _mapper.Map<HighestDegreeViewModel>(highestDegree);
+    }
 
-        public async Task<HighestDegreeViewModel?> UpdateHighestDegree(HighestDegreeViewModel HighestDegree)
-        {
-            var dbHighestDegree = await _db.HighestDegree.FindAsync(HighestDegree.Id);
-            if (dbHighestDegree == null)
-                throw new Exception("HighestDegree not found!");
+    public async Task<HighestDegreeViewModel?> UpdateHighestDegree(HighestDegreeViewModel highestDegreeVM)
+    {
+        HighestDegree highestDegree = await _db.HighestDegree.FindAsync(highestDegreeVM.Id) ?? throw new Exception("HighestDegree not found!");
 
-            dbHighestDegree.Value = HighestDegree.Value;
+        highestDegree.Value = highestDegreeVM.Value;
 
-            await _db.SaveChangesAsync();
-            return _mapper.Map<HighestDegreeViewModel>(dbHighestDegree);
-        }
+        await _db.SaveChangesAsync();
 
-        public async Task<List<HighestDegreeViewModel>?> DeleteHighestDegree(int Id)
-        {
-            var dbHighestDegree = await _db.HighestDegree.FindAsync(Id);
-            if (dbHighestDegree == null)
-                throw new Exception("HighestDegree not found!");
+        return _mapper.Map<HighestDegreeViewModel>(highestDegree);
+    }
 
-            _db.HighestDegree.Remove(dbHighestDegree);
-            await _db.SaveChangesAsync();
+    public async Task<List<HighestDegreeViewModel>?> DeleteHighestDegree(int Id)
+    {
+        HighestDegree highestDegree = await _db.HighestDegree.FindAsync(Id) ?? throw new Exception("HighestDegree not found!");
 
-            return await GetHighestDegree();
-        }
+        _db.HighestDegree.Remove(highestDegree);
+        await _db.SaveChangesAsync();
 
+        return await GetHighestDegree();
     }
 }

@@ -3,66 +3,66 @@ using Microsoft.EntityFrameworkCore;
 using Core.IRepositories;
 using Core.Data;
 using Core.ViewModel;
-using Core.Model;
 using Type = Core.Model.Type;
+using System.Data;
 
-namespace Core.Repositories
+namespace Core.Repositories;
+
+public class TypeRepository : ITypeRepository
 {
-    public class TypeRepository : ITypeRepository
+    private readonly DataContext _db;
+    private readonly IMapper _mapper;
+
+    public TypeRepository(DataContext context, IMapper mapper) 
     {
-        private readonly DataContext _db;
-        private readonly IMapper _mapper;
+        _db = context;
+        _mapper = mapper;
+    }
 
-        public TypeRepository(DataContext context, IMapper mapper) 
-        {
-            _db = context;
-            _mapper = mapper;
-        }
+    public new async Task<List<TypeViewModel>?> GetType()
+    {
+        return await _db.Type.Select(type => _mapper.Map<TypeViewModel>(type)).ToListAsync();
+    }
 
-        public new async Task<List<TypeViewModel>?> GetType()
-        {
-            return await _db.Type.Select(type => _mapper.Map<TypeViewModel>(type)).ToListAsync();
-        }
+    public async Task<TypeViewModel?> GetType(int Id)
+    {
+        TypeViewModel typeVM = await _db.Type
+            .Where(type => type.Id == Id)
+            .Select(type => _mapper.Map<TypeViewModel>(type))
+            .FirstOrDefaultAsync() ?? throw new Exception("Type not found!");
+        return typeVM;
+    }
 
-        public async Task<TypeViewModel?> GetType(int Id)
-        {
-            var dbType = await _db.Type.Where(type => type.Id == Id).Select(type => _mapper.Map<TypeViewModel>(type)).FirstOrDefaultAsync();
-            if (dbType == null)
-                throw new Exception("Type not found!");
-            return dbType;
-        }
+    public async Task<TypeViewModel?> CreateType(TypeViewModel typeVM)
+    {
+        Type type = _mapper.Map<Type>(typeVM);
 
-        public async Task<TypeViewModel?> CreateType(TypeViewModel type)
-        {
-            var dbType = await _db.Type.AddAsync(_mapper.Map<Type>(type));
-            await _db.SaveChangesAsync();
+        await _db.Type.AddAsync(type);
+        await _db.SaveChangesAsync();
 
-            return _mapper.Map<TypeViewModel>(dbType.Entity);
-        }
+        return _mapper.Map<TypeViewModel>(type);
+    }
 
-        public async Task<TypeViewModel?> UpdateType(TypeViewModel type)
-        {
-            var dbType = await _db.Type.FindAsync(type.Id);
-            if (dbType == null)
-                throw new Exception("Type not found!");
+    public async Task<TypeViewModel?> UpdateType(TypeViewModel typeVM)
+    {
+        Type type = await _db.Type.FindAsync(typeVM.Id) ?? throw new Exception("Type not found!");
 
-            dbType.ValueId = type.ValueId;
-            dbType.IsActive = type.IsActive;
 
-            await _db.SaveChangesAsync();
-            return _mapper.Map<TypeViewModel?>(dbType);
-        }
+        type.ValueId = typeVM.ValueId;
+        type.IsActive = typeVM.IsActive;
 
-        public async Task<List<TypeViewModel>?> DeleteType(int Id)
-        {
-            var dbType = await _db.Type.FindAsync(Id);
-            if (dbType == null)
-                throw new Exception("Type not found!");
+        await _db.SaveChangesAsync();
 
-            _db.Type.Remove(dbType);
-            await _db.SaveChangesAsync();
+        return _mapper.Map<TypeViewModel?>(type);
+    }
 
-            return await GetType();
-        }
+    public async Task<List<TypeViewModel>?> DeleteType(int Id)
+    {
+        Type type = await _db.Type.FindAsync(Id) ?? throw new Exception("Type not found!");
+
+        _db.Type.Remove(type);
+        await _db.SaveChangesAsync();
+
+        return await GetType();
     }
 }

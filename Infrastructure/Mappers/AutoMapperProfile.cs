@@ -10,8 +10,8 @@ public class AutoMapperProfile : AutoMapper.Profile
     {
         CreateMap<Company, CompanyViewModel>();
         CreateMap<CompanyViewModel, Company>();
-        CreateMap<Approvers, ApproversViewModel>();
-        CreateMap<ApproversViewModel, Approvers>();
+        CreateMap<Approver, ApproverViewModel>();
+        CreateMap<ApproverViewModel, Approver>();
         CreateMap<Department, DepartmentViewModel>();
         CreateMap<DepartmentViewModel, Department>();
         CreateMap<Profile, ProfileViewModel>();
@@ -36,6 +36,8 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<CategoryViewModel, Category>();
         CreateMap<PlaceOfDelivery, PlaceOfDeliveryViewModel>();
         CreateMap<PlaceOfDeliveryViewModel, PlaceOfDelivery>();
+        CreateMap<RequestFormStatus, RequestFormStatusViewModel>();
+        CreateMap<RequestFormStatusViewModel, RequestFormStatus>();
         CreateMap<HighestDegree, HighestDegreeViewModel>();
         CreateMap<HighestDegreeViewModel, HighestDegree>();
     }

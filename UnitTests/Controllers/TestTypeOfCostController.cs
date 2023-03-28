@@ -19,9 +19,9 @@ namespace UnitTests.Controllers
             var mockTypeOfCostService = new Mock<ITypeOfCostService>();
             mockTypeOfCostService.Setup(svc => svc.GetTypeOfCost().Result).Returns(new List<TypeOfCostViewModel>
                 {
-                    new TypeOfCostViewModel { Id = "Id 1", TypeOfCostValue = "TypeOfCost 1"},
-                    new TypeOfCostViewModel { Id = "Id 2", TypeOfCostValue = "TypeOfCost 2"},
-                    new TypeOfCostViewModel { Id = "Id 3", TypeOfCostValue = "TypeOfCost 3"}
+                    new TypeOfCostViewModel { Id = "Id 1", Value = "TypeOfCost 1"},
+                    new TypeOfCostViewModel { Id = "Id 2", Value = "TypeOfCost 2"},
+                    new TypeOfCostViewModel { Id = "Id 3", Value = "TypeOfCost 3"}
                 });
             _controller = new TypeOfCostController(logger, mockTypeOfCostService.Object);
         }
@@ -50,7 +50,7 @@ namespace UnitTests.Controllers
         public async Task Create_OnReturnsData()
         {
             // Act
-            var result = await _controller.CreateTypeOfCost(new TypeOfCostViewModel { Id = "Id 4", TypeOfCostValue = "TypeOfCost 4" });
+            var result = await _controller.CreateTypeOfCost(new TypeOfCostViewModel { Id = "Id 4", Value = "TypeOfCost 4" });
 
             // Assert
             Assert.IsType<ActionResult<TypeOfCostViewModel?>>(result);
@@ -60,7 +60,7 @@ namespace UnitTests.Controllers
         public async Task Update_OnReturnsData()
         {
             // Act
-            var result = await _controller.UpdateTypeOfCost(new TypeOfCostViewModel { Id = "Id 4", TypeOfCostValue = "Value id updated 4" });
+            var result = await _controller.UpdateTypeOfCost(new TypeOfCostViewModel { Id = "Id 4", Value = "Value id updated 4" });
 
             // Assert
             Assert.IsType<ActionResult<TypeOfCostViewModel?>>(result);
