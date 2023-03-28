@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230324145949_add_request_form_status")]
-    partial class add_request_form_status
+    [Migration("20230327151433_init_project")]
+    partial class init_project
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Core.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Core.Model.Approvers", b =>
+            modelBuilder.Entity("Core.Model.Approver", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,11 +35,13 @@ namespace Core.Migrations
 
                     b.Property<string>("AppFirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("app_FirstName");
 
                     b.Property<string>("AppLastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("app_LastName");
 
                     b.HasKey("Id");
 
@@ -77,7 +79,7 @@ namespace Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BrType");
+                    b.ToTable("TypeBR");
                 });
 
             modelBuilder.Entity("Core.Model.Category", b =>
@@ -108,33 +110,38 @@ namespace Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCompany"));
 
+                    b.Property<string>("BICSW")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("cmp_BICSW");
+
                     b.Property<string>("BankAccount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CmpBicsw")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CmpEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("CmpVatRate")
-                        .HasColumnType("float");
-
-                    b.Property<string>("CmpVatlegalEntity")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("IdApproverCmp")
-                        .HasColumnType("int");
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Cmp_Email");
+
+                    b.Property<int?>("IdApprover")
+                        .HasColumnType("int")
+                        .HasColumnName("idApproverCmp");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsEveris")
                         .HasColumnType("bit");
+
+                    b.Property<string>("VatLegalEntity")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("cmp_VATLegalEntity");
+
+                    b.Property<double?>("VatRate")
+                        .HasColumnType("float")
+                        .HasColumnName("cmp_VAT_Rate");
 
                     b.HasKey("IdCompany");
 
@@ -189,27 +196,31 @@ namespace Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("BA")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PTMOwner_BA");
+
+                    b.Property<string>("BICSW")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PTMOwner_BICSW");
+
                     b.Property<int?>("IdApprover")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsEveris")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PTMOwnerBA")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PTMOwnerBICSW")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PTMOwnerVatNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("PTMOwnerVatRate")
-                        .HasColumnType("float");
-
                     b.Property<string>("ValueId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VatNumber")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PTMOwner_VAT_Number");
+
+                    b.Property<double?>("VatRate")
+                        .HasColumnType("float")
+                        .HasColumnName("PTMOwner_VAT_Rate");
 
                     b.HasKey("Id");
 
@@ -221,13 +232,14 @@ namespace Core.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("PaymentTermValue")
+                    b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PaymentTermValue");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentTerm");
+                    b.ToTable("PaymentTerms");
                 });
 
             modelBuilder.Entity("Core.Model.PlaceOfDelivery", b =>
@@ -278,9 +290,6 @@ namespace Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ValueId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -298,11 +307,21 @@ namespace Core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("IdApproverSub")
-                        .HasColumnType("int");
+                    b.Property<string>("BA")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SubCont_BA");
+
+                    b.Property<string>("BICSW")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("SubCont_BICSW");
+
+                    b.Property<int?>("IdApprover")
+                        .HasColumnType("int")
+                        .HasColumnName("idApproverSub");
 
                     b.Property<string>("IdNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ID_Number");
 
                     b.Property<string>("IdPaymentTerm")
                         .HasColumnType("nvarchar(max)");
@@ -313,27 +332,24 @@ namespace Core.Migrations
                     b.Property<bool>("IsOfficial")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LegalEntityAdress")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("LegalEntityAddress")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("LegalEntityAdress");
 
                     b.Property<string>("LegalEntityName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubContBa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubContBicsw")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("SubContVatRate")
-                        .HasColumnType("float");
 
                     b.Property<string>("ValueId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VatNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("VAT_Number");
+
+                    b.Property<double?>("VatRate")
+                        .HasColumnType("float")
+                        .HasColumnName("SubCont_VAT_Rate");
 
                     b.HasKey("Id");
 
@@ -365,9 +381,10 @@ namespace Core.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("TypeOfCostValue")
+                    b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("TypeOfCostValue");
 
                     b.HasKey("Id");
 

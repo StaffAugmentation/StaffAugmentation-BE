@@ -1,12 +1,9 @@
-﻿namespace Core.ViewModel
+﻿namespace Core.ViewModel;
+
+public class RequestFormStatusViewModel
 {
-    public class RequestFormStatusViewModel
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string ValueId { get; set; } = null!;
+    public string ValueId { get; set; } = null!;
 
-        public bool IsActive { get; set; }
-
-    }
 }

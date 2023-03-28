@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Model
 {
@@ -15,22 +16,19 @@ namespace Core.Model
 
         public bool IsEveris { get; set; }
 
-        public string? CmpVatlegalEntity { get; set; }
+        [Column("cmp_VATLegalEntity")]
+        public string? VatLegalEntity { get; set; }
 
-        public string? CmpBicsw { get; set; }
+        [Column("cmp_BICSW")]
+        public string? BICSW { get; set; }
 
-        public double? CmpVatRate { get; set; }
+        [Column("cmp_VAT_Rate")]
+        public double? VatRate { get; set; }
 
-        public int? IdApproverCmp { get; set; }
+        [Column("idApproverCmp")]
+        public int? IdApprover { get; set; }
 
-        public string? CmpEmail { get; set; }
-
-        //public virtual ICollection<BrProfile> BrProfiles { get; } = new List<BrProfile>();
-
-        //public virtual ICollection<ChangeCompany> ChangeCompanyIdCompanyToNavigations { get; } = new List<ChangeCompany>();
-
-        //public virtual ICollection<ChangeCompany> ChangeCompanyIdInitialCompanyNavigations { get; } = new List<ChangeCompany>();
-
-        //public virtual ICollection<ScDaysWorkedByMonth> ScDaysWorkedByMonths { get; } = new List<ScDaysWorkedByMonth>();
+        [Column("Cmp_Email")]
+        public string? Email { get; set; }
     }
 }

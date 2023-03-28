@@ -18,7 +18,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ApproversViewModel>?>> GetAll()
+        public async Task<ActionResult<List<ApproverViewModel>?>> GetAll()
         {
             try
             {
@@ -33,7 +33,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ApproversViewModel?>> GetApprover(int id)
+        public async Task<ActionResult<ApproverViewModel?>> GetApprover(int id)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ApproversViewModel?>> CreateApprover(ApproversViewModel approver)
+        public async Task<ActionResult<ApproverViewModel?>> CreateApprover(ApproverViewModel approver)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ApproversViewModel?>> UpdateApprover(ApproversViewModel approver)
+        public async Task<ActionResult<ApproverViewModel?>> UpdateApprover(ApproverViewModel approver)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<ApproversViewModel>?>> DeleteApprover(int id)
+        public async Task<ActionResult<List<ApproverViewModel>?>> DeleteApprover(int id)
         {
             try
             {

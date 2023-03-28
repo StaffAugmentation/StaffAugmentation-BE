@@ -1,13 +1,9 @@
 ﻿
-namespace Core.Model
+namespace Core.Model;
+public class RequestFormStatus
 {
-    public class RequestFormStatus
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string ValueId { get; set; } = null!;
+    public string ValueId { get; set; } = null!;
 
-        public bool IsActive { get; set; }
-
-    }
 }
