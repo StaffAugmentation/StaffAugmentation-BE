@@ -25,11 +25,11 @@ public class CategoryRepository : ICategoryRepository
     
     public async Task<CategoryViewModel?> GetCategory(int Id)
     {
-        CategoryViewModel dbCategory = await _db.Category
+        CategoryViewModel category = await _db.Category
                                                 .Where(category => category.Id == Id)
                                                 .Select(category => _mapper.Map<CategoryViewModel>(category))
                                                 .FirstOrDefaultAsync() ?? throw new Exception("Category not found!");
-        return dbCategory; 
+        return category; 
     }
 
     public async Task<CategoryViewModel?> CreateCategory(CategoryViewModel categoryVM) 
@@ -44,11 +44,11 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<CategoryViewModel?> UpdateCategory(CategoryViewModel categoryVM)
     {
-        _ = await _db.Category.FindAsync(categoryVM.Id) ?? throw new Exception("Category not found!");
+        Category category = await _db.Category.FindAsync(categoryVM.Id) ?? throw new Exception("Category not found!");
 
-        Category category = _mapper.Map<Category>(categoryVM);
+        category.ValueId = categoryVM.ValueId;
+        category.IsActive = categoryVM.IsActive;
 
-        _db.Category.Update(category);
         await _db.SaveChangesAsync();
 
         return _mapper.Map<CategoryViewModel>(category);

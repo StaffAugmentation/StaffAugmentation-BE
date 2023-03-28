@@ -46,11 +46,11 @@ public class ProfileRepository : IProfileRepository
 
     public async Task<ProfileViewModel?> UpdateProfile(ProfileViewModel profileVM)
     {
-        _ = await _db.Profile.FindAsync(profileVM.Id) ?? throw new Exception("Profile not found!");
+        Profile profile = await _db.Profile.FindAsync(profileVM.Id) ?? throw new Exception("Profile not found!");
 
-        Profile profile = _mapper.Map<Profile>(profileVM);
+        profile.ValueId = profileVM.ValueId;
+        profile.IsActive = profileVM.IsActive;
 
-        _db.Profile.Update(profile);
         await _db.SaveChangesAsync();
 
         return _mapper.Map<ProfileViewModel>(profile);

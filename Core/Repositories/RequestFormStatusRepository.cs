@@ -42,13 +42,12 @@ public class RequestFormStatusRepository : IRequestFormStatusRepository
         return _mapper.Map<RequestFormStatusViewModel>(requestFormStatus);
     }
 
-    public async Task<RequestFormStatusViewModel?> UpdateRequestFormStatus(RequestFormStatusViewModel RequestFormStatusVM)
+    public async Task<RequestFormStatusViewModel?> UpdateRequestFormStatus(RequestFormStatusViewModel requestFormStatusVM)
     {
-        _ = await _db.RequestFormStatus.FindAsync(RequestFormStatusVM.Id) ?? throw new Exception("Request From Status not found!");
+        RequestFormStatus requestFormStatus = await _db.RequestFormStatus.FindAsync(requestFormStatusVM.Id) ?? throw new Exception("Request From Status not found!");
 
-        RequestFormStatus requestFormStatus = _mapper.Map<RequestFormStatus>(RequestFormStatusVM);
+        requestFormStatus.ValueId = requestFormStatusVM.ValueId;
 
-        _db.RequestFormStatus.Update(requestFormStatus);
         await _db.SaveChangesAsync();
 
         return _mapper.Map<RequestFormStatusViewModel>(requestFormStatus);

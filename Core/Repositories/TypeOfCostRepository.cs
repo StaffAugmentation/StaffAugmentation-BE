@@ -44,11 +44,10 @@ public class TypeOfCostRepository : ITypeOfCostRepository
 
     public async Task<TypeOfCostViewModel?> UpdateTypeOfCost(TypeOfCostViewModel typeOfCostVM)
     {
-        _ = await _db.TypeOfCost.FindAsync(typeOfCostVM.Id) ?? throw new Exception("TypeOfCost not found!");
+        TypeOfCost typeOfCost = await _db.TypeOfCost.FindAsync(typeOfCostVM.Id) ?? throw new Exception("TypeOfCost not found!");
 
-        TypeOfCost typeOfCost = _mapper.Map<TypeOfCost>(typeOfCostVM);
+        typeOfCost.Value = typeOfCostVM.Value;
 
-        _db.TypeOfCost.Update(typeOfCost);
         await _db.SaveChangesAsync();
 
         return _mapper.Map<TypeOfCostViewModel>(typeOfCost);

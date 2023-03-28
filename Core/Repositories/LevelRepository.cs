@@ -44,11 +44,11 @@ public class LevelRepository : ILevelRepository
 
     public async Task<LevelViewModel?> UpdateLevel(LevelViewModel levelVM)
     {
-        _ = await _db.Level.FindAsync(levelVM.Id) ?? throw new Exception("Level not found!");
+        Level level = await _db.Level.FindAsync(levelVM.Id) ?? throw new Exception("Level not found!");
 
-        Level level = _mapper.Map<Level>(levelVM);
+        level.ValueId = levelVM.ValueId;
+        level.IsActive = levelVM.IsActive;
 
-        _db.Level.Update(level);
         await _db.SaveChangesAsync();
 
         return _mapper.Map<LevelViewModel>(level);

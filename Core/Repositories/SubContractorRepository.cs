@@ -89,14 +89,20 @@ public class SubContractorRepository : ISubContractorRepository
 
     public async Task<SubContractorViewModel?> UpdateSubContractor(SubContractorViewModel subContractorVM)
     {
-        _ = await _db.SubContractor.FindAsync(subContractorVM.Id) ?? throw new Exception("SubContractor not found!");
+        SubContractor subContractor = await _db.SubContractor.FindAsync(subContractorVM.Id) ?? throw new Exception("SubContractor not found!");
 
-        SubContractor subContractor = _mapper.Map<SubContractor>(subContractorVM);
+        subContractor.ValueId = subContractorVM.ValueId;
+        subContractor.BA = subContractorVM.BA;
+        subContractor.BICSW = subContractorVM.BICSW;
+        subContractor.VatRate = subContractorVM.VatRate;
+        subContractor.VatNumber = subContractorVM.VatNumber;
+        subContractor.IsOfficial = subContractorVM.IsOfficial;
+        subContractor.LegalEntityName = subContractorVM.LegalEntityName;
+        subContractor.LegalEntityAddress = subContractorVM.LegalEntityAddress;
         subContractor.IdApprover = subContractorVM.Approver?.Id;
         subContractor.IdPaymentTerm = subContractorVM.PaymentTerm?.Id;
         subContractor.IdTypeOfCost = subContractorVM.TypeOfCost?.Id;
 
-        _db.SubContractor.Update(subContractor);
         await _db.SaveChangesAsync();
 
         subContractorVM = _mapper.Map<SubContractorViewModel>(subContractor);

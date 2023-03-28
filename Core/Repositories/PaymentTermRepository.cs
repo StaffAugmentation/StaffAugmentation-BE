@@ -46,11 +46,10 @@ public class PaymentTermRepository : IPaymentTermRepository
 
     public async Task<PaymentTermViewModel?> UpdatePaymentTerm(PaymentTermViewModel paymentTermVM)
     {
-        _ = await _db.PaymentTerm.FindAsync(paymentTermVM.Id) ?? throw new Exception("PaymentTerm not found!");
+        PaymentTerm paymentTerm = await _db.PaymentTerm.FindAsync(paymentTermVM.Id) ?? throw new Exception("PaymentTerm not found!");
 
-        PaymentTerm paymentTerm = _mapper.Map<PaymentTerm>(paymentTermVM);
+        paymentTerm.Value = paymentTermVM.Value;
 
-        _db.PaymentTerm.Update(paymentTerm);
         await _db.SaveChangesAsync();
 
         return _mapper.Map<PaymentTermViewModel>(paymentTerm);

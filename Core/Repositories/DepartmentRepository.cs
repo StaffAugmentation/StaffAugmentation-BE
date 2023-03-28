@@ -44,11 +44,11 @@ public class DepartmentRepository : IDepartmentRepository
 
     public async Task<DepartmentViewModel?> UpdateDepartment(DepartmentViewModel departmentVM)
     {
-        _ = await _db.Department.FindAsync(departmentVM.Id) ?? throw new Exception("Department not found!");
+        Department department = await _db.Department.FindAsync(departmentVM.Id) ?? throw new Exception("Department not found!");
 
-        Department department = _mapper.Map<Department>(departmentVM);
+        department.ValueId = departmentVM.ValueId;
+        department.IsActive = departmentVM.IsActive;
 
-        _db.Department.Update(department);
         await _db.SaveChangesAsync();
 
         return _mapper.Map<DepartmentViewModel>(department);

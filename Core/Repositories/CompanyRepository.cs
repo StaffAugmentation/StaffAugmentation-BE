@@ -83,7 +83,7 @@ public class CompanyRepository : ICompanyRepository
         await _db.SaveChangesAsync();
 
         companyVM = _mapper.Map<CompanyViewModel>(company);
-        companyVM.Approver = _mapper.Map<ApproverViewModel>(_db.Approver.Where(approver => approver.Id == company.IdApprover).FirstOrDefaultAsync());
+        companyVM.Approver = _mapper.Map<ApproverViewModel>(await _db.Approver.Where(approver => approver.Id == company.IdApprover).FirstOrDefaultAsync());
         return companyVM;
     }
 

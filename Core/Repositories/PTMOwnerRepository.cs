@@ -49,7 +49,10 @@ public class PTMOwnerRepository : IPTMOwnerRepository
                                 VatRate = PTMOwner.VatRate,
                                 IsEveris = PTMOwner.IsEveris,
                                 VatNumber = PTMOwner.VatNumber,
-                                Approver = _mapper.Map<ApproverViewModel>(_db.Approver.Where(approver => approver.Id == PTMOwner.IdApprover).FirstOrDefault())
+                                Approver = _db.Approver
+                                            .Where(approver => approver.Id == PTMOwner.IdApprover)
+                                            .Select(approver => _mapper.Map<ApproverViewModel>(approver))
+                                            .FirstOrDefault()
                             }
             ).FirstOrDefaultAsync() ?? throw new Exception("PTMOwner not found!");
         return PTMOwnerVM;
@@ -64,23 +67,33 @@ public class PTMOwnerRepository : IPTMOwnerRepository
         await _db.SaveChangesAsync();
 
         PTMOwnerVM = _mapper.Map<PTMOwnerViewModel>(ptmOwner);
-        PTMOwnerVM.Approver = _mapper.Map<ApproverViewModel>(_db.Approver.Where(app => app.Id == ptmOwner.IdApprover).FirstOrDefaultAsync());
+        PTMOwnerVM.Approver = await _db.Approver
+            .Where(app => app.Id == ptmOwner.IdApprover)
+            .Select(approver => _mapper.Map<ApproverViewModel>(approver))
+            .FirstOrDefaultAsync();
 
         return PTMOwnerVM;
     }
 
     public async Task<PTMOwnerViewModel?> UpdatePTMOwner(PTMOwnerViewModel PTMOwnerVM)
     {
-        _ = await _db.PTMOwner.FindAsync(PTMOwnerVM.Id) ?? throw new Exception("PTMOwner not found!");
+        PTMOwner ptmOwner = await _db.PTMOwner.FindAsync(PTMOwnerVM.Id) ?? throw new Exception("PTMOwner not found!");
 
-        PTMOwner ptmOwner = _mapper.Map<PTMOwner>(PTMOwnerVM);
+        ptmOwner.ValueId = PTMOwnerVM.ValueId;
+        ptmOwner.BA = PTMOwnerVM.BA;
+        ptmOwner.BICSW = PTMOwnerVM.BICSW;
+        ptmOwner.VatRate = PTMOwnerVM.VatRate;
+        ptmOwner.VatNumber = PTMOwnerVM.VatNumber;
+        ptmOwner.IsEveris = PTMOwnerVM.IsEveris;
         ptmOwner.IdApprover = PTMOwnerVM.Approver?.Id;
 
-        _db.PTMOwner.Update(ptmOwner);
         await _db.SaveChangesAsync();
 
         PTMOwnerVM = _mapper.Map<PTMOwnerViewModel>(ptmOwner);
-        PTMOwnerVM.Approver = _mapper.Map<ApproverViewModel>(_db.Approver.Where(app => app.Id == ptmOwner.IdApprover).FirstOrDefaultAsync());
+        PTMOwnerVM.Approver = await _db.Approver
+            .Where(app => app.Id == ptmOwner.IdApprover)
+            .Select(approver => _mapper.Map<ApproverViewModel>(approver))
+            .FirstOrDefaultAsync();
 
         return PTMOwnerVM;
     }

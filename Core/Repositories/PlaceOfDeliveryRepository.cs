@@ -42,13 +42,13 @@ public class PlaceOfDeliveryRepository : IPlaceOfDeliveryRepository
         return _mapper.Map<PlaceOfDeliveryViewModel>(placeOfDelivery);
     }
 
-    public async Task<PlaceOfDeliveryViewModel?> UpdatePlaceOfDelivery(PlaceOfDeliveryViewModel PlaceOfDeliveryVM)
+    public async Task<PlaceOfDeliveryViewModel?> UpdatePlaceOfDelivery(PlaceOfDeliveryViewModel placeOfDeliveryVM)
     {
-        _ = await _db.PlaceOfDelivery.FindAsync(PlaceOfDeliveryVM.Id) ?? throw new Exception("PlaceOfDelivery not found!");
+        PlaceOfDelivery placeOfDelivery = await _db.PlaceOfDelivery.FindAsync(placeOfDeliveryVM.Id) ?? throw new Exception("PlaceOfDelivery not found!");
 
-        PlaceOfDelivery placeOfDelivery = _mapper.Map<PlaceOfDelivery>(PlaceOfDeliveryVM);
+        placeOfDelivery.ValueId = placeOfDeliveryVM.ValueId;
+        placeOfDelivery.IsActive = placeOfDeliveryVM.IsActive;
 
-        _db.PlaceOfDelivery.Update(placeOfDelivery);
         await _db.SaveChangesAsync();
 
         return _mapper.Map<PlaceOfDeliveryViewModel?>(placeOfDelivery);

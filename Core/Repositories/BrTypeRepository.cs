@@ -4,6 +4,7 @@ using Core.Model;
 using Core.ViewModel;
 using Core.IRepositories;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Core.Repositories;
 
@@ -45,11 +46,11 @@ public class BrTypeRepository : IBrTypeRepository
 
     public async Task<BrTypeViewModel?> UpdateBrType(BrTypeViewModel brTypeVM)
     {
-        _ = await _db.BrType.FindAsync(brTypeVM.Id) ?? throw new Exception("BrType not found!");
-        
-        BrType brType = _mapper.Map<BrType>(brTypeVM);
+        BrType brType = await _db.BrType.FindAsync(brTypeVM.Id) ?? throw new Exception("BrType not found!");
 
-        _db.BrType.Update(brType);
+        brType.ValueId = brTypeVM.ValueId;
+        brType.IsActive = brTypeVM.IsActive;
+
         await _db.SaveChangesAsync();
 
         return _mapper.Map<BrTypeViewModel>(brType);

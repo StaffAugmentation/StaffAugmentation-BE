@@ -4,7 +4,6 @@ using Core.IRepositories;
 using Core.Data;
 using Core.ViewModel;
 using Core.Model;
-using System.Data.Common;
 
 namespace Core.Repositories;
 
@@ -33,21 +32,23 @@ public class ApproverRepository : IApproverRepository
         return dbApprover ;
     }
 
-    public async Task<ApproverViewModel?> CreateApprover(ApproverViewModel approver)
+    public async Task<ApproverViewModel?> CreateApprover(ApproverViewModel approverVM)
     {
-        var dbApprover = await _db.Approver.AddAsync(_mapper.Map<Approver>(approver));
+        Approver approver = _mapper.Map<Approver>(approverVM);
+
+        approver = (await _db.Approver.AddAsync(approver)).Entity;
         await _db.SaveChangesAsync();
 
-        return _mapper.Map<ApproverViewModel>(dbApprover.Entity);
+        return _mapper.Map<ApproverViewModel>(approver);
     }
 
     public async Task<ApproverViewModel?> UpdateApprover(ApproverViewModel approverVM)
     {
-        _ = await _db.Approver.FindAsync(approverVM.Id) ?? throw new Exception("Approver not found!");
+        Approver approver = await _db.Approver.FindAsync(approverVM.Id) ?? throw new Exception("Approver not found!");
 
-        Approver approver = _mapper.Map<Approver>(approverVM);
+        approver.AppFirstName = approverVM.AppFirstName;
+        approver.AppLastName = approverVM.AppLastName;
 
-        _db.Approver.Update(approver);
         await _db.SaveChangesAsync();
 
         return _mapper.Map<ApproverViewModel>(approver);
@@ -55,11 +56,11 @@ public class ApproverRepository : IApproverRepository
 
     public async Task<List<ApproverViewModel>?> DeleteApprover(int Id)
     {
-        Approver dbApprover = await _db.Approver.FindAsync(Id) ?? throw new Exception("Approver not found!");
-        _db.Approver.Remove(dbApprover);
+        Approver approver = await _db.Approver.FindAsync(Id) ?? throw new Exception("Approver not found!");
+        
+        _db.Approver.Remove(approver);
         await _db.SaveChangesAsync();
 
         return await GetApprover();
     }
-
 }

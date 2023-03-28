@@ -38,5 +38,7 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<PlaceOfDeliveryViewModel, PlaceOfDelivery>();
         CreateMap<RequestFormStatus, RequestFormStatusViewModel>();
         CreateMap<RequestFormStatusViewModel, RequestFormStatus>();
+        CreateMap<HighestDegree, HighestDegreeViewModel>();
+        CreateMap<HighestDegreeViewModel, HighestDegree>();
     }
 }

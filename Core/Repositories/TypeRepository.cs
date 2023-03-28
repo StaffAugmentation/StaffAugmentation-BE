@@ -4,6 +4,7 @@ using Core.IRepositories;
 using Core.Data;
 using Core.ViewModel;
 using Type = Core.Model.Type;
+using System.Data;
 
 namespace Core.Repositories;
 
@@ -44,11 +45,12 @@ public class TypeRepository : ITypeRepository
 
     public async Task<TypeViewModel?> UpdateType(TypeViewModel typeVM)
     {
-        _ = await _db.Type.FindAsync(typeVM.Id) ?? throw new Exception("Type not found!");
+        Type type = await _db.Type.FindAsync(typeVM.Id) ?? throw new Exception("Type not found!");
 
-        Type type = _mapper.Map<Type>(typeVM);
 
-        _db.Type.Update(type);
+        type.ValueId = typeVM.ValueId;
+        type.IsActive = typeVM.IsActive;
+
         await _db.SaveChangesAsync();
 
         return _mapper.Map<TypeViewModel?>(type);

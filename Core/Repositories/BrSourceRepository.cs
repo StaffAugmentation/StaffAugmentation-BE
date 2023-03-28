@@ -42,20 +42,21 @@ public class BrSourceRepository : IBrSourceRepository
             throw new Exception("BrSource with this id already exists!");
 
         brSource = _mapper.Map<BrSource>(brSourceVM);
-        await _db.BrSource.AddAsync(brSource);
 
+        brSource = (await _db.BrSource.AddAsync(brSource)).Entity;
         await _db.SaveChangesAsync();
+
         return _mapper.Map<BrSourceViewModel>(brSource);
     }
 
     public async Task<BrSourceViewModel?> UpdateBrSource(BrSourceViewModel brSourceVM)
     {
-        _ = await _db.BrSource.FindAsync(brSourceVM.IdSource) ?? throw new Exception("BrSource not found!");
+        BrSource brSource = await _db.BrSource.FindAsync(brSourceVM.IdSource) ?? throw new Exception("BrSource not found!");
 
-        BrSource brSource = _mapper.Map<BrSource>(brSourceVM);
-        _db.BrSource.Update(brSource);
+        brSource.SourceName = brSourceVM.SourceName;
 
         await _db.SaveChangesAsync();
+
         return _mapper.Map<BrSourceViewModel>(brSource);
     }
 
