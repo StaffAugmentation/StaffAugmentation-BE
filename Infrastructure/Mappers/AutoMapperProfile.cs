@@ -36,6 +36,8 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<CategoryViewModel, Category>();
         CreateMap<PlaceOfDelivery, PlaceOfDeliveryViewModel>();
         CreateMap<PlaceOfDeliveryViewModel, PlaceOfDelivery>();
+        CreateMap<RecruitmentResponsible, RecruitmentResponsibleViewModel>();
+        CreateMap<RecruitmentResponsibleViewModel, RecruitmentResponsible>();
         CreateMap<RequestFormStatus, RequestFormStatusViewModel>();
         CreateMap<RequestFormStatusViewModel, RequestFormStatus>();
         CreateMap<HighestDegree, HighestDegreeViewModel>();

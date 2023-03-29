@@ -22,6 +22,7 @@ namespace Core.Data
         public DbSet<Core.Model.Type> Type => Set<Core.Model.Type>();
         public DbSet<Category> Category => Set<Category>();
         public DbSet<PlaceOfDelivery> PlaceOfDelivery => Set<PlaceOfDelivery>();
+        public DbSet<RecruitmentResponsible> RecruitmentResponsible => Set<RecruitmentResponsible>();
         public DbSet<HighestDegree> HighestDegree => Set<HighestDegree>();
         public DbSet<RequestFormStatus> RequestFormStatus => Set<RequestFormStatus>();
     }

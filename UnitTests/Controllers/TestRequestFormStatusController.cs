@@ -19,9 +19,9 @@ namespace UnitTests.Controllers
             var mockRequestFormStatusService = new Mock<IRequestFormStatusService>();
             mockRequestFormStatusService.Setup(svc => svc.GetRequestFormStatus().Result).Returns(new List<RequestFormStatusViewModel>
                 {
-                    new RequestFormStatusViewModel { Id = 1, ValueId = "RequestFormStatus 1" },
-                    new RequestFormStatusViewModel { Id = 2, ValueId = "RequestFormStatus 2" },
-                    new RequestFormStatusViewModel { Id = 3, ValueId = "RequestFormStatus 3" },
+                    new RequestFormStatusViewModel { Id = "RFS1", Value = "RequestFormStatus 1" },
+                    new RequestFormStatusViewModel { Id = "RFS2", Value = "RequestFormStatus 2" },
+                    new RequestFormStatusViewModel { Id = "RFS3", Value = "RequestFormStatus 3" },
                 });
             _controller = new RequestFormStatusController(logger, mockRequestFormStatusService.Object);
         }
@@ -40,7 +40,7 @@ namespace UnitTests.Controllers
         public async Task GetRequestFormStatus_OnReturnsData()
         {
             // Act
-            var result = await _controller.GetRequestFormStatus(100);
+            var result = await _controller.GetRequestFormStatus("RFS1");
 
             // Assert
             Assert.IsType<ActionResult<RequestFormStatusViewModel?>?>(result);
@@ -50,7 +50,7 @@ namespace UnitTests.Controllers
         public async Task Create_OnReturnsData()
         {
             // Act
-            var result = await _controller.CreateRequestFormStatus(new RequestFormStatusViewModel { Id = 4, ValueId = "RequestFormStatus 4" });
+            var result = await _controller.CreateRequestFormStatus(new RequestFormStatusViewModel { Id = "RFS4", Value = "RequestFormStatus 4" });
 
             // Assert
             Assert.IsType<ActionResult<RequestFormStatusViewModel?>>(result);
@@ -60,7 +60,7 @@ namespace UnitTests.Controllers
         public async Task Update_OnReturnsData()
         {
             // Act
-            var result = await _controller.UpdateRequestFormStatus(new RequestFormStatusViewModel { Id = 4, ValueId = "RequestFormStatus 4" });
+            var result = await _controller.UpdateRequestFormStatus(new RequestFormStatusViewModel { Id = "RFS4", Value = "RequestFormStatus 4" });
 
             // Assert
             Assert.IsType<ActionResult<RequestFormStatusViewModel?>>(result);
@@ -70,7 +70,7 @@ namespace UnitTests.Controllers
         public async Task Delete_OnReturnsData()
         {
             // Act
-            var result = await _controller.DeleteRequestFormStatus(4);
+            var result = await _controller.DeleteRequestFormStatus("RFS4");
 
             // Assert
             Assert.IsType<ActionResult<List<RequestFormStatusViewModel>>>(result);
