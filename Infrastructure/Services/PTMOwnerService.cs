@@ -7,9 +7,9 @@ namespace Business.Services
     public class PTMOwnerService : IPTMOwnerService
     {
         private readonly IPTMOwnerRepository repo;
-        public PTMOwnerService(IPTMOwnerRepository PTMOwnerrepository)
+        public PTMOwnerService(IPTMOwnerRepository ptmOwnerRepository)
         {
-            repo = PTMOwnerrepository;
+            repo = ptmOwnerRepository;
         }
 
         public async Task<List<PTMOwnerViewModel>?> GetPTMOwner()

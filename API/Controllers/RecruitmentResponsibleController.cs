@@ -1,28 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Business.IServices;
 using Core.ViewModel;
+using Core.Model;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RecruitmentRespController : ControllerBase
+    public class RecruitmentResponsibleController : ControllerBase
     {
-        private readonly ILogger<RecruitmentRespController> _logger;
-        private readonly IRecruitmentRespService _service;
-        public RecruitmentRespController(ILogger<RecruitmentRespController> logger, IRecruitmentRespService service)
+        private readonly ILogger<RecruitmentResponsibleController> _logger;
+        private readonly IRecruitmentResponsibleService _service;
+        public RecruitmentResponsibleController(ILogger<RecruitmentResponsibleController> logger, IRecruitmentResponsibleService service)
         {
             _logger = logger;
             _service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<RecruitmentRespViewModel>?>> GetAll()
+        public async Task<ActionResult<List<RecruitmentResponsibleViewModel>?>> GetAll()
         {
             try
             {
-                _logger.LogInformation("GetRecruitement");
-                return Ok(await _service.GetRecruitmentResp());
+                _logger.LogInformation("Get Recruitement");
+                return Ok(await _service.GetRecruitmentResponsible());
             }
             catch (Exception ex)
             {
@@ -32,12 +33,12 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<RecruitmentRespViewModel?>> GetRecruitmentResp(int id)
+        public async Task<ActionResult<RecruitmentResponsibleViewModel?>> GetRecruitmentResponsible(int id)
         {
             try
             {
                 _logger.LogInformation("GetRecruitement");
-                return Ok(await _service.GetRecruitmentResp(id));
+                return Ok(await _service.GetRecruitmentResponsible(id));
             }
             catch (Exception ex)
             {
@@ -47,12 +48,12 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<RecruitmentRespViewModel?>> CreateRecruitmentResp(RecruitmentRespViewModel recruitmentResp)
+        public async Task<ActionResult<RecruitmentResponsibleViewModel?>> CreateRecruitmentResponsible(RecruitmentResponsibleViewModel recruitmentResponsible)
         {
             try
             {
                 _logger.LogInformation("Add Recruitement");
-                return Accepted(await _service.CreateRecruitmentResp(recruitmentResp));
+                return Accepted(await _service.CreateRecruitmentResponsible(recruitmentResponsible));
             }
             catch (Exception ex)
             {
@@ -62,12 +63,12 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<RecruitmentRespViewModel?>> UpdateRecruitmentResp(RecruitmentRespViewModel recruitmentResp)
+        public async Task<ActionResult<RecruitmentResponsibleViewModel?>> UpdateRecruitmentResponsible(RecruitmentResponsibleViewModel recruitmentResponsible)
         {
             try
             {
                 _logger.LogInformation("Update Recruitement");
-                return Accepted(await _service.UpdateRecruitmentResp(recruitmentResp));
+                return Accepted(await _service.UpdateRecruitmentResponsible(recruitmentResponsible));
             }
             catch (Exception ex)
             {
@@ -78,12 +79,12 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<RecruitmentRespViewModel>?>> DeleteRecruitmentResp(int id)
+        public async Task<ActionResult<List<RecruitmentResponsibleViewModel>?>> DeleteRecruitmentResponsible(int id)
         {
             try
             {
                 _logger.LogInformation("Delete Recruitement");
-                return Accepted(await _service.DeleteRecruitmentResp(id));
+                return Accepted(await _service.DeleteRecruitmentResponsible(id));
             }
             catch (Exception ex)
             {

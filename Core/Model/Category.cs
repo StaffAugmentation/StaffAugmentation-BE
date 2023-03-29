@@ -1,12 +1,10 @@
-namespace Core.Model
+namespace Core.Model;
+public class Category
 {
-    public class Category
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string ValueId { get; set; } = null!;
+    public string ValueId { get; set; } = null!;
 
-        public bool? IsActive { get; set; }
+    public bool? IsActive { get; set; }
 
-       }
 }

@@ -1,10 +1,11 @@
-namespace Core.Model
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Core.Model;
+public class TypeOfCost
 {
-    public class TypeOfCost
-    {
-        public string Id { get; set; } = null!;
+    public string Id { get; set; } = null!;
 
-        public string TypeOfCostValue { get; set; } = null!;
+    [Column("TypeOfCostValue")]
+    public string Value { get; set; } = null!;
 
-       }
 }

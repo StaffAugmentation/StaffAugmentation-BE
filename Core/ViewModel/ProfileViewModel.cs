@@ -1,11 +1,10 @@
-namespace Core.ViewModel
+namespace Core.ViewModel;
+
+public class ProfileViewModel
 {
-    public class ProfileViewModel
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string ValueId { get; set; } = null!;
+    public string ValueId { get; set; } = null!;
 
-        public bool? IsActive { get; set; }
-    }
+    public bool? IsActive { get; set; }
 }

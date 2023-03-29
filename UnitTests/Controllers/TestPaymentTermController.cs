@@ -19,9 +19,9 @@ namespace UnitTests.Controllers
             var mockPaymentTermService = new Mock<IPaymentTermService>();
             mockPaymentTermService.Setup(svc => svc.GetPaymentTerm().Result).Returns(new List<PaymentTermViewModel>
                 {
-                    new PaymentTermViewModel { Id = "Id 1", PaymentTermValue = "PaymentTerm 1"},
-                    new PaymentTermViewModel { Id = "Id 2", PaymentTermValue = "PaymentTerm 2"},
-                    new PaymentTermViewModel { Id = "Id 3", PaymentTermValue = "PaymentTerm 3"}
+                    new PaymentTermViewModel { Id = "Id 1", Value = "PaymentTerm 1"},
+                    new PaymentTermViewModel { Id = "Id 2", Value = "PaymentTerm 2"},
+                    new PaymentTermViewModel { Id = "Id 3", Value = "PaymentTerm 3"}
                 });
             _controller = new PaymentTermController(logger, mockPaymentTermService.Object);
         }
@@ -50,7 +50,7 @@ namespace UnitTests.Controllers
         public async Task Create_OnReturnsData()
         {
             // Act
-            var result = await _controller.CreatePaymentTerm(new PaymentTermViewModel { Id = "Id 4", PaymentTermValue = "PaymentTerm 4" });
+            var result = await _controller.CreatePaymentTerm(new PaymentTermViewModel { Id = "Id 4", Value = "PaymentTerm 4" });
 
             // Assert
             Assert.IsType<ActionResult<PaymentTermViewModel?>>(result);
@@ -60,7 +60,7 @@ namespace UnitTests.Controllers
         public async Task Update_OnReturnsData()
         {
             // Act
-            var result = await _controller.UpdatePaymentTerm(new PaymentTermViewModel { Id = "Id 4", PaymentTermValue = "Value id updated 4" });
+            var result = await _controller.UpdatePaymentTerm(new PaymentTermViewModel { Id = "Id 4", Value = "Value id updated 4" });
 
             // Assert
             Assert.IsType<ActionResult<PaymentTermViewModel?>>(result);
