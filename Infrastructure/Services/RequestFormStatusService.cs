@@ -17,7 +17,7 @@ namespace Business.Services
             return await repo.GetRequestFormStatus();
         }
 
-        public async Task<RequestFormStatusViewModel?> GetRequestFormStatus(int Id)
+        public async Task<RequestFormStatusViewModel?> GetRequestFormStatus(string Id)
         {
             return await repo.GetRequestFormStatus(Id);
         }
@@ -32,7 +32,7 @@ namespace Business.Services
             return await repo.UpdateRequestFormStatus(RequestFormStatus);
         }
 
-        public async Task<List<RequestFormStatusViewModel>?> DeleteRequestFormStatus(int Id)
+        public async Task<List<RequestFormStatusViewModel>?> DeleteRequestFormStatus(string Id)
         {
             return await repo.DeleteRequestFormStatus(Id);
         }

@@ -23,7 +23,7 @@ public class RequestFormStatusRepository : IRequestFormStatusRepository
         return await _db.RequestFormStatus.Select(RequestFormStatus => _mapper.Map<RequestFormStatusViewModel>(RequestFormStatus)).ToListAsync();
     }
 
-    public async Task<RequestFormStatusViewModel?> GetRequestFormStatus(int Id)
+    public async Task<RequestFormStatusViewModel?> GetRequestFormStatus(string Id)
     {
         RequestFormStatusViewModel requestFormStatusVM  = await _db.RequestFormStatus
             .Where(RequestFormStatus => RequestFormStatus.Id == Id)
@@ -46,14 +46,14 @@ public class RequestFormStatusRepository : IRequestFormStatusRepository
     {
         RequestFormStatus requestFormStatus = await _db.RequestFormStatus.FindAsync(requestFormStatusVM.Id) ?? throw new Exception("Request From Status not found!");
 
-        requestFormStatus.ValueId = requestFormStatusVM.ValueId;
+        requestFormStatus.Value = requestFormStatusVM.Value;
 
         await _db.SaveChangesAsync();
 
         return _mapper.Map<RequestFormStatusViewModel>(requestFormStatus);
     }
 
-    public async Task<List<RequestFormStatusViewModel>?> DeleteRequestFormStatus(int Id)
+    public async Task<List<RequestFormStatusViewModel>?> DeleteRequestFormStatus(string Id)
     {
         RequestFormStatus requestFormStatus = await _db.RequestFormStatus.FindAsync(Id) ?? throw new Exception("Request From Status not found!");
 

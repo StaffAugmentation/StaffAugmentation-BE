@@ -21,7 +21,7 @@ namespace API.Controllers
         {
             try
             {
-                _logger.LogInformation("GetRequestFormStatuss");
+                _logger.LogInformation("GetRequestFormStatus");
                 return Ok(await _service.GetRequestFormStatus());
             }
             catch (Exception ex)
@@ -32,11 +32,11 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<RequestFormStatusViewModel?>> GetRequestFormStatus(int id)
+        public async Task<ActionResult<RequestFormStatusViewModel?>> GetRequestFormStatus(string id)
         {
             try
             {
-                _logger.LogInformation("GetRequestFormStatuss");
+                _logger.LogInformation("GetRequestFormStatus");
                 return Ok(await _service.GetRequestFormStatus(id));
             }
             catch (Exception ex)
@@ -78,7 +78,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<RequestFormStatusViewModel>?>> DeleteRequestFormStatus(int id)
+        public async Task<ActionResult<List<RequestFormStatusViewModel>?>> DeleteRequestFormStatus(string id)
         {
             try
             {

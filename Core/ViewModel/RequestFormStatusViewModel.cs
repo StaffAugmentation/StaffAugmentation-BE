@@ -2,8 +2,8 @@
 
 public class RequestFormStatusViewModel
 {
-    public int Id { get; set; }
+    public required string Id { get; set; }
 
-    public string ValueId { get; set; } = null!;
+    public string Value { get; set; } = null!;
 
 }

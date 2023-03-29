@@ -1,9 +1,12 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Core.Model;
+
 public class RequestFormStatus
 {
-    public int Id { get; set; }
+    public required string Id { get; set; }
 
-    public string ValueId { get; set; } = null!;
+    [Column("ValueId")]
+    public string Value { get; set; } = null!;
 
 }
