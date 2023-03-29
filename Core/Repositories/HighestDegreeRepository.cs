@@ -47,6 +47,7 @@ public class HighestDegreeRepository : IHighestDegreeRepository
         HighestDegree highestDegree = await _db.HighestDegree.FindAsync(highestDegreeVM.Id) ?? throw new Exception("HighestDegree not found!");
 
         highestDegree.Value = highestDegreeVM.Value;
+        highestDegree.IsActive = highestDegreeVM.IsActive;
 
         await _db.SaveChangesAsync();
 
