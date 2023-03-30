@@ -29,6 +29,7 @@ builder.Services.AddScoped<ITypeOfCostService, TypeOfCostService>();
 builder.Services.AddScoped<IPaymentTermService, PaymentTermService>();
 builder.Services.AddScoped<IRequestFormStatusService, RequestFormStatusService>();
 builder.Services.AddScoped<IHighestDegreeService, HighestDegreeService>();
+builder.Services.AddScoped<IOERPCodeService, OERPCodeService>();
 
 /*  Repositories  */
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
@@ -47,6 +48,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IPlaceOfDeliveryRepository, PlaceOfDeliveryRepository>();
 builder.Services.AddScoped<IHighestDegreeRepository, HighestDegreeRepository>();
 builder.Services.AddScoped<IRequestFormStatusRepository, RequestFormStatusRepository>();
+builder.Services.AddScoped<IOERPCodeRepository, OERPCodeRepository>();
+
 
 /*  EF Configuration  */
 builder.Services.AddDbContext<DataContext>(options =>

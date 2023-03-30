@@ -24,5 +24,7 @@ namespace Core.Data
         public DbSet<PlaceOfDelivery> PlaceOfDelivery => Set<PlaceOfDelivery>();
         public DbSet<HighestDegree> HighestDegree => Set<HighestDegree>();
         public DbSet<RequestFormStatus> RequestFormStatus => Set<RequestFormStatus>();
+        public DbSet<OERPCode> OERPCode => Set<OERPCode>();
+
     }
 }
