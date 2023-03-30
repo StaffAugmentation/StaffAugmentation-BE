@@ -6,35 +6,36 @@ namespace Business.Services;
 
 public class RecruitmentResponsibleService : IRecruitmentResponsibleService
 {
-    private readonly IRecruitmentResponsibleRepository repo;
-    public RecruitmentResponsibleService(IRecruitmentResponsibleRepository RecruitmentResponsibleRepository)
+    private readonly IUnitOfWork _unitOfWork;
+
+    public RecruitmentResponsibleService(IUnitOfWork unitOfWork)
     {
-        repo = RecruitmentResponsibleRepository;
+        _unitOfWork = unitOfWork;
     }
 
-    public async Task<List<RecruitmentResponsibleViewModel>?> GetRecruitmentResponsible()
+    public async Task<IEnumerable<RecruitmentResponsibleViewModel>?> GetRecruitmentResponsible()
     {
-        return await repo.GetRecruitmentResponsible();
+        return await _unitOfWork.RecruitmentResponsible.GetAll();
     }
 
     public async Task<RecruitmentResponsibleViewModel?> GetRecruitmentResponsible(int Id)
     {
-        return await repo.GetRecruitmentResponsible(Id);
+        return await _unitOfWork.RecruitmentResponsible.Find(entity => entity.Id == Id);
     }
 
     public async Task<RecruitmentResponsibleViewModel?> CreateRecruitmentResponsible(RecruitmentResponsibleViewModel recruitmentResponsible)
     {
-        return await repo.CreateRecruitmentResponsible(recruitmentResponsible);
+        return await _unitOfWork.RecruitmentResponsible.Create(recruitmentResponsible);
     }
 
     public async Task<RecruitmentResponsibleViewModel?> UpdateRecruitmentResponsible(RecruitmentResponsibleViewModel recruitmentResponsible)
     {
-        return await repo.UpdateRecruitmentResponsible(recruitmentResponsible);
+        return await _unitOfWork.RecruitmentResponsible.Update(recruitmentResponsible.Id, recruitmentResponsible);
     }
 
-    public async Task<List<RecruitmentResponsibleViewModel>?> DeleteRecruitmentResponsible(int Id)
+    public async Task<IEnumerable<RecruitmentResponsibleViewModel>?> DeleteRecruitmentResponsible(int Id)
     {
-        return await repo.DeleteRecruitmentResponsible(Id);
+        return await _unitOfWork.RecruitmentResponsible.Delete(Id);
     }
 
 }

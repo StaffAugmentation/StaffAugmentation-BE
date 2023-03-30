@@ -6,35 +6,36 @@ namespace Business.Services
 {
     public class HighestDegreeService : IHighestDegreeService
     {
-        private readonly IHighestDegreeRepository repo;
-        public HighestDegreeService(IHighestDegreeRepository HighestDegreerepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public HighestDegreeService(IUnitOfWork unitOfWork)
         {
-            repo = HighestDegreerepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<HighestDegreeViewModel>?> GetHighestDegree()
+        public async Task<IEnumerable<HighestDegreeViewModel>?> GetHighestDegree()
         {
-            return await repo.GetHighestDegree();
+            return await _unitOfWork.HighestDegree.GetAll();
         }
 
         public async Task<HighestDegreeViewModel?> GetHighestDegree(int Id)
         {
-            return await repo.GetHighestDegree(Id);
+            return await _unitOfWork.HighestDegree.Find(entity => entity.Id == Id);
         }
 
         public async Task<HighestDegreeViewModel?> CreateHighestDegree(HighestDegreeViewModel HighestDegree)
         {
-            return await repo.CreateHighestDegree(HighestDegree);
+            return await _unitOfWork.HighestDegree.Create(HighestDegree);
         }
 
         public async Task<HighestDegreeViewModel?> UpdateHighestDegree(HighestDegreeViewModel HighestDegree)
         {
-            return await repo.UpdateHighestDegree(HighestDegree);
+            return await _unitOfWork.HighestDegree.Update(HighestDegree.Id, HighestDegree);
         }
 
-        public async Task<List<HighestDegreeViewModel>?> DeleteHighestDegree(int Id)
+        public async Task<IEnumerable<HighestDegreeViewModel>?> DeleteHighestDegree(int Id)
         {
-            return await repo.DeleteHighestDegree(Id);
+            return await _unitOfWork.HighestDegree.Delete(Id);
         }
 
     }

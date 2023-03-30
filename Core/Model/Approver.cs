@@ -8,7 +8,7 @@ public class Approver
     public int Id { get; set; }
 
     [Column("app_FirstName")]
-    public string AppFirstName { get; set; } = null!;
+    public string FirstName { get; set; } = null!;
     [Column("app_LastName")]
-    public string AppLastName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
 }

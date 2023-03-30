@@ -9,7 +9,7 @@ namespace Core.Data
         public DataContext(DbContextOptions<DataContext> options): base(options) { }
 
         public DbSet<Company> Company => Set<Company>();
-        public DbSet<Department> Department => Set<Department>();
+        public DbSet<Level> Department => Set<Level>();
         public DbSet<Approver> Approver => Set<Approver>();
         public DbSet<Profile> Profile => Set<Profile>();
         public DbSet<BrSource> BrSource => Set<BrSource>();

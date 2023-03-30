@@ -1,13 +1,8 @@
+using Core.Model;
 using Core.ViewModel;
 
-namespace Core.IRepositories
+namespace Core.IRepositories;
+
+public interface ISubContractorRepository : IGenericRepository<SubContractorViewModel, SubContractor, int>
 {
-    public interface ISubContractorRepository
-    {
-        Task<List<SubContractorViewModel>?> GetSubContractor();
-        Task<SubContractorViewModel?> GetSubContractor(int Id);
-        Task<SubContractorViewModel?> CreateSubContractor(SubContractorViewModel subContractor);
-        Task<SubContractorViewModel?> UpdateSubContractor(SubContractorViewModel subContractor);
-        Task<List<SubContractorViewModel>?> DeleteSubContractor(int Id);
-    }
 }

@@ -6,35 +6,36 @@ namespace Business.Services
 {
     public class PaymentTermService : IPaymentTermService
     {
-        private readonly IPaymentTermRepository repo;
-        public PaymentTermService(IPaymentTermRepository PaymentTermRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public PaymentTermService(IUnitOfWork unitOfWork)
         {
-            repo = PaymentTermRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<PaymentTermViewModel>?> GetPaymentTerm()
+        public async Task<IEnumerable<PaymentTermViewModel>?> GetPaymentTerm()
         {
-            return await repo.GetPaymentTerm();
+            return await _unitOfWork.PaymentTerm.GetAll();
         }
 
         public async Task<PaymentTermViewModel?> GetPaymentTerm(string Id)
         {
-            return await repo.GetPaymentTerm(Id);
+            return await _unitOfWork.PaymentTerm.Find(payment => payment.Id == Id);
         }
 
         public async Task<PaymentTermViewModel?> CreatePaymentTerm(PaymentTermViewModel paymentTerm)
         {
-            return await repo.CreatePaymentTerm(paymentTerm);
+            return await _unitOfWork.PaymentTerm.Create(paymentTerm);
         }
 
         public async Task<PaymentTermViewModel?> UpdatePaymentTerm(PaymentTermViewModel paymentTerm)
         {
-            return await repo.UpdatePaymentTerm(paymentTerm);
+            return await _unitOfWork.PaymentTerm.Update(paymentTerm.Id, paymentTerm);
         }
 
-        public async Task<List<PaymentTermViewModel>?> DeletePaymentTerm(string Id)
+        public async Task<IEnumerable<PaymentTermViewModel>?> DeletePaymentTerm(string Id)
         {
-            return await repo.DeletePaymentTerm(Id);
+            return await _unitOfWork.PaymentTerm.Delete(Id);
         }
 
     }

@@ -7,35 +7,36 @@ namespace Business.Services
 {
     public class ApproverService : IApproverService
     {
-        private readonly IApproverRepository repo;
-        public ApproverService(IApproverRepository approverRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ApproverService(IUnitOfWork unitOfWork)
         {
-            repo = approverRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<ApproverViewModel>?> GetApprover()
+        public async Task<IEnumerable<ApproverViewModel>?> GetApprover()
         {
-            return await repo.GetApprover();
+            return await _unitOfWork.Approver.GetAll();
         }
 
         public async Task<ApproverViewModel?> GetApprover(int approverId)
         {
-            return await repo.GetApprover(approverId);
+            return await _unitOfWork.Approver.Find(entity => entity.Id == approverId) ;
         }
 
         public async Task<ApproverViewModel?> CreateApprover(ApproverViewModel approver)
         {
-            return await repo.CreateApprover(approver);
+            return await _unitOfWork.Approver.Create(approver);
         }
 
         public async Task<ApproverViewModel?> UpdateApprover(ApproverViewModel approver)
         {
-            return await repo.UpdateApprover(approver);
+            return await _unitOfWork.Approver.Update(approver.Id, approver);
         }
 
-        public async Task<List<ApproverViewModel>?> DeleteApprover(int ApproverId)
+        public async Task<IEnumerable<ApproverViewModel>?> DeleteApprover(int ApproverId)
         {
-            return await repo.DeleteApprover(ApproverId);
+            return await _unitOfWork.Approver.Delete(ApproverId);
         }
 
     }

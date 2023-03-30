@@ -12,8 +12,8 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<CompanyViewModel, Company>();
         CreateMap<Approver, ApproverViewModel>();
         CreateMap<ApproverViewModel, Approver>();
-        CreateMap<Department, DepartmentViewModel>();
-        CreateMap<DepartmentViewModel, Department>();
+        CreateMap<Level, DepartmentViewModel>();
+        CreateMap<DepartmentViewModel, Level>();
         CreateMap<Profile, ProfileViewModel>();
         CreateMap<ProfileViewModel, Profile>();
         CreateMap<BrSource, BrSourceViewModel>();

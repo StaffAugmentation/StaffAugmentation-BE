@@ -6,35 +6,36 @@ namespace Business.Services
 {
     public class SubContractorService : ISubContractorService
     {
-        private readonly ISubContractorRepository repo;
-        public SubContractorService(ISubContractorRepository SubContractorRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public SubContractorService(IUnitOfWork unitOfWork)
         {
-            repo = SubContractorRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<SubContractorViewModel>?> GetSubContractor()
+        public async Task<IEnumerable<SubContractorViewModel>?> GetSubContractor()
         {
-            return await repo.GetSubContractor();
+            return await _unitOfWork.SubContractor.GetAll();
         }
 
         public async Task<SubContractorViewModel?> GetSubContractor(int Id)
         {
-            return await repo.GetSubContractor(Id);
+            return await _unitOfWork.SubContractor.Find(entity => entity.Id == Id);
         }
 
         public async Task<SubContractorViewModel?> CreateSubContractor(SubContractorViewModel subContractor)
         {
-            return await repo.CreateSubContractor(subContractor);
+            return await _unitOfWork.SubContractor.Create(subContractor);
         }
 
         public async Task<SubContractorViewModel?> UpdateSubContractor(SubContractorViewModel subContractor)
         {
-            return await repo.UpdateSubContractor(subContractor);
+            return await _unitOfWork.SubContractor.Update(subContractor.Id, subContractor);
         }
 
-        public async Task<List<SubContractorViewModel>?> DeleteSubContractor(int Id)
+        public async Task<IEnumerable<SubContractorViewModel>?> DeleteSubContractor(int Id)
         {
-            return await repo.DeleteSubContractor(Id);
+            return await _unitOfWork.SubContractor.Delete(Id);
         }
 
     }

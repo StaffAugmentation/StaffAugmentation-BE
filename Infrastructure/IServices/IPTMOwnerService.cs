@@ -1,13 +1,12 @@
 ﻿using Core.ViewModel;
 
-namespace Business.IServices
+namespace Business.IServices;
+
+public interface IPTMOwnerService
 {
-    public interface IPTMOwnerService
-    {
-        Task<List<PTMOwnerViewModel>?> GetPTMOwner();
-        Task<PTMOwnerViewModel?> GetPTMOwner(int Id);
-        Task<PTMOwnerViewModel?> CreatePTMOwner(PTMOwnerViewModel PTMOwner);
-        Task<PTMOwnerViewModel?> UpdatePTMOwner(PTMOwnerViewModel PTMOwner);
-        Task<List<PTMOwnerViewModel>?> DeletePTMOwner(int Id);
-    }
+    Task<IEnumerable<PTMOwnerViewModel>?> GetPTMOwner();
+    Task<PTMOwnerViewModel?> GetPTMOwner(int Id);
+    Task<PTMOwnerViewModel?> CreatePTMOwner(PTMOwnerViewModel PTMOwner);
+    Task<PTMOwnerViewModel?> UpdatePTMOwner(PTMOwnerViewModel PTMOwner);
+    Task<IEnumerable<PTMOwnerViewModel>?> DeletePTMOwner(int Id);
 }

@@ -1,15 +1,7 @@
 ﻿using Core.ViewModel;
 
-namespace Core.IRepositories
+namespace Core.IRepositories;
+
+public interface ITypeRepository : IGenericRepository<TypeViewModel, Core.Model.Type, int>
 {
-    public interface ITypeRepository
-    {
-        Task<List<TypeViewModel>?> GetType();
-        Task<TypeViewModel?> GetType(int Id);
-        Task<TypeViewModel?> CreateType(TypeViewModel type);
-        Task<TypeViewModel?> UpdateType(TypeViewModel type);
-        Task<List<TypeViewModel>?> DeleteType(int Id);
-
-
-    }
 }

@@ -6,35 +6,36 @@ namespace Business.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepository repo;
-        public CategoryService(ICategoryRepository CategoryRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public CategoryService(IUnitOfWork unitOfWork)
         {
-            repo = CategoryRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<CategoryViewModel>?> GetCategory()
+        public async Task<IEnumerable<CategoryViewModel>?> GetCategory()
         {
-            return await repo.GetCategory();
+            return await _unitOfWork.Category.GetAll();
         }
 
         public async Task<CategoryViewModel?> GetCategory(int Id)
         {
-            return await repo.GetCategory(Id);
+            return await _unitOfWork.Category.Find(entity => entity.Id == Id);
         }
 
         public async Task<CategoryViewModel?> CreateCategory(CategoryViewModel Category)
         {
-            return await repo.CreateCategory(Category);
+            return await _unitOfWork.Category.Create(Category);
         }
 
         public async Task<CategoryViewModel?> UpdateCategory(CategoryViewModel Category)
         {
-            return await repo.UpdateCategory(Category);
+            return await _unitOfWork.Category.Update(Category.Id, Category);
         }
 
-        public async Task<List<CategoryViewModel>?> DeleteCategory(int Id)
+        public async Task<IEnumerable<CategoryViewModel>?> DeleteCategory(int Id)
         {
-            return await repo.DeleteCategory(Id);
+            return await _unitOfWork.Category.Delete(Id);
         }
 
     }

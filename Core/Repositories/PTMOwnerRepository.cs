@@ -1,27 +1,22 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Core.IRepositories;
 using Core.Data;
 using Core.ViewModel;
 using Core.Model;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Repositories;
 
-public class PTMOwnerRepository : IPTMOwnerRepository
+public class PTMOwnerRepository : GenericRepository<PTMOwnerViewModel, PTMOwner, int>, IPTMOwnerRepository
 {
-    private readonly DataContext _db;
-    private readonly IMapper _mapper;
+    public PTMOwnerRepository(DataContext context, IMapper mapper) : base(context, mapper)
+    { }
 
-    public PTMOwnerRepository(DataContext context, IMapper mapper)
+    public override async Task<IEnumerable<PTMOwnerViewModel>> GetAll(Expression<Func<PTMOwner, bool>>? criteria = null, string? orderDirection = null, Expression<Func<PTMOwner, object>>? order = null)
     {
-        _db = context;
-        _mapper = mapper;
-    }
-
-    public async Task<List<PTMOwnerViewModel>?> GetPTMOwner()
-    {
-        return await (from ptmOwner in _db.PTMOwner
-                      join approver in _db.Approver on ptmOwner.IdApprover equals approver.Id into approver
+        return await (from ptmOwner in _context.PTMOwner
+                      join approver in _context.Approver on ptmOwner.IdApprover equals approver.Id into approver
                       from approvers in approver.DefaultIfEmpty()
                       select new PTMOwnerViewModel
                       {
@@ -36,75 +31,50 @@ public class PTMOwnerRepository : IPTMOwnerRepository
                       }).ToListAsync();
     }
 
-    public async Task<PTMOwnerViewModel?> GetPTMOwner(int Id)
+    public override async Task<PTMOwnerViewModel> Find(Expression<Func<PTMOwner, bool>> criteria)
     {
-        PTMOwnerViewModel PTMOwnerVM = await _db.PTMOwner
-            .Where(PTMOwner => PTMOwner.Id == Id)
+        PTMOwnerViewModel PTMOwnerVM = await _context.PTMOwner
+            .Where(criteria)
             .Select(PTMOwner => new PTMOwnerViewModel
-                            {
-                                Id = PTMOwner.Id, 
-                                ValueId = PTMOwner.ValueId, 
-                                BA = PTMOwner.BA,
-                                BICSW = PTMOwner.BICSW,
-                                VatRate = PTMOwner.VatRate,
-                                IsEveris = PTMOwner.IsEveris,
-                                VatNumber = PTMOwner.VatNumber,
-                                Approver = _db.Approver
+            {
+                Id = PTMOwner.Id,
+                ValueId = PTMOwner.ValueId,
+                BA = PTMOwner.BA,
+                BICSW = PTMOwner.BICSW,
+                VatRate = PTMOwner.VatRate,
+                IsEveris = PTMOwner.IsEveris,
+                VatNumber = PTMOwner.VatNumber,
+                Approver = _context.Approver
                                             .Where(approver => approver.Id == PTMOwner.IdApprover)
                                             .Select(approver => _mapper.Map<ApproverViewModel>(approver))
                                             .FirstOrDefault()
-                            }
-            ).FirstOrDefaultAsync() ?? throw new Exception("PTMOwner not found!");
+            }).FirstOrDefaultAsync() ?? throw new Exception("PTMOwner not found!");
         return PTMOwnerVM;
     }
 
-    public async Task<PTMOwnerViewModel?> CreatePTMOwner(PTMOwnerViewModel PTMOwnerVM)
+    public override async Task<PTMOwnerViewModel> Create(PTMOwnerViewModel PTMOwnerVM)
     {
         PTMOwner ptmOwner = _mapper.Map<PTMOwner>(PTMOwnerVM);
         ptmOwner.IdApprover = PTMOwnerVM.Approver?.Id;
 
-        await _db.PTMOwner.AddAsync(ptmOwner);
-        await _db.SaveChangesAsync();
+        await _context.PTMOwner.AddAsync(ptmOwner);
+        await _context.SaveChangesAsync();
 
-        PTMOwnerVM = _mapper.Map<PTMOwnerViewModel>(ptmOwner);
-        PTMOwnerVM.Approver = await _db.Approver
-            .Where(app => app.Id == ptmOwner.IdApprover)
-            .Select(approver => _mapper.Map<ApproverViewModel>(approver))
-            .FirstOrDefaultAsync();
-
-        return PTMOwnerVM;
+        return await Find(entity => entity.Id == ptmOwner.Id);
     }
 
-    public async Task<PTMOwnerViewModel?> UpdatePTMOwner(PTMOwnerViewModel PTMOwnerVM)
+    public override async Task<PTMOwnerViewModel> Update(int key, PTMOwnerViewModel PTMOwnerVM)
     {
-        PTMOwner ptmOwner = await _db.PTMOwner.FindAsync(PTMOwnerVM.Id) ?? throw new Exception("PTMOwner not found!");
+        PTMOwner ptmOwner = await _context.PTMOwner.FindAsync(key) ?? throw new Exception("PTMOwner not found!");
 
-        ptmOwner.ValueId = PTMOwnerVM.ValueId;
-        ptmOwner.BA = PTMOwnerVM.BA;
-        ptmOwner.BICSW = PTMOwnerVM.BICSW;
-        ptmOwner.VatRate = PTMOwnerVM.VatRate;
-        ptmOwner.VatNumber = PTMOwnerVM.VatNumber;
-        ptmOwner.IsEveris = PTMOwnerVM.IsEveris;
-        ptmOwner.IdApprover = PTMOwnerVM.Approver?.Id;
+        if (ptmOwner != null)
+        {
+            ptmOwner = _mapper.Map<PTMOwner>(PTMOwnerVM);
+            ptmOwner.IdApprover = PTMOwnerVM.Approver?.Id;
+        }
 
-        await _db.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
-        PTMOwnerVM = _mapper.Map<PTMOwnerViewModel>(ptmOwner);
-        PTMOwnerVM.Approver = await _db.Approver
-            .Where(app => app.Id == ptmOwner.IdApprover)
-            .Select(approver => _mapper.Map<ApproverViewModel>(approver))
-            .FirstOrDefaultAsync();
-
-        return PTMOwnerVM;
+        return await Find(entity => entity.Id == key);
     }
-
-    public async Task<List<PTMOwnerViewModel>?> DeletePTMOwner(int Id)
-    {
-        PTMOwner ptmOwner = await _db.PTMOwner.FindAsync(Id) ?? throw new Exception("PTMOwner not found!");
-        _db.PTMOwner.Remove(ptmOwner);
-        await _db.SaveChangesAsync();
-
-        return await GetPTMOwner();
-    }
-
 }

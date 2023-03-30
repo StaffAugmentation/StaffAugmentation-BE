@@ -1,8 +1,8 @@
 ﻿namespace Core.ViewModel;
 public class CompanyViewModel
 {
-    public int IdCompany { get; set; }
-    public string CompanyName { get; set; } = null!;
+    public int Id { get; set; }
+    public string Name { get; set; } = null!;
     public string? BankAccount { get; set; }
     public bool IsEveris { get; set; }
     public string? VatLegalEntity { get; set; }

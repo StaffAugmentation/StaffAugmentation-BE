@@ -18,6 +18,7 @@ public class PTMOwner
 
     public bool IsEveris { get; set; }
 
+    [Column("IdApproverPTMOwner")]
     public int? IdApprover { get; set; }
 
     [Column("PTMOwner_VAT_Number")]
