@@ -19,6 +19,7 @@
         ISubContractorRepository SubContractor { get; }
         ITypeOfCostRepository TypeOfCost { get; }
         ITypeRepository Type { get; }
+        IOERPCodeRepository OERPCode { get; }
 
         Task<int> CompleteAsync();
     }

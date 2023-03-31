@@ -42,5 +42,7 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<RequestFormStatusViewModel, RequestFormStatus>();
         CreateMap<HighestDegree, HighestDegreeViewModel>();
         CreateMap<HighestDegreeViewModel, HighestDegree>();
+        CreateMap<OERPCode, OERPCodeViewModel>();
+        CreateMap<OERPCodeViewModel, OERPCode>();
     }
 }

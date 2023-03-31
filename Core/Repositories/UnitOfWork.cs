@@ -25,6 +25,7 @@ namespace Core.Repositories
         public ISubContractorRepository SubContractor { get; private set; }
         public ITypeOfCostRepository TypeOfCost { get; private set; }
         public ITypeRepository Type { get; private set; }
+        public IOERPCodeRepository OERPCode { get; private set; }
 
         public UnitOfWork(DataContext context, IMapper mapper)
         {
@@ -47,6 +48,7 @@ namespace Core.Repositories
             SubContractor = new SubContractorRepository(_context, mapper);
             TypeOfCost = new TypeOfCostRepository(_context, mapper);
             Type = new TypeRepository(_context, mapper);
+            OERPCode = new OERPCodeRepository(_context, mapper);
         }
 
         public async Task<int> CompleteAsync()
