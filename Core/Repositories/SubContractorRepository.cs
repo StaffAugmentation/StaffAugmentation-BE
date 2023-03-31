@@ -4,29 +4,22 @@ using Core.IRepositories;
 using Core.Data;
 using Core.ViewModel;
 using Core.Model;
+using System.Linq.Expressions;
 
 namespace Core.Repositories;
 
-public class SubContractorRepository : ISubContractorRepository
+public class SubContractorRepository : GenericRepository<SubContractorViewModel, SubContractor, int>, ISubContractorRepository
 {
-    private readonly DataContext _db;
-    private readonly IMapper _mapper;
-
-    public SubContractorRepository(DataContext context, IMapper mapper)
+    public SubContractorRepository(DataContext context, IMapper mapper) : base(context, mapper)
     {
-        _db = context;
-        _mapper = mapper;
     }
 
-    public async Task<List<SubContractorViewModel>?> GetSubContractor()
+    public override async Task<IEnumerable<SubContractorViewModel>> GetAll(Expression<Func<SubContractor, bool>>? criteria = null, string? orderDirection = null, Expression<Func<SubContractor, object>>? order = null)
     {
-        return await (from subContractor in _db.SubContractor
-                      join approver in _db.Approver on subContractor.IdApprover equals approver.Id into approver
-                      from approvers in approver.DefaultIfEmpty()
-                      join typeOfCost in _db.TypeOfCost on subContractor.IdTypeOfCost equals typeOfCost.Id into typeOfCost
-                      from typeOfCosts in typeOfCost.DefaultIfEmpty()
-                      join paymentTerm in _db.PaymentTerm on subContractor.IdPaymentTerm equals paymentTerm.Id into paymentTerm
-                      from paymentTerms in paymentTerm.DefaultIfEmpty()
+        return await (from subContractor in _context.SubContractor
+                      join approver in _context.Approver on subContractor.IdApprover equals approver.Id into approver from approvers in approver.DefaultIfEmpty()
+                      join typeOfCost in _context.TypeOfCost on subContractor.IdTypeOfCost equals typeOfCost.Id into typeOfCost from typeOfCosts in typeOfCost.DefaultIfEmpty()
+                      join paymentTerm in _context.PaymentTerm on subContractor.IdPaymentTerm equals paymentTerm.Id into paymentTerm from paymentTerms in paymentTerm.DefaultIfEmpty()
                       select new SubContractorViewModel
                       {
                           Id = subContractor.Id,
@@ -45,10 +38,10 @@ public class SubContractorRepository : ISubContractorRepository
                       }).ToListAsync();
     }
     
-    public async Task<SubContractorViewModel?> GetSubContractor(int Id)
+    public override async Task<SubContractorViewModel> Find(Expression<Func<SubContractor, bool>> criteria)
     {
-        SubContractorViewModel subContractorVM = await _db.SubContractor
-            .Where(subContractor => subContractor.Id == Id)
+        SubContractorViewModel subContractorVM = await _context.SubContractor
+            .Where(criteria)
             .Select(subContractor => new SubContractorViewModel
             {
                 Id = subContractor.Id,
@@ -61,65 +54,46 @@ public class SubContractorRepository : ISubContractorRepository
                 LegalEntityAddress = subContractor.LegalEntityAddress,
                 VatNumber = subContractor.VatNumber,
                 IdNumber = subContractor.IdNumber,
-                Approver = _mapper.Map<ApproverViewModel>(_db.Approver.Where(entity => entity.Id == subContractor.IdApprover)),
-                PaymentTerm = _mapper.Map<PaymentTermViewModel>(_db.PaymentTerm.Where(entity => entity.Id == subContractor.IdPaymentTerm)),
-                TypeOfCost = _mapper.Map<TypeOfCostViewModel>(_db.TypeOfCost.Where(entity => entity.Id == subContractor.IdTypeOfCost))
+                Approver = _mapper.Map<ApproverViewModel>(_context.Approver.Where(entity => entity.Id == subContractor.IdApprover).FirstOrDefault()),
+                PaymentTerm = _mapper.Map<PaymentTermViewModel>(_context.PaymentTerm.Where(entity => entity.Id == subContractor.IdPaymentTerm).FirstOrDefault()),
+                TypeOfCost = _mapper.Map<TypeOfCostViewModel>(_context.TypeOfCost.Where(entity => entity.Id == subContractor.IdTypeOfCost).FirstOrDefault())
             })
             .FirstOrDefaultAsync() ?? throw new Exception("SubContractor not found!");
         return subContractorVM;
     }
 
-    public async Task<SubContractorViewModel?> CreateSubContractor(SubContractorViewModel subContractorVM) 
+    public override async Task<SubContractorViewModel> Create(SubContractorViewModel subContractorVM) 
     {
         SubContractor subContractor = _mapper.Map<SubContractor>(subContractorVM);
         subContractor.IdApprover = subContractorVM.Approver?.Id;
         subContractor.IdPaymentTerm = subContractorVM.PaymentTerm?.Id;
         subContractor.IdTypeOfCost = subContractorVM.TypeOfCost?.Id;
 
-        await _db.SubContractor.AddAsync(subContractor);
-        await _db.SaveChangesAsync();
+        await _context.SubContractor.AddAsync(subContractor);
+        await _context.SaveChangesAsync();
 
         subContractorVM = _mapper.Map<SubContractorViewModel>(subContractor);
-        subContractorVM.Approver = _mapper.Map<ApproverViewModel>(_db.Approver.Where(entity => entity.Id == subContractor.IdApprover).FirstOrDefaultAsync());
-        subContractorVM.PaymentTerm = _mapper.Map<PaymentTermViewModel>(_db.PaymentTerm.Where(entity => entity.Id == subContractor.IdPaymentTerm).FirstOrDefaultAsync());
-        subContractorVM.TypeOfCost = _mapper.Map<TypeOfCostViewModel>(_db.TypeOfCost.Where(entity => entity.Id == subContractor.IdTypeOfCost).FirstOrDefaultAsync());
+        subContractorVM.Approver = _mapper.Map<ApproverViewModel>(_context.Approver.Where(entity => entity.Id == subContractor.IdApprover).FirstOrDefaultAsync());
+        subContractorVM.PaymentTerm = _mapper.Map<PaymentTermViewModel>(_context.PaymentTerm.Where(entity => entity.Id == subContractor.IdPaymentTerm).FirstOrDefaultAsync());
+        subContractorVM.TypeOfCost = _mapper.Map<TypeOfCostViewModel>(_context.TypeOfCost.Where(entity => entity.Id == subContractor.IdTypeOfCost).FirstOrDefaultAsync());
 
         return subContractorVM;
     }
 
-    public async Task<SubContractorViewModel?> UpdateSubContractor(SubContractorViewModel subContractorVM)
+    public override async Task<SubContractorViewModel> Update(int key, SubContractorViewModel subContractorVM)
     {
-        SubContractor subContractor = await _db.SubContractor.FindAsync(subContractorVM.Id) ?? throw new Exception("SubContractor not found!");
+        SubContractor subContractor = await _context.SubContractor.FindAsync(key) ?? throw new Exception("SubContractor not found!");
 
-        subContractor.ValueId = subContractorVM.ValueId;
-        subContractor.BA = subContractorVM.BA;
-        subContractor.BICSW = subContractorVM.BICSW;
-        subContractor.VatRate = subContractorVM.VatRate;
-        subContractor.VatNumber = subContractorVM.VatNumber;
-        subContractor.IsOfficial = subContractorVM.IsOfficial;
-        subContractor.LegalEntityName = subContractorVM.LegalEntityName;
-        subContractor.LegalEntityAddress = subContractorVM.LegalEntityAddress;
-        subContractor.IdApprover = subContractorVM.Approver?.Id;
-        subContractor.IdPaymentTerm = subContractorVM.PaymentTerm?.Id;
-        subContractor.IdTypeOfCost = subContractorVM.TypeOfCost?.Id;
+        if(subContractor != null)
+        {
+            subContractor = _mapper.Map<SubContractor>(subContractorVM);
+            subContractor.IdApprover = subContractorVM.Approver?.Id;
+            subContractor.IdPaymentTerm = subContractorVM.PaymentTerm?.Id;
+            subContractor.IdTypeOfCost = subContractorVM.TypeOfCost?.Id;
+        }
 
-        await _db.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
-        subContractorVM = _mapper.Map<SubContractorViewModel>(subContractor);
-        subContractorVM.Approver = _mapper.Map<ApproverViewModel>(_db.Approver.Where(entity => entity.Id == subContractor.IdApprover).FirstOrDefaultAsync());
-        subContractorVM.PaymentTerm = _mapper.Map<PaymentTermViewModel>(_db.PaymentTerm.Where(entity => entity.Id == subContractor.IdPaymentTerm).FirstOrDefaultAsync());
-        subContractorVM.TypeOfCost = _mapper.Map<TypeOfCostViewModel>(_db.TypeOfCost.Where(entity => entity.Id == subContractor.IdTypeOfCost).FirstOrDefaultAsync());
-
-        return subContractorVM;
-    }
-
-    public async Task<List<SubContractorViewModel>?> DeleteSubContractor(int Id)
-    {
-        SubContractor subContractor = await _db.SubContractor.FindAsync(Id) ?? throw new Exception("SubContractor not found!");
-        
-        _db.SubContractor.Remove(subContractor);
-        await _db.SaveChangesAsync();
-
-        return await GetSubContractor();
+        return await Find(entity => entity.Id == key);
     }
 }

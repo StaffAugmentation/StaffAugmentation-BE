@@ -6,34 +6,35 @@ namespace Business.Services
 {
     public class PlaceOfDeliveryService : IPlaceOfDeliveryService
     {
-        private readonly IPlaceOfDeliveryRepository repo;
-        public PlaceOfDeliveryService(IPlaceOfDeliveryRepository PlaceOfDeliveryrepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public PlaceOfDeliveryService(IUnitOfWork unitOfWork)
         {
-            repo = PlaceOfDeliveryrepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<PlaceOfDeliveryViewModel>?> GetPlaceOfDelivery()
+        public async Task<IEnumerable<PlaceOfDeliveryViewModel>?> GetPlaceOfDelivery()
         {
-            return await repo.GetPlaceOfDelivery();
+            return await _unitOfWork.PlaceOfDelivery.GetAll();
         }
 
         public async Task<PlaceOfDeliveryViewModel?> GetPlaceOfDelivery(int Id)
         {
-            return await repo.GetPlaceOfDelivery(Id);
+            return await _unitOfWork.PlaceOfDelivery.Find(entity => entity.Id == Id);
         }
 
         public async Task<PlaceOfDeliveryViewModel?> CreatePlaceOfDelivery(PlaceOfDeliveryViewModel PlaceOfDelivery)
         {
-            return await repo.CreatePlaceOfDelivery(PlaceOfDelivery);
+            return await _unitOfWork.PlaceOfDelivery.Create(PlaceOfDelivery);
         }
 
         public async Task<PlaceOfDeliveryViewModel?> UpdatePlaceOfDelivery(PlaceOfDeliveryViewModel PlaceOfDelivery)
         {
-            return await repo.UpdatePlaceOfDelivery(PlaceOfDelivery);
+            return await _unitOfWork.PlaceOfDelivery.Update(PlaceOfDelivery.Id, PlaceOfDelivery);
         }
-        public async Task<List<PlaceOfDeliveryViewModel>?> DeletePlaceOfDelivery(int Id)
+        public async Task<IEnumerable<PlaceOfDeliveryViewModel>?> DeletePlaceOfDelivery(int Id)
         {
-            return await repo.DeletePlaceOfDelivery(Id);
+            return await _unitOfWork.PlaceOfDelivery.Delete(Id);
         }
     }
 }

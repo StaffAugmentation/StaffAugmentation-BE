@@ -7,35 +7,36 @@ namespace Business.Services
 {
     public class BrTypeService : IBrTypeService
     {
-        private readonly IBrTypeRepository repo;
-        public BrTypeService(IBrTypeRepository brTyperepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public BrTypeService (IUnitOfWork unitOfWork)
         {
-            repo = brTyperepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<BrTypeViewModel>?> GetBrType()
+        public async Task<IEnumerable<BrTypeViewModel>?> GetBrType()
         {
-            return await repo.GetBrType();
+            return await _unitOfWork.BrType.GetAll();
         }
 
         public async Task<BrTypeViewModel?> GetBrType(int Id)
         {
-            return await repo.GetBrType(Id);
+            return await _unitOfWork.BrType.Find(entity => entity.Id == Id);
         }
 
         public async Task<BrTypeViewModel?> CreateBrType(BrTypeViewModel brType)
         {
-            return await repo.CreateBrType(brType);
+            return await _unitOfWork.BrType.Create(brType);
         }
 
         public async Task<BrTypeViewModel?> UpdateBrType(BrTypeViewModel brType)
         {
-            return await repo.UpdateBrType(brType);
+            return await _unitOfWork.BrType.Update(brType.Id, brType);
         }
 
-        public async Task<List<BrTypeViewModel>?> DeleteBrType(int Id)
+        public async Task<IEnumerable<BrTypeViewModel>?> DeleteBrType(int Id)
         {
-            return await repo.DeleteBrType(Id);
+            return await _unitOfWork.BrType.Delete(Id);
         }
 
     }

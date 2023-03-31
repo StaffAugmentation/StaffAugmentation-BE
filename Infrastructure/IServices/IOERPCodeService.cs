@@ -10,10 +10,10 @@ namespace Business.IServices
 {
     public interface IOERPCodeService
     {
-        Task<List<OERPCodeViewModel>?> GetOERPCode();
+        Task<IEnumerable<OERPCodeViewModel>?> GetOERPCode();
         Task<OERPCodeViewModel?> GetOERPCode(int Id);
         Task<OERPCodeViewModel?> CreateOERPCode(OERPCodeViewModel OERPCode);
         Task<OERPCodeViewModel?> UpdateOERPCode(OERPCodeViewModel OERPCode);
-        Task<List<OERPCodeViewModel>?> DeleteOERPCode(int Id);
+        Task<IEnumerable<OERPCodeViewModel>?> DeleteOERPCode(int Id);
     }
 }

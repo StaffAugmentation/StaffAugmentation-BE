@@ -6,9 +6,11 @@ namespace Core.Model
     public class Company
     {
         [Key]
-        public int IdCompany { get; set; }
+        [Column("IdCompany")]
+        public int Id { get; set; }
 
-        public string CompanyName { get; set; } = null!;
+        [Column("CompanyName")]
+        public string Name { get; set; } = null!;
 
         public string? BankAccount { get; set; }
 

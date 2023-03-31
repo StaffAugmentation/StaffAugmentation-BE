@@ -6,35 +6,36 @@ namespace Business.Services
 {
     public class RequestFormStatusService : IRequestFormStatusService
     {
-        private readonly IRequestFormStatusRepository repo;
-        public RequestFormStatusService(IRequestFormStatusRepository RequestFormStatusrepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public RequestFormStatusService(IUnitOfWork unitOfWork)
         {
-            repo = RequestFormStatusrepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<RequestFormStatusViewModel>?> GetRequestFormStatus()
+        public async Task<IEnumerable<RequestFormStatusViewModel>?> GetRequestFormStatus()
         {
-            return await repo.GetRequestFormStatus();
+            return await _unitOfWork.RequestFormStatus.GetAll();
         }
 
-        public async Task<RequestFormStatusViewModel?> GetRequestFormStatus(int Id)
+        public async Task<RequestFormStatusViewModel?> GetRequestFormStatus(string Id)
         {
-            return await repo.GetRequestFormStatus(Id);
+            return await _unitOfWork.RequestFormStatus.Find(entity => entity.Id == Id);
         }
 
         public async Task<RequestFormStatusViewModel?> CreateRequestFormStatus(RequestFormStatusViewModel RequestFormStatus)
         {
-            return await repo.CreateRequestFormStatus(RequestFormStatus);
+            return await _unitOfWork.RequestFormStatus.Create(RequestFormStatus);
         }
 
         public async Task<RequestFormStatusViewModel?> UpdateRequestFormStatus(RequestFormStatusViewModel RequestFormStatus)
         {
-            return await repo.UpdateRequestFormStatus(RequestFormStatus);
+            return await _unitOfWork.RequestFormStatus.Update(RequestFormStatus.Id, RequestFormStatus);
         }
 
-        public async Task<List<RequestFormStatusViewModel>?> DeleteRequestFormStatus(int Id)
+        public async Task<IEnumerable<RequestFormStatusViewModel>?> DeleteRequestFormStatus(string Id)
         {
-            return await repo.DeleteRequestFormStatus(Id);
+            return await _unitOfWork.RequestFormStatus.Delete(Id);
         }
 
     }

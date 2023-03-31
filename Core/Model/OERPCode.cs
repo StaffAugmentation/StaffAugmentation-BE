@@ -8,7 +8,7 @@ public partial class OERPCode
 {
     public int Id { get; set; }
 
-    [Column("OERPcodeValue")]
+    [Column("OERPCodeValue")]
     public string Value { get; set; } = null!;
 
     public bool IsActive { get; set; }

@@ -1,41 +1,41 @@
 using Business.IServices;
 using Core.IRepositories;
-using Core.Model;
 using Core.ViewModel;
 
 namespace Business.Services
 {
     public class LevelService : ILevelService
     {
-        private readonly ILevelRepository repo;
-        public LevelService(ILevelRepository LevelRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public LevelService(IUnitOfWork unitOfWork)
         {
-            repo = LevelRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<LevelViewModel>?> GetLevel()
+        public async Task<IEnumerable<LevelViewModel>?> GetLevel()
         {
-            return await repo.GetLevel();
+            return await _unitOfWork.Level.GetAll();
         }
 
         public async Task<LevelViewModel?> GetLevel(int Id)
         {
-            return await repo.GetLevel(Id);
+            return await _unitOfWork.Level.Find(level => level.Id == Id);
         }
 
         public async Task<LevelViewModel?> CreateLevel(LevelViewModel level)
         {
-            return await repo.CreateLevel(level);
+            return await _unitOfWork.Level.Create(level);
         }
 
         public async Task<LevelViewModel?> UpdateLevel(LevelViewModel level)
         {
-            return await repo.UpdateLevel(level);
+            return await _unitOfWork.Level.Update(level.Id, level);
         }
 
-        public async Task<List<LevelViewModel>?> DeleteLevel(int Id)
+        public async Task<IEnumerable<LevelViewModel>?> DeleteLevel(int Id)
         {
-            return await repo.DeleteLevel(Id);
+            return await _unitOfWork.Level.Delete(Id);
         }
 
     }

@@ -6,35 +6,36 @@ namespace Business.Services
 {
     public class DepartmentService : IDepartmentService
     {
-        private readonly IDepartmentRepository repo;
-        public DepartmentService(IDepartmentRepository departmentrepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public DepartmentService(IUnitOfWork unitOfWork)
         {
-            repo = departmentrepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<DepartmentViewModel>?> GetDepartment()
+        public async Task<IEnumerable<DepartmentViewModel>?> GetDepartment()
         {
-            return await repo.GetDepartment();
+            return await _unitOfWork.Department.GetAll();
         }
 
         public async Task<DepartmentViewModel?> GetDepartment(int Id)
         {
-            return await repo.GetDepartment(Id);
+            return await _unitOfWork.Department.Find(entity => entity.Id == Id);
         }
 
         public async Task<DepartmentViewModel?> CreateDepartment(DepartmentViewModel department)
         {
-            return await repo.CreateDepartment(department);
+            return await _unitOfWork.Department.Create(department);
         }
 
         public async Task<DepartmentViewModel?> UpdateDepartment(DepartmentViewModel department)
         {
-            return await repo.UpdateDepartment(department);
+            return await _unitOfWork.Department.Update(department.Id, department);
         }
 
-        public async Task<List<DepartmentViewModel>?> DeleteDepartment(int Id)
+        public async Task<IEnumerable<DepartmentViewModel>?> DeleteDepartment(int Id)
         {
-            return await repo.DeleteDepartment(Id);
+            return await _unitOfWork.Department.Delete(Id);
         }
 
     }

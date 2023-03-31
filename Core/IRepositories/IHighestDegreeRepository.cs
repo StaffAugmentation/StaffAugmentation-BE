@@ -1,13 +1,8 @@
-﻿using Core.ViewModel;
+﻿using Core.Model;
+using Core.ViewModel;
 
-namespace Core.IRepositories
+namespace Core.IRepositories;
+
+public interface IHighestDegreeRepository : IGenericRepository<HighestDegreeViewModel, HighestDegree, int>
 {
-    public interface IHighestDegreeRepository
-    {
-        Task<List<HighestDegreeViewModel>?> GetHighestDegree();
-        Task<HighestDegreeViewModel?> GetHighestDegree(int Id);
-        Task<HighestDegreeViewModel?> CreateHighestDegree(HighestDegreeViewModel HighestDegree);
-        Task<HighestDegreeViewModel?> UpdateHighestDegree(HighestDegreeViewModel HighestDegree);
-        Task<List<HighestDegreeViewModel>?> DeleteHighestDegree(int Id);
-    }
 }

@@ -1,13 +1,8 @@
-﻿using Core.ViewModel;
+﻿using Core.Model;
+using Core.ViewModel;
 
-namespace Core.IRepositories
+namespace Core.IRepositories;
+
+public interface IRequestFormStatusRepository : IGenericRepository<RequestFormStatusViewModel, RequestFormStatus, string>
 {
-    public interface IRequestFormStatusRepository
-    {
-        Task<List<RequestFormStatusViewModel>?> GetRequestFormStatus();
-        Task<RequestFormStatusViewModel?> GetRequestFormStatus(int Id);
-        Task<RequestFormStatusViewModel?> CreateRequestFormStatus(RequestFormStatusViewModel RequestFormStatus);
-        Task<RequestFormStatusViewModel?> UpdateRequestFormStatus(RequestFormStatusViewModel RequestFormStatus);
-        Task<List<RequestFormStatusViewModel>?> DeleteRequestFormStatus(int Id);
-    }
 }

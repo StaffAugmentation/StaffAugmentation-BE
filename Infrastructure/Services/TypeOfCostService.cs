@@ -6,35 +6,36 @@ namespace Business.Services
 {
     public class TypeOfCostService : ITypeOfCostService
     {
-        private readonly ITypeOfCostRepository repo;
-        public TypeOfCostService(ITypeOfCostRepository TypeOfCostRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public TypeOfCostService(IUnitOfWork unitOfWork)
         {
-            repo = TypeOfCostRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<TypeOfCostViewModel>?> GetTypeOfCost()
+        public async Task<IEnumerable<TypeOfCostViewModel>?> GetTypeOfCost()
         {
-            return await repo.GetTypeOfCost();
+            return await _unitOfWork.TypeOfCost.GetAll();
         }
 
         public async Task<TypeOfCostViewModel?> GetTypeOfCost(string Id)
         {
-            return await repo.GetTypeOfCost(Id);
+            return await _unitOfWork.TypeOfCost.Find(entity => entity.Id == Id);
         }
 
         public async Task<TypeOfCostViewModel?> CreateTypeOfCost(TypeOfCostViewModel typeOfCost)
         {
-            return await repo.CreateTypeOfCost(typeOfCost);
+            return await _unitOfWork.TypeOfCost.Create(typeOfCost);
         }
 
         public async Task<TypeOfCostViewModel?> UpdateTypeOfCost(TypeOfCostViewModel typeOfCost)
         {
-            return await repo.UpdateTypeOfCost(typeOfCost);
+            return await _unitOfWork.TypeOfCost.Update(typeOfCost.Id, typeOfCost);
         }
 
-        public async Task<List<TypeOfCostViewModel>?> DeleteTypeOfCost(string Id)
+        public async Task<IEnumerable<TypeOfCostViewModel>?> DeleteTypeOfCost(string Id)
         {
-            return await repo.DeleteTypeOfCost(Id);
+            return await _unitOfWork.TypeOfCost.Delete(Id);
         }
 
     }

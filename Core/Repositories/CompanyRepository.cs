@@ -1,99 +1,75 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Core.IRepositories;
 using Core.Data;
 using Core.ViewModel;
 using Core.Model;
-using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Core.Repositories;
 
-public class CompanyRepository : ICompanyRepository
+public class CompanyRepository : GenericRepository<CompanyViewModel, Company, int>, ICompanyRepository
 {
-    private readonly DataContext _db;
-    private readonly IMapper _mapper;
+    public CompanyRepository(DataContext context, IMapper mapper) : base(context, mapper)
+    {}
 
-    public CompanyRepository(DataContext context, IMapper mapper)
+    public override async Task<IEnumerable<CompanyViewModel>> GetAll(Expression<Func<Company, bool>>? criteria = null, string? orderDirection = null, Expression<Func<Company, object>>? order = null)
     {
-        _db = context;
-        _mapper = mapper;
+        return await (from company in _context.Company
+                      join approver in _context.Approver on company.IdApprover equals approver.Id into approver
+                      from approvers in approver.DefaultIfEmpty()
+                      where !company.IsDeleted
+                      select new CompanyViewModel
+                      {
+                          Id = company.Id,
+                          Name = company.Name,
+                          Email = company.Email,
+                          BankAccount = company.BankAccount,
+                          BICSW = company.BICSW,
+                          VatLegalEntity = company.VatLegalEntity,
+                          VatRate = company.VatRate,
+                          IsEveris = company.IsEveris,
+                          Approver = _mapper.Map<ApproverViewModel>(approvers)
+                      }).ToListAsync();
     }
 
-    public async Task<List<CompanyViewModel>?> GetCompany()
+    public override async Task<CompanyViewModel> Find(Expression<Func<Company, bool>> criteria)
     {
-        return await (from company in _db.Company
-                join approver in _db.Approver on company.IdApprover equals approver.Id into approver from approvers in approver.DefaultIfEmpty()
-                where !company.IsDeleted
-                select new CompanyViewModel
-                {
-                    IdCompany = company.IdCompany,
-                    CompanyName = company.CompanyName,
-                    Email = company.Email,
-                    BankAccount = company.BankAccount,
-                    BICSW = company.BICSW,
-                    VatLegalEntity = company.VatLegalEntity,
-                    VatRate = company.VatRate,
-                    IsEveris = company.IsEveris,
-                    Approver = _mapper.Map<ApproverViewModel>(approvers)
-                 }).ToListAsync();
-    }
+        Company entity = await _context.Company.Where(criteria).FirstOrDefaultAsync() ?? throw new Exception();
 
-    public async Task<CompanyViewModel?> GetCompany(int companyId)
-    {
-        CompanyViewModel Company = await 
-            (from company in _db.Company
-             where company.IdCompany == companyId && !company.IsDeleted
-             select new CompanyViewModel
-             {
-                 IdCompany = company.IdCompany,
-                 CompanyName = company.CompanyName,
-                 BankAccount = company.BankAccount,
-                 BICSW = company.BICSW,
-                 Email = company.Email,
-                 IsEveris = company.IsEveris,
-                 VatLegalEntity = company.VatLegalEntity,
-                 VatRate = company.VatRate,
-                 Approver = _mapper.Map<ApproverViewModel>(_db.Approver.Where(approver => approver.Id == company.IdApprover).FirstOrDefault())
-            }).FirstOrDefaultAsync() ?? throw new Exception("Company not found!");
-        return Company;
-    }
+        if (entity.IsDeleted)
+            throw new Exception("Company deleted !");
 
-    public async Task<CompanyViewModel?> CreateCompany(CompanyViewModel companyVM) 
-    {
-        Company company = _mapper.Map<Company>(companyVM);
-        company.IdApprover = companyVM.Approver?.Id;
-
-        await _db.Company.AddAsync(company);
-        await _db.SaveChangesAsync();
-
-        companyVM = _mapper.Map<CompanyViewModel>(company);
-        companyVM.Approver = _mapper.Map<ApproverViewModel>(_db.Approver.Where(approver => approver.Id == company.IdApprover).FirstOrDefaultAsync());
+        CompanyViewModel companyVM = _mapper.Map<CompanyViewModel>(entity);
+        companyVM.Approver = _mapper.Map<ApproverViewModel>(
+                                await _context.Approver
+                                .Where(approver => approver.Id == entity.IdApprover)
+                                .FirstOrDefaultAsync());
         return companyVM;
     }
 
-    public async Task<CompanyViewModel?> UpdateCompany(CompanyViewModel companyVM)
+    public override async Task<CompanyViewModel> Create(CompanyViewModel entityVM)
     {
-        Company company = await _db.Company.FindAsync(companyVM.IdCompany) ?? throw new Exception("Company not found!");
-        if (company.IsDeleted)
-            throw new Exception("Company deleted!");
+        Company entity = _mapper.Map<Company>(entityVM);
+        entity.IdApprover = entityVM.Approver?.Id;
 
-        company = _mapper.Map<Company>(companyVM);
-        company.IdApprover = companyVM.Approver?.Id;
+        await _context.Company.AddAsync(entity);
+        await _context.SaveChangesAsync();
 
-        await _db.SaveChangesAsync();
-
-        companyVM = _mapper.Map<CompanyViewModel>(company);
-        companyVM.Approver = _mapper.Map<ApproverViewModel>(await _db.Approver.Where(approver => approver.Id == company.IdApprover).FirstOrDefaultAsync());
-        return companyVM;
+        return _mapper.Map<CompanyViewModel>(entity);
     }
 
-    public async Task<List<CompanyViewModel>?> DeleteCompany(int CompanyId)
+    public override async Task<CompanyViewModel> Update(int key, CompanyViewModel entityVM)
     {
-        Company company = await _db.Company.FindAsync(CompanyId) ?? throw new Exception("Company not found!");
-        
-        company.IsDeleted = true;
-        await _db.SaveChangesAsync();
+        Company entity = await _context.Company.FindAsync(key) ?? throw new Exception();
 
-        return await GetCompany();
+        if (entity != null)
+        {
+            entity = _mapper.Map<Company>(entityVM);
+            entity.IdApprover = entityVM.Approver?.Id;
+            await _context.SaveChangesAsync();
+        }
+
+        return _mapper.Map<CompanyViewModel>(entity);
     }
 }

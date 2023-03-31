@@ -1,41 +1,41 @@
 ﻿using Business.IServices;
 using Core.IRepositories;
-using Core.Model;
 using Core.ViewModel;
 
 namespace Business.Services
 {
     public class OERPCodeService : IOERPCodeService
     {
-        private readonly IOERPCodeRepository repo;
-        public OERPCodeService(IOERPCodeRepository OERPCodeRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public OERPCodeService(IUnitOfWork unitOfWork)
         {
-            repo = OERPCodeRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<OERPCodeViewModel>?> GetOERPCode()
+        public async Task<IEnumerable<OERPCodeViewModel>?> GetOERPCode()
         {
-            return await repo.GetOERPCode();
+            return await _unitOfWork.OERPCode.GetAll();
         }
 
         public async Task<OERPCodeViewModel?> GetOERPCode(int Id)
         {
-            return await repo.GetOERPCode(Id);
+            return await _unitOfWork.OERPCode.Find(entity => entity.Id == Id);
         }
 
         public async Task<OERPCodeViewModel?> CreateOERPCode(OERPCodeViewModel OERPCode)
         {
-            return await repo.CreateOERPCode(OERPCode);
+            return await _unitOfWork.OERPCode.Create(OERPCode);
         }
 
         public async Task<OERPCodeViewModel?> UpdateOERPCode(OERPCodeViewModel OERPCode)
         {
-            return await repo.UpdateOERPCode(OERPCode);
+            return await _unitOfWork.OERPCode.Update(OERPCode.Id, OERPCode);
         }
 
-        public async Task<List<OERPCodeViewModel>?> DeleteOERPCode(int Id)
+        public async Task<IEnumerable<OERPCodeViewModel>?> DeleteOERPCode(int Id)
         {
-            return await repo.DeleteOERPCode(Id);
+            return await _unitOfWork.OERPCode.Delete(Id);
         }
 
     }

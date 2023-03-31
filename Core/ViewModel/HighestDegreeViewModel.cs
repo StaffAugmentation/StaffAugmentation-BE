@@ -6,6 +6,6 @@
 
         public string Value { get; set; } = null!;
 
-
+        public bool IsActive { get; set; }
     }
 }

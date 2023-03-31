@@ -1,13 +1,12 @@
 ﻿using Core.ViewModel;
 
-namespace Business.IServices
+namespace Business.IServices;
+
+public interface IRequestFormStatusService
 {
-    public interface IRequestFormStatusService
-    {
-        Task<List<RequestFormStatusViewModel>?> GetRequestFormStatus();
-        Task<RequestFormStatusViewModel?> GetRequestFormStatus(int Id);
-        Task<RequestFormStatusViewModel?> CreateRequestFormStatus(RequestFormStatusViewModel RequestFormStatus);
-        Task<RequestFormStatusViewModel?> UpdateRequestFormStatus(RequestFormStatusViewModel RequestFormStatus);
-        Task<List<RequestFormStatusViewModel>?> DeleteRequestFormStatus(int Id);
-    }
+    Task<IEnumerable<RequestFormStatusViewModel>?> GetRequestFormStatus();
+    Task<RequestFormStatusViewModel?> GetRequestFormStatus(string Id);
+    Task<RequestFormStatusViewModel?> CreateRequestFormStatus(RequestFormStatusViewModel RequestFormStatus);
+    Task<RequestFormStatusViewModel?> UpdateRequestFormStatus(RequestFormStatusViewModel RequestFormStatus);
+    Task<IEnumerable<RequestFormStatusViewModel>?> DeleteRequestFormStatus(string Id);
 }

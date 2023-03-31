@@ -1,13 +1,8 @@
-﻿using Core.ViewModel;
+﻿using Core.Model;
+using Core.ViewModel;
 
-namespace Core.IRepositories
+namespace Core.IRepositories;
+
+public interface IOERPCodeRepository : IGenericRepository<OERPCodeViewModel, OERPCode, int>
 {
-    public interface IOERPCodeRepository
-    {
-        Task<List<OERPCodeViewModel>?> GetOERPCode();
-        Task<OERPCodeViewModel?> GetOERPCode(int Id);
-        Task<OERPCodeViewModel?> CreateOERPCode(OERPCodeViewModel OERPCode);
-        Task<OERPCodeViewModel?> UpdateOERPCode(OERPCodeViewModel OERPCode);
-        Task<List<OERPCodeViewModel>?> DeleteOERPCode(int Id);
-    }
 }

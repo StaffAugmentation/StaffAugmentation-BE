@@ -1,13 +1,12 @@
 ﻿using Core.ViewModel;
 
-namespace Business.IServices
+namespace Business.IServices;
+
+public interface IBrTypeService
 {
-    public interface IBrTypeService
-    {
-        Task<List<BrTypeViewModel>?> GetBrType();
-        Task<BrTypeViewModel?> GetBrType(int Id);
-        Task<BrTypeViewModel?> CreateBrType(BrTypeViewModel brType);
-        Task<BrTypeViewModel?> UpdateBrType(BrTypeViewModel brType);
-        Task<List<BrTypeViewModel>?> DeleteBrType(int Id);
-    }
+    Task<IEnumerable<BrTypeViewModel>?> GetBrType();
+    Task<BrTypeViewModel?> GetBrType(int Id);
+    Task<BrTypeViewModel?> CreateBrType(BrTypeViewModel brType);
+    Task<BrTypeViewModel?> UpdateBrType(BrTypeViewModel brType);
+    Task<IEnumerable<BrTypeViewModel>?> DeleteBrType(int Id);
 }
