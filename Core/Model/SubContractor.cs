@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Model;
-public class SubContractor
+public partial class SubContractor
 {
     public int Id { get; set; }
 
@@ -18,9 +18,6 @@ public class SubContractor
 
     public bool IsOfficial { get; set; }
 
-    [Column("idApproverSub")]
-    public int? IdApprover { get; set; }
-
     public string? LegalEntityName { get; set; }
 
     [Column("LegalEntityAdress")]
@@ -32,8 +29,19 @@ public class SubContractor
     [Column("ID_Number")]
     public string? IdNumber { get; set; }
 
-    public string? IdPaymentTerm { get; set; }
+    [Column("idApproverSub")]
+    public int? ApproverId { get; set; }
 
-    public string? IdTypeOfCost { get; set; }
+    public virtual Approver? Approver { get; set; }
+
+    [Column("IdPaymentTerm")]
+    public string? PaymentTermId { get; set; }
+
+    public virtual PaymentTerm? PaymentTerm { get; set; }
+
+    [Column("IdTypeOfCost")]
+    public string? TypeOfCostId { get; set; }
+
+    public virtual TypeOfCost? TypeOfCost { get; set; }
 
 }

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Model;
-public class PTMOwner
+public partial class PTMOwner
 {
     public int Id { get; set; }
 
@@ -16,11 +16,13 @@ public class PTMOwner
     [Column("PTMOwner_VAT_Rate")]
     public double? VatRate { get; set; }
 
+    [Column("PTMOwner_VAT_Number")]
+    public string? VatNumber { get; set; }
+
     public bool IsEveris { get; set; }
 
     [Column("IdApproverPTMOwner")]
-    public int? IdApprover { get; set; }
+    public int? ApproverId { get; set; }
 
-    [Column("PTMOwner_VAT_Number")]
-    public string? VatNumber { get; set; }
+    public virtual Approver? Approver { get; set; }
 }

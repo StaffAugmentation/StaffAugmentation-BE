@@ -1,6 +1,8 @@
 ﻿using Business.IServices;
 using Core.IRepositories;
+using Core.Model;
 using Core.ViewModel;
+using System.Linq.Expressions;
 
 namespace Business.Services
 {
@@ -15,12 +17,12 @@ namespace Business.Services
 
         public async Task<IEnumerable<PTMOwnerViewModel>?> GetPTMOwner()
         {
-            return await _unitOfWork.PTMOwner.GetAll();
+            return await _unitOfWork.PTMOwner.GetAll(new List<Expression<Func<PTMOwner, object>>> { entity => entity.Approver });
         }
 
         public async Task<PTMOwnerViewModel?> GetPTMOwner(int Id)
         {
-            return await _unitOfWork.PTMOwner.Find(entity => entity.Id == Id);
+            return await _unitOfWork.PTMOwner.Find(entity => entity.Id == Id, new List<Expression<Func<PTMOwner, object>>> { entity => entity.Approver });
         }
 
         public async Task<PTMOwnerViewModel?> CreatePTMOwner(PTMOwnerViewModel PTMOwner)

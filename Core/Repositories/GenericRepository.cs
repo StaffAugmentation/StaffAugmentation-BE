@@ -20,9 +20,12 @@ public class GenericRepository<V, M, K> : IGenericRepository<V, M, K>
         _mapper = mapper;
     }
 
-    public virtual async Task<IEnumerable<V>> GetAll(Expression<Func<M, bool>>? criteria = null, string? orderDirection = null, Expression<Func<M, object>>? order = null)
+    public virtual async Task<IEnumerable<V>> GetAll(List<Expression<Func<M, object>>>? includes = null, Expression<Func<M, bool>>? criteria = null, string? orderDirection = null, Expression<Func<M, object>>? order = null)
     {
         IQueryable<M> query = _context.Set<M>();
+
+        if (includes != null)
+            query = includes.Aggregate(query, (current, include) => current.Include(include));
 
         if (criteria != null)
             query = query.Where(criteria);
@@ -40,9 +43,14 @@ public class GenericRepository<V, M, K> : IGenericRepository<V, M, K>
             .ToListAsync();
     }
 
-    public virtual async Task<V> Find(Expression<Func<M, bool>> criteria)
+    public virtual async Task<V> Find(Expression<Func<M, bool>> criteria, List<Expression<Func<M, object>>>? includes = null)
     {
-        return await _context.Set<M>()
+        IQueryable<M> query = _context.Set<M>();
+
+        if (includes != null)
+            query = includes.Aggregate(query, (current, include) => current.Include(include));
+
+        return await query
             .Where(criteria)
             .Select(entity => _mapper.Map<V>(entity))
             .FirstOrDefaultAsync() ?? throw new Exception(typeof(M).Name + " not found!");
@@ -60,15 +68,18 @@ public class GenericRepository<V, M, K> : IGenericRepository<V, M, K>
 
     public virtual async Task<V> Update(K key, V entityVM)
     {
-        M entity = await _context.Set<M>().FindAsync(key) ?? throw new Exception(typeof(M).Name + " not found!");
-
-        if (entity != null)
+        try
         {
-            entity = _mapper.Map<M>(entityVM);
+            M entity = _mapper.Map<M>(entityVM);
+            _context.Set<M>().Update(entity);
             await _context.SaveChangesAsync();
-        }
+            return _mapper.Map<V>(entity);
 
-        return _mapper.Map<V>(entity);
+        }
+        catch (Exception ) 
+        {
+            throw new Exception(typeof(M).Name + " not found!");
+        }
     }
 
     public async Task<IEnumerable<V>> Delete(K id)
