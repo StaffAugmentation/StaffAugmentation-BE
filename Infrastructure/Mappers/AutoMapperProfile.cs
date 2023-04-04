@@ -12,8 +12,8 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<CompanyViewModel, Company>();
         CreateMap<Approver, ApproverViewModel>();
         CreateMap<ApproverViewModel, Approver>();
-        CreateMap<Level, DepartmentViewModel>();
-        CreateMap<DepartmentViewModel, Level>();
+        CreateMap<Department, DepartmentViewModel>();
+        CreateMap<DepartmentViewModel, Department>();
         CreateMap<Profile, ProfileViewModel>();
         CreateMap<ProfileViewModel, Profile>();
         CreateMap<BrSource, BrSourceViewModel>();
@@ -44,5 +44,7 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<HighestDegreeViewModel, HighestDegree>();
         CreateMap<OERPCode, OERPCodeViewModel>();
         CreateMap<OERPCodeViewModel, OERPCode>();
+        CreateMap<Country, CountryViewModel>();
+        CreateMap<CountryViewModel, Country>();
     }
 }

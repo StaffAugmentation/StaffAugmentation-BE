@@ -9,7 +9,7 @@ namespace Core.Data
         public DataContext(DbContextOptions<DataContext> options): base(options) { }
 
         public DbSet<Company> Company => Set<Company>();
-        public DbSet<Level> Department => Set<Level>();
+        public DbSet<Department> Department => Set<Department>();
         public DbSet<Approver> Approver => Set<Approver>();
         public DbSet<Profile> Profile => Set<Profile>();
         public DbSet<BrSource> BrSource => Set<BrSource>();
@@ -26,6 +26,6 @@ namespace Core.Data
         public DbSet<HighestDegree> HighestDegree => Set<HighestDegree>();
         public DbSet<RequestFormStatus> RequestFormStatus => Set<RequestFormStatus>();
         public DbSet<OERPCode> OERPCode => Set<OERPCode>();
-
+        public DbSet<Country> Country => Set<Country>();
     }
 }

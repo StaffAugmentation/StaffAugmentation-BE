@@ -20,6 +20,7 @@
         ITypeOfCostRepository TypeOfCost { get; }
         ITypeRepository Type { get; }
         IOERPCodeRepository OERPCode { get; }
+        ICountryRepository Country { get; }
 
         Task<int> CompleteAsync();
     }
