@@ -17,12 +17,12 @@ namespace Business.Services
 
         public async Task<IEnumerable<SubContractorViewModel>?> GetSubContractor()
         {
-            return await _unitOfWork.SubContractor.GetAll(new List<Expression<Func<SubContractor, object>>> { entity => entity.Approver, entity => entity.PaymentTerm, entity => entity.TypeOfCost });
+            return await _unitOfWork.SubContractor.GetAll(new List<Expression<Func<SubContractor, object?>>> { entity => entity.Approver, entity => entity.PaymentTerm, entity => entity.TypeOfCost });
         }
 
         public async Task<SubContractorViewModel?> GetSubContractor(int Id)
         {
-            return await _unitOfWork.SubContractor.Find(entity => entity.Id == Id, new List<Expression<Func<SubContractor, object>>> { entity => entity.Approver, entity => entity.PaymentTerm, entity => entity.TypeOfCost });
+            return await _unitOfWork.SubContractor.Find(entity => entity.Id == Id, new List<Expression<Func<SubContractor, object?>>> { entity => entity.Approver, entity => entity.PaymentTerm, entity => entity.TypeOfCost });
         }
 
         public async Task<SubContractorViewModel?> CreateSubContractor(SubContractorViewModel subContractor)

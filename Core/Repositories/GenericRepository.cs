@@ -20,7 +20,7 @@ public class GenericRepository<V, M, K> : IGenericRepository<V, M, K>
         _mapper = mapper;
     }
 
-    public virtual async Task<IEnumerable<V>> GetAll(List<Expression<Func<M, object>>>? includes = null, Expression<Func<M, bool>>? criteria = null, string? orderDirection = null, Expression<Func<M, object>>? order = null)
+    public virtual async Task<IEnumerable<V>> GetAll(List<Expression<Func<M, object?>>>? includes = null, Expression<Func<M, bool>>? criteria = null, string? orderDirection = null, Expression<Func<M, object>>? order = null)
     {
         IQueryable<M> query = _context.Set<M>();
 
@@ -43,7 +43,7 @@ public class GenericRepository<V, M, K> : IGenericRepository<V, M, K>
             .ToListAsync();
     }
 
-    public virtual async Task<V> Find(Expression<Func<M, bool>> criteria, List<Expression<Func<M, object>>>? includes = null)
+    public virtual async Task<V> Find(Expression<Func<M, bool>> criteria, List<Expression<Func<M, object?>>>? includes = null)
     {
         IQueryable<M> query = _context.Set<M>();
 

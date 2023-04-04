@@ -17,12 +17,12 @@ public class CompanyService : ICompanyService
 
     public async Task<IEnumerable<CompanyViewModel>?> GetCompany()
     {
-        return await _unitOfWork.Company.GetAll(new List<Expression<Func<Company, object>>> { company => company.Approver }, company => !company.IsDeleted);
+        return await _unitOfWork.Company.GetAll(new List<Expression<Func<Company, object?>>> { company => company.Approver }, company => !company.IsDeleted);
     }
 
     public async Task<CompanyViewModel?> GetCompany(int companyId)
     {
-        return await _unitOfWork.Company.Find(company => company.Id == companyId && !company.IsDeleted, new List<Expression<Func<Company, object>>> { company => company.Approver } );
+        return await _unitOfWork.Company.Find(company => company.Id == companyId && !company.IsDeleted, new List<Expression<Func<Company, object?>>> { company => company.Approver } );
     }
 
     public async Task<CompanyViewModel?> CreateCompany(CompanyViewModel company)

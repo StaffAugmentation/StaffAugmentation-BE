@@ -28,7 +28,7 @@ public class SubContractorRepository : GenericRepository<SubContractorViewModel,
         await _context.SubContractor.AddAsync(subContractor);
         await _context.SaveChangesAsync();
 
-        return await Find(entity => entity.Id == subContractor.Id, new List<Expression<Func<SubContractor, object>>> { entity => entity.Approver, entity => entity.PaymentTerm, entity => entity.TypeOfCost });
+        return await Find(entity => entity.Id == subContractor.Id, new List<Expression<Func<SubContractor, object?>>> { entity => entity.Approver, entity => entity.PaymentTerm, entity => entity.TypeOfCost });
     }
 
     public override async Task<SubContractorViewModel> Update(int key, SubContractorViewModel subContractorVM)
@@ -42,7 +42,7 @@ public class SubContractorRepository : GenericRepository<SubContractorViewModel,
 
             _context.Update(subContractor);
             await _context.SaveChangesAsync();
-            return await Find(entity => entity.Id == subContractor.Id, new List<Expression<Func<SubContractor, object>>> { entity => entity.Approver, entity => entity.PaymentTerm, entity => entity.TypeOfCost });
+            return await Find(entity => entity.Id == subContractor.Id, new List<Expression<Func<SubContractor, object?>>> { entity => entity.Approver, entity => entity.PaymentTerm, entity => entity.TypeOfCost });
         }
         catch (Exception)
         {
