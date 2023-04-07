@@ -26,6 +26,8 @@ namespace Core.Data
         public DbSet<HighestDegree> HighestDegree => Set<HighestDegree>();
         public DbSet<RequestFormStatus> RequestFormStatus => Set<RequestFormStatus>();
         public DbSet<OERPCode> OERPCode => Set<OERPCode>();
+        public DbSet<Forecast> Forecast => Set<Forecast>();
+
 
     }
 }

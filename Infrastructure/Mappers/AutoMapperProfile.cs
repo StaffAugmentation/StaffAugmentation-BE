@@ -44,5 +44,7 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<HighestDegreeViewModel, HighestDegree>();
         CreateMap<OERPCode, OERPCodeViewModel>();
         CreateMap<OERPCodeViewModel, OERPCode>();
+        CreateMap<Forecast, ForecastViewModel>();
+        CreateMap<ForecastViewModel, Forecast>();
     }
 }

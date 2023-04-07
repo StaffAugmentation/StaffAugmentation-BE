@@ -20,6 +20,8 @@
         ITypeOfCostRepository TypeOfCost { get; }
         ITypeRepository Type { get; }
         IOERPCodeRepository OERPCode { get; }
+        IForecastRepository Forecast { get; }
+
 
         Task<int> CompleteAsync();
     }
