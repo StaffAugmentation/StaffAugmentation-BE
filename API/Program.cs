@@ -27,6 +27,7 @@ builder.Services.AddScoped<IPTMOwnerService, PTMOwnerService>();
 builder.Services.AddScoped<ISubContractorService, SubContractorService>();
 builder.Services.AddScoped<ITypeOfCostService, TypeOfCostService>();
 builder.Services.AddScoped<IPaymentTermService, PaymentTermService>();
+builder.Services.AddScoped<IAppParameterService, AppParameterService>();
 builder.Services.AddScoped<IRecruitmentResponsibleService, RecruitmentResponsibleService>();
 builder.Services.AddScoped<IRequestFormStatusService, RequestFormStatusService>();
 builder.Services.AddScoped<IHighestDegreeService, HighestDegreeService>();
