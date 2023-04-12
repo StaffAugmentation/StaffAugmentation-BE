@@ -28,23 +28,13 @@ builder.Services.AddScoped<ISubContractorService, SubContractorService>();
 builder.Services.AddScoped<ITypeOfCostService, TypeOfCostService>();
 builder.Services.AddScoped<IPaymentTermService, PaymentTermService>();
 builder.Services.AddScoped<IAppParameterService, AppParameterService>();
+builder.Services.AddScoped<IRecruitmentResponsibleService, RecruitmentResponsibleService>();
+builder.Services.AddScoped<IRequestFormStatusService, RequestFormStatusService>();
+builder.Services.AddScoped<IHighestDegreeService, HighestDegreeService>();
+builder.Services.AddScoped<IOERPCodeService, OERPCodeService>();
 
 /*  Repositories  */
-builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
-builder.Services.AddScoped<IApproverRepository, ApproverRepository>();
-builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-builder.Services.AddScoped<IBrTypeRepository, BrTypeRepository>();
-builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
-builder.Services.AddScoped<IBrSourceRepository, BrSourceRepository>();
-builder.Services.AddScoped<ISubContractorRepository, SubContractorRepository>();
-builder.Services.AddScoped<ITypeOfCostRepository, TypeOfCostRepository>();
-builder.Services.AddScoped<IPaymentTermRepository, PaymentTermRepository>();
-builder.Services.AddScoped<ILevelRepository, LevelRepository>();
-builder.Services.AddScoped<IPTMOwnerRepository, PTMOwnerRepository>();
-builder.Services.AddScoped<ITypeRepository, TypeRepository>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IPlaceOfDeliveryRepository, PlaceOfDeliveryRepository>();
-builder.Services.AddScoped<IAppParameterRepository, AppParameterRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 /*  EF Configuration  */
 builder.Services.AddDbContext<DataContext>(options =>

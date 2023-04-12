@@ -4,104 +4,49 @@ using Core.IRepositories;
 using Core.Data;
 using Core.ViewModel;
 using Core.Model;
-using System.Data.Common;
-using SubContractor = Core.Model.SubContractor;
-using Core.Migrations;
+using System.Linq.Expressions;
 
-namespace Core.Repositories
+namespace Core.Repositories;
+
+public class SubContractorRepository : GenericRepository<SubContractorViewModel, SubContractor, int>, ISubContractorRepository
 {
-    public class SubContractorRepository : ISubContractorRepository
+    public SubContractorRepository(DataContext context, IMapper mapper) : base(context, mapper)
     {
-        private readonly DataContext _db;
-        private readonly IMapper _mapper;
+    }   
 
-        public SubContractorRepository(DataContext context, IMapper mapper)
+    public override async Task<SubContractorViewModel> Create(SubContractorViewModel subContractorVM) 
+    {
+        SubContractor subContractor = _mapper.Map<SubContractor>(subContractorVM);
+        subContractor.ApproverId = subContractorVM.Approver?.Id;
+        subContractor.PaymentTermId = subContractorVM.PaymentTerm?.Id;
+        subContractor.TypeOfCostId = subContractorVM.TypeOfCost?.Id;
+
+        subContractor.Approver = null;
+        subContractor.PaymentTerm = null;
+        subContractor.TypeOfCost = null;
+
+        await _context.SubContractor.AddAsync(subContractor);
+        await _context.SaveChangesAsync();
+
+        return await Find(entity => entity.Id == subContractor.Id, new List<Expression<Func<SubContractor, object?>>> { entity => entity.Approver, entity => entity.PaymentTerm, entity => entity.TypeOfCost });
+    }
+
+    public override async Task<SubContractorViewModel> Update(int key, SubContractorViewModel subContractorVM)
+    {
+        try
         {
-            _db = context;
-            _mapper = mapper;
-        }
+            SubContractor subContractor = _mapper.Map<SubContractor>(subContractorVM);
+            subContractor.ApproverId = subContractorVM.Approver?.Id;
+            subContractor.PaymentTermId = subContractorVM.PaymentTerm?.Id;
+            subContractor.TypeOfCostId = subContractorVM.TypeOfCost?.Id;
 
-        public async Task<List<SubContractorViewModel>?> GetSubContractor()
+            _context.Update(subContractor);
+            await _context.SaveChangesAsync();
+            return await Find(entity => entity.Id == subContractor.Id, new List<Expression<Func<SubContractor, object?>>> { entity => entity.Approver, entity => entity.PaymentTerm, entity => entity.TypeOfCost });
+        }
+        catch (Exception)
         {
-            return await (from subContractor in _db.SubContractor
-                          join approver in _db.Approvers on subContractor.IdApproverSub equals approver.Id into approver
-                          from approvers in approver.DefaultIfEmpty()
-                          join typeOfCost in _db.TypeOfCost on subContractor.IdTypeOfCost equals typeOfCost.Id into typeOfCost
-                          from typeOfCosts in typeOfCost.DefaultIfEmpty()
-                          join paymentTerm in _db.PaymentTerm on subContractor.IdPaymentTerm equals paymentTerm.Id into paymentTerm
-                          from paymentTerms in paymentTerm.DefaultIfEmpty()
-                          select new SubContractorViewModel
-                          {
-                              Id = subContractor.Id,
-                              ValueId = subContractor.ValueId,
-                              SubContBa = subContractor.SubContBa,
-                              SubContBicsw = subContractor.SubContBicsw,
-                              SubContVatRate = subContractor.SubContVatRate,
-                              IsOfficial = subContractor.IsOfficial,
-                              IdApproverSub = subContractor.IdApproverSub,
-                              LegalEntityName = subContractor.LegalEntityName,
-                              LegalEntityAdress = subContractor.LegalEntityAdress,
-                              VatNumber = subContractor.VatNumber,
-                              IdNumber = subContractor.IdNumber,
-                              IdPaymentTerm = subContractor.IdPaymentTerm,
-                              IdTypeOfCost = subContractor.IdTypeOfCost,
-                              TypeOfCostName = typeOfCosts != null ? typeOfCosts.TypeOfCostValue : "",
-                              PaymentTermName = paymentTerms != null ? paymentTerms.PaymentTermValue : "",
-                              ApproverName = approvers != null ? approvers.AppFirstName + " " + approvers.AppLastName : ""
-
-                          }).ToListAsync();
+            throw new Exception("SubContractor not found!");
         }
-        
-        public async Task<SubContractorViewModel?> GetSubContractor(int Id)
-        {
-            var dbSubContractor = await _db.SubContractor.Where(subContractor => subContractor.Id == Id).Select(subContractor => _mapper.Map<SubContractorViewModel>(subContractor)).FirstOrDefaultAsync();
-            if (dbSubContractor == null)
-                throw new Exception("SubContractor not found!");
-            return dbSubContractor; 
-        }
-
-        public async Task<SubContractorViewModel?> CreateSubContractor(SubContractorViewModel subContractor) 
-        {
-            var dbSubContractor = await _db.SubContractor.AddAsync(_mapper.Map<SubContractor>(subContractor));
-            await _db.SaveChangesAsync();
-
-            return _mapper.Map<SubContractorViewModel>(dbSubContractor.Entity);
-        }
-
-        public async Task<SubContractorViewModel?> UpdateSubContractor(SubContractorViewModel subContractor)
-        {
-            var dbSubContractor = await _db.SubContractor.FindAsync(subContractor.Id);
-            if (dbSubContractor == null)
-                throw new Exception("SubContractor not found!");
-
-            dbSubContractor.ValueId = subContractor.ValueId;
-            dbSubContractor.SubContBa = subContractor.SubContBa;
-            dbSubContractor.SubContBicsw = subContractor.SubContBicsw;
-            dbSubContractor.SubContVatRate = subContractor.SubContVatRate;
-            dbSubContractor.IsOfficial = subContractor.IsOfficial;
-            dbSubContractor.IdApproverSub = subContractor.IdApproverSub;
-            dbSubContractor.LegalEntityName = subContractor.LegalEntityName;
-            dbSubContractor.LegalEntityAdress = subContractor.LegalEntityAdress;
-            dbSubContractor.VatNumber = subContractor.VatNumber;
-            dbSubContractor.IdNumber = subContractor.IdNumber;
-            dbSubContractor.IdPaymentTerm = subContractor.IdPaymentTerm;
-            dbSubContractor.IdTypeOfCost = subContractor.IdTypeOfCost;
-
-        await _db.SaveChangesAsync();
-            return _mapper.Map<SubContractorViewModel>(dbSubContractor);
-        }
-
-        public async Task<List<SubContractorViewModel>?> DeleteSubContractor(int Id)
-        {
-            var dbSubContractor = await _db.SubContractor.FindAsync(Id);
-            if (dbSubContractor == null)
-                throw new Exception("SubContractor not found!");
-
-            _db.SubContractor.Remove(dbSubContractor);
-            await _db.SaveChangesAsync();
-
-            return await GetSubContractor();
-        }
-
     }
 }

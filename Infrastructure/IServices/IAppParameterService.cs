@@ -1,13 +1,12 @@
 using Core.ViewModel;
 
-namespace Business.IServices
+namespace Business.IServices;
+
+public interface IAppParameterService
 {
-    public interface IAppParameterService
-    {
-        Task<List<AppParameterViewModel>?> GetAppParameter();
-        Task<AppParameterViewModel?> GetAppParameter(int Id);
-        Task<AppParameterViewModel?> CreateAppParameter(AppParameterViewModel appParameter);
-        Task<AppParameterViewModel?> UpdateAppParameter(AppParameterViewModel appParameter);
-        Task<List<AppParameterViewModel>?> DeleteAppParameter(int Id);
-    }
+    Task<IEnumerable<AppParameterViewModel>?> GetAppParameter();
+    Task<AppParameterViewModel?> GetAppParameter(int Id);
+    Task<AppParameterViewModel?> CreateAppParameter(AppParameterViewModel appParameter);
+    Task<AppParameterViewModel?> UpdateAppParameter(AppParameterViewModel appParameter);
+    Task<IEnumerable<AppParameterViewModel>?> DeleteAppParameter(int Id);
 }

@@ -1,36 +1,37 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Model
+namespace Core.Model;
+
+public partial class Company
 {
-    public class Company
-    {
-        [Key]
-        public int IdCompany { get; set; }
+    [Key]
+    [Column("IdCompany")]
+    public int Id { get; set; }
 
-        public string CompanyName { get; set; } = null!;
+    [Column("CompanyName")]
+    public string Name { get; set; } = null!;
 
-        public string? BankAccount { get; set; }
+    public string? BankAccount { get; set; }
 
-        public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; }
 
-        public bool IsEveris { get; set; }
+    public bool IsEveris { get; set; }
 
-        public string? CmpVatlegalEntity { get; set; }
+    [Column("cmp_VATLegalEntity")]
+    public string? VatLegalEntity { get; set; }
 
-        public string? CmpBicsw { get; set; }
+    [Column("cmp_BICSW")]
+    public string? BICSW { get; set; }
 
-        public double? CmpVatRate { get; set; }
+    [Column("cmp_VAT_Rate")]
+    public double? VatRate { get; set; }
 
-        public int? IdApproverCmp { get; set; }
+    [Column("idApproverCmp")]
+    public int? ApproverId { get; set; }
 
-        public string? CmpEmail { get; set; }
+    public virtual Approver? Approver { get; set; }
 
-        //public virtual ICollection<BrProfile> BrProfiles { get; } = new List<BrProfile>();
-
-        //public virtual ICollection<ChangeCompany> ChangeCompanyIdCompanyToNavigations { get; } = new List<ChangeCompany>();
-
-        //public virtual ICollection<ChangeCompany> ChangeCompanyIdInitialCompanyNavigations { get; } = new List<ChangeCompany>();
-
-        //public virtual ICollection<ScDaysWorkedByMonth> ScDaysWorkedByMonths { get; } = new List<ScDaysWorkedByMonth>();
-    }
+    [Column("Cmp_Email")]
+    public string? Email { get; set; }
 }

@@ -1,40 +1,43 @@
 ﻿using Business.IServices;
 using Core.IRepositories;
+using Core.Model;
 using Core.ViewModel;
+using System.Linq.Expressions;
 
 namespace Business.Services
 {
     public class PTMOwnerService : IPTMOwnerService
     {
-        private readonly IPTMOwnerRepository repo;
-        public PTMOwnerService(IPTMOwnerRepository PTMOwnerrepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public PTMOwnerService(IUnitOfWork unitOfWork)
         {
-            repo = PTMOwnerrepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<PTMOwnerViewModel>?> GetPTMOwner()
+        public async Task<IEnumerable<PTMOwnerViewModel>?> GetPTMOwner()
         {
-            return await repo.GetPTMOwner();
+            return await _unitOfWork.PTMOwner.GetAll(new List<Expression<Func<PTMOwner, object?>>> { entity => entity.Approver });
         }
 
         public async Task<PTMOwnerViewModel?> GetPTMOwner(int Id)
         {
-            return await repo.GetPTMOwner(Id);
+            return await _unitOfWork.PTMOwner.Find(entity => entity.Id == Id, new List<Expression<Func<PTMOwner, object?>>> { entity => entity.Approver });
         }
 
         public async Task<PTMOwnerViewModel?> CreatePTMOwner(PTMOwnerViewModel PTMOwner)
         {
-            return await repo.CreatePTMOwner(PTMOwner);
+            return await _unitOfWork.PTMOwner.Create(PTMOwner);
         }
 
         public async Task<PTMOwnerViewModel?> UpdatePTMOwner(PTMOwnerViewModel PTMOwner)
         {
-            return await repo.UpdatePTMOwner(PTMOwner);
+            return await _unitOfWork.PTMOwner.Update(PTMOwner.Id, PTMOwner);
         }
 
-        public async Task<List<PTMOwnerViewModel>?> DeletePTMOwner(int Id)
+        public async Task<IEnumerable<PTMOwnerViewModel>?> DeletePTMOwner(int Id)
         {
-            return await repo.DeletePTMOwner(Id);
+            return await _unitOfWork.PTMOwner.Delete(Id);
         }
 
     }

@@ -5,76 +5,74 @@ using API.Controllers;
 using Business.IServices;
 using Core.ViewModel;
 using Microsoft.Extensions.Logging;
-using Core.Model;
 
-namespace UnitTests.Controllers
+namespace UnitTests.Controllers;
+
+public class TestPTMOwnerController
 {
-    public class TestPTMOwnerController
+    private readonly PTMOwnerController _controller;
+
+    public TestPTMOwnerController()
     {
-        private readonly PTMOwnerController _controller;
-
-        public TestPTMOwnerController()
+        var loggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
+        var logger = loggerFactory.CreateLogger<PTMOwnerController>();
+        var mockPTMOwnerService = new Mock<IPTMOwnerService>();
+        mockPTMOwnerService.Setup(svc => svc.GetPTMOwner().Result).Returns(new List<PTMOwnerViewModel>
         {
-            var loggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
-            var logger = loggerFactory.CreateLogger<PTMOwnerController>();
-            var mockPTMOwnerService = new Mock<IPTMOwnerService>();
-            mockPTMOwnerService.Setup(svc => svc.GetPTMOwner().Result).Returns(new List<PTMOwnerViewModel>
-            {
-                    new PTMOwnerViewModel { Id = 1, ValueId = "PTMOwner 1",PTMOwnerBA = "PTMOwnerBA 1",PTMOwnerBICSW ="PTMOwnerBICSW 1",PTMOwnerVatRate =10000, IsEveris = false, IdApprover=1, PTMOwnerVatNumber ="PTMOwnerVatNumber 1" },
-                    new PTMOwnerViewModel { Id = 2, ValueId = "PTMOwner 2",PTMOwnerBA = "PTMOwnerBA 2",PTMOwnerBICSW ="PTMOwnerBICSW 2",PTMOwnerVatRate =20000, IsEveris = true, IdApprover=2, PTMOwnerVatNumber ="PTMOwnerVatNumber 2" },
-                    new PTMOwnerViewModel { Id = 3, ValueId = "PTMOwner 3",PTMOwnerBA = "PTMOwnerBA 3",PTMOwnerBICSW ="PTMOwnerBICSW 3",PTMOwnerVatRate =30000, IsEveris = false, IdApprover=3, PTMOwnerVatNumber ="PTMOwnerVatNumber 3" },
-                });
-            _controller = new PTMOwnerController(logger, mockPTMOwnerService.Object);
-        }
+                new PTMOwnerViewModel { Id = 1, ValueId = "PTMOwner 1",BA = "BA 1",BICSW ="BICSW 1",VatRate =10000, IsEveris = false, VatNumber ="VatNumber 1" },
+                new PTMOwnerViewModel { Id = 2, ValueId = "PTMOwner 2",BA = "BA 2",BICSW ="BICSW 2",VatRate =20000, IsEveris = true, VatNumber ="VatNumber 2" },
+                new PTMOwnerViewModel { Id = 3, ValueId = "PTMOwner 3",BA = "BA 3",BICSW ="BICSW 3",VatRate =30000, IsEveris = false, Approver = new ApproverViewModel{ Id = 1, FirstName= "test", LastName = "test" }, VatNumber ="VatNumber 3" },
+            });
+        _controller = new PTMOwnerController(logger, mockPTMOwnerService.Object);
+    }
 
-        [Fact]
-        public async Task Get_OnReturnsData()
-        {
-            // Act
-            var result = await _controller.GetAll();
+    [Fact]
+    public async Task Get_OnReturnsData()
+    {
+        // Act
+        var result = await _controller.GetAll();
 
-            // Assert
-            Assert.IsType<ActionResult<List<PTMOwnerViewModel>?>?>(result);
-        }
+        // Assert
+        Assert.IsType<ActionResult<List<PTMOwnerViewModel>?>?>(result);
+    }
 
-        [Fact]
-        public async Task GetPTMOwner_OnReturnsData()
-        {
-            // Act
-            var result = await _controller.GetPTMOwner(100);
+    [Fact]
+    public async Task GetPTMOwner_OnReturnsData()
+    {
+        // Act
+        var result = await _controller.GetPTMOwner(100);
 
-            // Assert
-            Assert.IsType<ActionResult<PTMOwnerViewModel?>?>(result);
-        }
+        // Assert
+        Assert.IsType<ActionResult<PTMOwnerViewModel?>?>(result);
+    }
 
-        [Fact]
-        public async Task Create_OnReturnsData()
-        {
-            // Act
-            var result = await _controller.CreatePTMOwner(new PTMOwnerViewModel { Id = 4, ValueId = "PTMOwner 4", PTMOwnerBA = "PTMOwnerBA 4", PTMOwnerBICSW = "PTMOwnerBICSW 4", PTMOwnerVatRate = 40000, IsEveris = true, IdApprover = 4, PTMOwnerVatNumber = "PTMOwnerVatNumber 4" });
+    [Fact]
+    public async Task Create_OnReturnsData()
+    {
+        // Act
+        var result = await _controller.CreatePTMOwner(new PTMOwnerViewModel { Id = 4, ValueId = "PTMOwner 4", BA = "BA 4", BICSW = "BICSW 4", VatRate = 40000, IsEveris = true, VatNumber = "VatNumber 4" });
 
-            // Assert
-            Assert.IsType<ActionResult<PTMOwnerViewModel?>>(result);
-        }
+        // Assert
+        Assert.IsType<ActionResult<PTMOwnerViewModel?>>(result);
+    }
 
-        [Fact]
-        public async Task Update_OnReturnsData()
-        {
-            // Act
-            var result = await _controller.UpdatePTMOwner(new PTMOwnerViewModel { Id = 4, ValueId = "PTMOwner 4", PTMOwnerBA = "PTMOwnerBA 4", PTMOwnerBICSW = "PTMOwnerBICSW 4", PTMOwnerVatRate = 40000, IsEveris = true, IdApprover = 4, PTMOwnerVatNumber = "PTMOwnerVatNumber 4" });
+    [Fact]
+    public async Task Update_OnReturnsData()
+    {
+        // Act
+        var result = await _controller.UpdatePTMOwner(new PTMOwnerViewModel { Id = 4, ValueId = "PTMOwner 4", BA = "BA 4", BICSW = "BICSW 4", VatRate = 40000, IsEveris = true, VatNumber = "VatNumber 4" });
 
-            // Assert
-            Assert.IsType<ActionResult<PTMOwnerViewModel?>>(result);
-        }
+        // Assert
+        Assert.IsType<ActionResult<PTMOwnerViewModel?>>(result);
+    }
 
-        [Fact]
-        public async Task Delete_OnReturnsData()
-        {
-            // Act
-            var result = await _controller.DeletePTMOwner(4);
+    [Fact]
+    public async Task Delete_OnReturnsData()
+    {
+        // Act
+        var result = await _controller.DeletePTMOwner(4);
 
-            // Assert
-            Assert.IsType<ActionResult<List<PTMOwnerViewModel>>>(result);
-        }
+        // Assert
+        Assert.IsType<ActionResult<List<PTMOwnerViewModel>>>(result);
     }
 }

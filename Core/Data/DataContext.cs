@@ -9,8 +9,8 @@ namespace Core.Data
         public DataContext(DbContextOptions<DataContext> options): base(options) { }
 
         public DbSet<Company> Company => Set<Company>();
-        public DbSet<Department> Department => Set<Department>();
-        public DbSet<Approvers> Approvers => Set<Approvers>();
+        public DbSet<Level> Department => Set<Level>();
+        public DbSet<Approver> Approver => Set<Approver>();
         public DbSet<Profile> Profile => Set<Profile>();
         public DbSet<BrSource> BrSource => Set<BrSource>();
         public DbSet<BrType> BrType => Set<BrType>();
@@ -22,6 +22,10 @@ namespace Core.Data
         public DbSet<Core.Model.Type> Type => Set<Core.Model.Type>();
         public DbSet<Category> Category => Set<Category>();
         public DbSet<PlaceOfDelivery> PlaceOfDelivery => Set<PlaceOfDelivery>();
+        public DbSet<RecruitmentResponsible> RecruitmentResponsible => Set<RecruitmentResponsible>();
+        public DbSet<HighestDegree> HighestDegree => Set<HighestDegree>();
+        public DbSet<RequestFormStatus> RequestFormStatus => Set<RequestFormStatus>();
+        public DbSet<OERPCode> OERPCode => Set<OERPCode>();
         public DbSet<AppParameter> AppParameter => Set<AppParameter>();
     }
 }

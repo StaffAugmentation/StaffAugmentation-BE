@@ -7,35 +7,36 @@ namespace Business.Services
 {
     public class ProfileService : IProfileService
     {
-        private readonly IProfileRepository repo;
-        public ProfileService(IProfileRepository ProfileRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ProfileService(IUnitOfWork unitOfWork)
         {
-            repo = ProfileRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<List<ProfileViewModel>?> GetProfile()
+        public async Task<IEnumerable<ProfileViewModel>?> GetProfile()
         {
-            return await repo.GetProfile();
+            return await _unitOfWork.Profile.GetAll();
         }
 
         public async Task<ProfileViewModel?> GetProfile(int Id)
         {
-            return await repo.GetProfile(Id);
+            return await _unitOfWork.Profile.Find(profile => profile.Id == Id);
         }
 
         public async Task<ProfileViewModel?> CreateProfile(ProfileViewModel profile)
         {
-            return await repo.CreateProfile(profile);
+            return await _unitOfWork.Profile.Create(profile);
         }
 
         public async Task<ProfileViewModel?> UpdateProfile(ProfileViewModel profile)
         {
-            return await repo.UpdateProfile(profile);
+            return await _unitOfWork.Profile.Update(profile.Id, profile);
         }
 
-        public async Task<List<ProfileViewModel>?> DeleteProfile(int Id)
+        public async Task<IEnumerable<ProfileViewModel>?> DeleteProfile(int Id)
         {
-            return await repo.DeleteProfile(Id);
+            return await _unitOfWork.Profile.Delete(Id);
         }
 
     }

@@ -1,8 +1,7 @@
-﻿namespace Core.ViewModel
+﻿namespace Core.ViewModel;
+
+public class BrSourceViewModel
 {
-    public class BrSourceViewModel
-    {
-        public string IdSource { get; set; } = null!;
-        public string SourceName { get; set; } = null!;
-    }
+    public string Id { get; set; } = null!;
+    public string Name { get; set; } = null!;
 }

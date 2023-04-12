@@ -1,16 +1,15 @@
-﻿namespace Core.ViewModel
-{
-    public class PTMOwnerViewModel
-    {
-        public int Id { get; set; }
-        public string ValueId { get; set; } = null!;
-        public string? PTMOwnerBA { get; set; }
-        public string? PTMOwnerBICSW { get; set; }
-        public double? PTMOwnerVatRate { get; set; }
-        public bool IsEveris { get; set; }
-        public int? IdApprover { get; set; }
-        public string? ApproverName { get; set; }
+﻿using Core.Model;
 
-        public string? PTMOwnerVatNumber { get; set; }
-    }
+namespace Core.ViewModel;
+
+public class PTMOwnerViewModel
+{
+    public int Id { get; set; }
+    public string ValueId { get; set; } = null!;
+    public string? BA { get; set; }
+    public string? BICSW { get; set; }
+    public double? VatRate { get; set; }
+    public bool IsEveris { get; set; }
+    public string? VatNumber { get; set; }
+    public ApproverViewModel? Approver { get; set; }
 }

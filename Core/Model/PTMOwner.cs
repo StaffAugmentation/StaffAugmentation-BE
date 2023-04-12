@@ -1,14 +1,28 @@
-﻿namespace Core.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Core.Model;
+public partial class PTMOwner
 {
-    public class PTMOwner
-    {
-        public int Id { get; set; }
-        public string ValueId { get; set; } = null!;
-        public string? PTMOwnerBA { get; set; }
-        public string? PTMOwnerBICSW { get; set; }
-        public double? PTMOwnerVatRate { get; set; }
-        public bool IsEveris { get; set; }
-        public int? IdApprover { get; set; }
-        public string? PTMOwnerVatNumber { get; set; }
-    }
+    public int Id { get; set; }
+
+    public string ValueId { get; set; } = null!;
+
+    [Column("PTMOwner_BA")]
+    public string? BA { get; set; }
+
+    [Column("PTMOwner_BICSW")]
+    public string? BICSW { get; set; }
+
+    [Column("PTMOwner_VAT_Rate")]
+    public double? VatRate { get; set; }
+
+    [Column("PTMOwner_VAT_Number")]
+    public string? VatNumber { get; set; }
+
+    public bool IsEveris { get; set; }
+
+    [Column("IdApproverPTMOwner")]
+    public int? ApproverId { get; set; }
+
+    public virtual Approver? Approver { get; set; }
 }

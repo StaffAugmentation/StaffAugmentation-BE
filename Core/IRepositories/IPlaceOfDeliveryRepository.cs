@@ -1,15 +1,8 @@
-﻿using Core.ViewModel;
+﻿using Core.Model;
+using Core.ViewModel;
 
-namespace Core.IRepositories
+namespace Core.IRepositories;
+
+public interface IPlaceOfDeliveryRepository : IGenericRepository<PlaceOfDeliveryViewModel, PlaceOfDelivery, int>
 {
-    public interface IPlaceOfDeliveryRepository
-    {
-        Task<List<PlaceOfDeliveryViewModel>?> GetPlaceOfDelivery();
-        Task<PlaceOfDeliveryViewModel?> GetPlaceOfDelivery(int Id);
-        Task<PlaceOfDeliveryViewModel?> CreatePlaceOfDelivery(PlaceOfDeliveryViewModel PlaceOfDelivery);
-        Task<PlaceOfDeliveryViewModel?> UpdatePlaceOfDelivery(PlaceOfDeliveryViewModel PlaceOfDelivery);
-        Task<List<PlaceOfDeliveryViewModel>?> DeletePlaceOfDelivery(int Id);
-
-
-    }
 }

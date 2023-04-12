@@ -1,13 +1,8 @@
-﻿using Core.ViewModel;
+﻿using Core.Model;
+using Core.ViewModel;
 
-namespace Core.IRepositories
+namespace Core.IRepositories;
+
+public interface ICompanyRepository : IGenericRepository<CompanyViewModel, Company, int>
 {
-    public interface ICompanyRepository
-    {
-        Task<List<CompanyViewModel>?> GetCompany();
-        Task<CompanyViewModel?> GetCompany(int companyId);
-        Task<CompanyViewModel?> CreateCompany(CompanyViewModel company);
-        Task<CompanyViewModel?> UpdateCompany(CompanyViewModel company);
-        Task<List<CompanyViewModel>?> DeleteCompany(int CompanyId);
-    }
 }
