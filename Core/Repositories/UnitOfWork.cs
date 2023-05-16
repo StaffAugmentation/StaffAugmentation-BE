@@ -27,6 +27,7 @@ namespace Core.Repositories
         public ITypeRepository Type { get; private set; }
         public IOERPCodeRepository OERPCode { get; private set; }
         public IAppParameterRepository AppParameter { get; private set; }
+        public IBusinessRequestRepository BusinessRequest { get; private set; }
 
         public UnitOfWork(DataContext context, IMapper mapper)
         {
@@ -51,6 +52,7 @@ namespace Core.Repositories
             Type = new TypeRepository(_context, mapper);
             OERPCode = new OERPCodeRepository(_context, mapper);
             AppParameter = new AppParameterRepository(_context, mapper);
+            BusinessRequest = new BusinessRequestRepository(_context, mapper);
         }
 
         public async Task<int> CompleteAsync()

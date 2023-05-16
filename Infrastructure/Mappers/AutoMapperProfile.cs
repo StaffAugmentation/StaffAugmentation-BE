@@ -46,5 +46,8 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<OERPCodeViewModel, OERPCode>();
         CreateMap<AppParameter, AppParameterViewModel>();
         CreateMap<AppParameterViewModel, AppParameter>();
+        CreateMap<BusinessRequest, BusinessRequestViewModel>();
+        CreateMap<BusinessRequestViewModel, BusinessRequest>();
+
     }
 }

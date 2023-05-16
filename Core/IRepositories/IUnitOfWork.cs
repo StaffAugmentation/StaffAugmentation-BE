@@ -21,6 +21,7 @@
         ITypeRepository Type { get; }
         IOERPCodeRepository OERPCode { get; }
         IAppParameterRepository AppParameter { get; }
+        IBusinessRequestRepository BusinessRequest { get; }
 
         Task<int> CompleteAsync();
     }
