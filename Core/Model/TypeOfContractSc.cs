@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Model;
-public partial class TypeOfContractSc
+public partial class TypeOfContractSC
 {
     public int Id { get; set; }
 

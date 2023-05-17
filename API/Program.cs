@@ -33,6 +33,7 @@ builder.Services.AddScoped<IRequestFormStatusService, RequestFormStatusService>(
 builder.Services.AddScoped<IHighestDegreeService, HighestDegreeService>();
 builder.Services.AddScoped<IOERPCodeService, OERPCodeService>();
 builder.Services.AddScoped<IBusinessRequestService, BusinessRequestService>();
+builder.Services.AddScoped<ISprintContractService, SprintContractService>();
 
 /*  Repositories  */
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

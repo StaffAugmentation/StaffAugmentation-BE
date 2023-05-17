@@ -22,6 +22,7 @@
         IOERPCodeRepository OERPCode { get; }
         IAppParameterRepository AppParameter { get; }
         IBusinessRequestRepository BusinessRequest { get; }
+        ISprintContractRepository SprintContract { get; }
 
         Task<int> CompleteAsync();
     }

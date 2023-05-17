@@ -48,6 +48,7 @@ public class AutoMapperProfile : AutoMapper.Profile
         CreateMap<AppParameterViewModel, AppParameter>();
         CreateMap<BusinessRequest, BusinessRequestViewModel>();
         CreateMap<BusinessRequestViewModel, BusinessRequest>();
-
+        CreateMap<SprintContract, SprintContractViewModel>();
+        CreateMap<SprintContractViewModel, SprintContract>();
     }
 }

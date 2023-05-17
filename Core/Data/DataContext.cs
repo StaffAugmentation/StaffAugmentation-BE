@@ -28,5 +28,8 @@ namespace Core.Data
         public DbSet<OERPCode> OERPCode => Set<OERPCode>();
         public DbSet<AppParameter> AppParameter => Set<AppParameter>();
         public DbSet<BusinessRequest> BusinessRequest => Set<BusinessRequest>();
+        public DbSet<SprintContract> SprintContract => Set<SprintContract>();
+        public DbSet<BRConsultant> BRConsultant => Set<BRConsultant>();
+        public DbSet<Consultant> Consultant => Set<Consultant>();
     }
 }

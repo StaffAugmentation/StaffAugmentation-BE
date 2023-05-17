@@ -28,6 +28,7 @@ namespace Core.Repositories
         public IOERPCodeRepository OERPCode { get; private set; }
         public IAppParameterRepository AppParameter { get; private set; }
         public IBusinessRequestRepository BusinessRequest { get; private set; }
+        public ISprintContractRepository SprintContract { get; private set; }
 
         public UnitOfWork(DataContext context, IMapper mapper)
         {
@@ -53,6 +54,7 @@ namespace Core.Repositories
             OERPCode = new OERPCodeRepository(_context, mapper);
             AppParameter = new AppParameterRepository(_context, mapper);
             BusinessRequest = new BusinessRequestRepository(_context, mapper);
+            SprintContract = new SprintContractRepository(_context, mapper);
         }
 
         public async Task<int> CompleteAsync()
