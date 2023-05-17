@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.Metrics;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Core.Model
 {
     public partial class Consultant
     {
+        [Key]
         public int IdConsultant { get; set; }
 
         [Column("Cons_Fname")]
@@ -119,15 +121,19 @@ namespace Core.Model
 
         public string? OERPEmployeeNumber { get; set; }
 
-        public virtual ConsultantDegree? ConsultantDegree { get; set; }
+        [ForeignKey("IdConsultantDegree")]
+        public virtual HighestDegree? ConsultantDegree { get; set; }
 
+        [ForeignKey("IdCountry")]
         public virtual Country? Country { get; set; }
 
-        public virtual PaymentTerm? PaymentTerms { get; set; }
+        [ForeignKey("IdPaymentTerm")]
+        public virtual PaymentTerm? PaymentTerm { get; set; }
 
+        [ForeignKey("IdTypeOfCost")]
         public virtual TypeOfCost? TypeOfCost { get; set; }
 
-        public virtual ICollection<BRConsultant> BrConsultants { get; } = new List<BrConsultant>();
+        public virtual ICollection<BRConsultant> BrConsultants { get; } = new List<BRConsultant>();
 
         //public virtual ICollection<ChangeCompany> ChangeCompanies { get; } = new List<ChangeCompany>();
 

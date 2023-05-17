@@ -98,27 +98,27 @@ namespace Core.Repositories
                                          on BRConsultant.ConsultantId equals Const.IdConsultant
                                          where BRConsultant.BRId == br.Id
                                          select Const.Firstname + " " + Const.Lastname).ToList(),
-                           //DataProfile = (from Brprofile in _context.BR_Profile
-                           //               where Brprofile.BusinessRequest.id == br.id
-                           //               select new
-                           //               {
-                           //                   Profile = Brprofile.Profile.valueId,
-                           //                   Level = Brprofile.Level.valueId,
-                           //                   Category = Brprofile.Category != null ? Brprofile.Category.valueId : string.Empty,
-                           //                   Other_Expertise_Required = Brprofile.Other_Expertise_Required,
-                           //                   Daily_Price = Brprofile.DailyPrice,
-                           //                   dt_FO_Is_Submitted_To_Customer = Brprofile.dt_FO_Is_Submitted_To_Customer != null ? System.Data.Entity.DbFunctions.AddHours(Brprofile.dt_FO_Is_Submitted_To_Customer, LocalUTC) : Brprofile.dt_FO_Is_Submitted_To_Customer,
-                           //                   dt_Proposal_Is_Submitted_To_Customer = Brprofile.dt_Proposal_Is_Submitted_To_Customer != null ? System.Data.Entity.DbFunctions.AddHours(Brprofile.dt_Proposal_Is_Submitted_To_Customer, LocalUTC) : Brprofile.dt_Proposal_Is_Submitted_To_Customer,
-                           //                   dt_SentToCustomer = Brprofile.dt_SentToCustomer != null ? System.Data.Entity.DbFunctions.AddHours(Brprofile.dt_SentToCustomer, LocalUTC) : Brprofile.dt_SentToCustomer,
-                           //                   RequestFormStatus = Brprofile.idRequestFromStatus != null ? (from req in _context.RequestFormStatus where req.id == Brprofile.idRequestFromStatus select req.ValueId).FirstOrDefault() : string.Empty,
-                           //                   CurrencySalesPrice = (from Currency in _context.CurrencyRateParams
-                           //                                         where Currency.id == Brprofile.idCurrency
-                           //                                         select Currency.CurrencySymbol).FirstOrDefault(),
-                           //                   Service_Level_Category = Brprofile.id_Service_Level_Category != null ? (from serv in _context.ServiceLevelCategory where serv.id == Brprofile.id_Service_Level_Category select serv.valueId).FirstOrDefault() : "",
-                           //                   CompanyName = Brprofile.idCompany != null ? (from cmp in _context.Company where cmp.idCompany == Brprofile.idCompany select cmp.CompanyName).FirstOrDefault() : "",
-                           //                   Validity_Date = Brprofile.Validity_Date != null ? System.Data.Entity.DbFunctions.AddHours(Brprofile.Validity_Date, LocalUTC) : Brprofile.Validity_Date,
-                           //                   Bank_Account = Brprofile.Bank_Account,
-                           //               }).ToList(),
+                           DataProfile = (from Brprofile in _context.BRProfile
+                                          where Brprofile.BusinessRequest.Id == br.Id
+                                          select new
+                                          {
+                                              Profile = Brprofile.Profile.ValueId,
+                                              Level = Brprofile.Level.ValueId,
+                                              Category = Brprofile.Category != null ? Brprofile.Category.ValueId : string.Empty,
+                                              Other_Expertise_Required = Brprofile.OtherExpertiseRequired,
+                                              Daily_Price = Brprofile.DailyPrice,
+                                              dt_FO_Is_Submitted_To_Customer = Brprofile.DtFoIsSubmittedToCustomer != null ? Brprofile.DtFoIsSubmittedToCustomer.Value.AddHours(LocalUTC) : Brprofile.DtFoIsSubmittedToCustomer,
+                                              dt_Proposal_Is_Submitted_To_Customer = Brprofile.DtProposalIsSubmittedToCustomer != null ? Brprofile.DtProposalIsSubmittedToCustomer.Value.AddHours(LocalUTC) : Brprofile.DtProposalIsSubmittedToCustomer,
+                                              dt_SentToCustomer = Brprofile.DtSentToCustomer != null ? Brprofile.DtSentToCustomer.Value.AddHours(LocalUTC) : Brprofile.DtSentToCustomer,
+                                              RequestFormStatus = Brprofile.IdRequestFromStatus != null ? (from req in _context.RequestFormStatus where req.Id == Brprofile.IdRequestFromStatus select req.Value).FirstOrDefault() : string.Empty,
+                                              CurrencySalesPrice = (from Currency in _context.CurrencyRateParam
+                                                                    where Currency.Id == Brprofile.IdCurrency
+                                                                    select Currency.CurrencySymbol).FirstOrDefault(),
+                                              Service_Level_Category = Brprofile.IdServiceLevelCategory != null ? (from serv in _context.ServiceLevelCategory where serv.Id == Brprofile.IdServiceLevelCategory select serv.ValueId).FirstOrDefault() : "",
+                                              CompanyName = Brprofile.IdCompany != null ? (from cmp in _context.Company where cmp.Id == Brprofile.IdCompany select cmp.Name).FirstOrDefault() : "",
+                                              Validity_Date = Brprofile.ValidityDate != null ? Brprofile.ValidityDate.Value.AddHours(LocalUTC) : Brprofile.ValidityDate,
+                                              Bank_Account = Brprofile.BankAccount,
+                                          }).ToList(),
                            Normal_Performance = br.TypeOfContract.NormalPerformance,
                            dt_AcknowledgementDeadline = br.DtAcknowledgementDeadline != null ? br.DtAcknowledgementDeadline.Value.AddHours(LocalUTC) : br.DtAcknowledgementDeadline,
                            GeneralComment = br.GeneralComment

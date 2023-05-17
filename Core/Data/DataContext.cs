@@ -31,5 +31,8 @@ namespace Core.Data
         public DbSet<SprintContract> SprintContract => Set<SprintContract>();
         public DbSet<BRConsultant> BRConsultant => Set<BRConsultant>();
         public DbSet<Consultant> Consultant => Set<Consultant>();
+        public DbSet<BRProfile> BRProfile => Set<BRProfile>();
+        public DbSet<CurrencyRateParam> CurrencyRateParam => Set<CurrencyRateParam>();
+        public DbSet<ServiceLevelCategory> ServiceLevelCategory => Set<ServiceLevelCategory>();
     }
 }
