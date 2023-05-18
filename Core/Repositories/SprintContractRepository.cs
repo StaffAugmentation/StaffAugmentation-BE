@@ -30,7 +30,7 @@ public class SprintContractRepository : ISprintContractRepository
             var listTOCId = listTOC.Select(s => s.Id).ToList();
             bool IsSCPTM = state == "PTM";
             var listSprintContract = (from sc in _context.SprintContract
-                                      join br in _context.BusinessRequest on sc.RequestNumberId equals br.Id
+                                      join br in _context.BusinessRequest on sc.BusinessRequestId equals br.Id
                                       //join consultant in _context.BR_Consultant on sc.BusinessRequest.id equals consultant.idBR
                                       // join BC in _context.BR_Consultant on br.id equals BC.BRId
                                       //into x
@@ -38,7 +38,7 @@ public class SprintContractRepository : ISprintContractRepository
                                       // join c in _context.Consultant on BC.ConsultantId equals c.idConsultant
                                       //into y
                                       // from c in y.DefaultIfEmpty()
-                                      where listTOCId.Contains(sc.BusinessRequest.TypeOfContract.Id) && sc.IsDeleted == false && sc.ScPTM == IsSCPTM && br.BrType.ValueId == state
+                                      where listTOCId.Contains(sc.BusinessRequest.TypeOfContract.Id) && sc.IsDeleted == false && sc.SCPTM == IsSCPTM && br.BrType.ValueId == state
                                       select new
                                       {
                                           id = sc.Id,
@@ -46,7 +46,7 @@ public class SprintContractRepository : ISprintContractRepository
                                           idBR = br.Id,
                                           RexOrExt = br.IdSourceBr != null ? (from source in _context.BrSource where source.Id.Equals(br.IdSourceBr) select source.Name).FirstOrDefault() : "",
                                           // Ressource = sc.Ressource,
-                                          Departement = br.Department.ValueId,
+                                          Departement = br.Department != null ? br.Department.ValueId : null,
                                           ContractNumber = br.SpecificContractNumber,
                                           Consultant = (from BRConsultant in _context.BRConsultant
                                                         join BRProfileConsultant in _context.BRProfileConsultant on BRConsultant.Id equals BRProfileConsultant.IdBRConsultant
@@ -85,7 +85,7 @@ public class SprintContractRepository : ISprintContractRepository
                                           PurchaseOrderReferencePay = sc.PurchaseOrderReferencePay,
                                           Level = (from brprofilr in _context.BRProfile where brprofilr.IdBr == br.Id select brprofilr.Level.ValueId).ToList(),
                                           Category = (from brprofilr in _context.BRProfile where brprofilr.IdBr == br.Id select brprofilr.Category.ValueId).ToList(),
-                                          ContractStatus = sc.ContractStatus.ValueId,
+                                          ContractStatus = sc.ContractStatus != null ? sc.ContractStatus.ValueId : null,
                                           FWC = br.TypeOfContract.ValueId,
                                           //Company = br.Company.CompanyName,
                                           Company = (from brprofile in _context.BRProfile where brprofile.IdBr == br.Id select new { CompanyName = brprofile.Company.Name }).Distinct().ToList(),
@@ -142,7 +142,7 @@ public class SprintContractRepository : ISprintContractRepository
         {
             {
                 return await (from SC in _context.SprintContract
-                              join br in _context.BusinessRequest on SC.RequestNumberId equals br.Id
+                              join br in _context.BusinessRequest on SC.BusinessRequestId equals br.Id
                               where SC.Id == SprintContractId && SC.IsDeleted == false
                               select new SprintContractViewModel
                               {
@@ -156,7 +156,7 @@ public class SprintContractRepository : ISprintContractRepository
                                   RemainingDays = SC.RemainingDays,
                                   PerformanceComment = SC.PerformanceComment,
                                   PurchaseOrderReferencePay = SC.PurchaseOrderReferencePay,
-                                  SCPTM = SC.ScPTM,
+                                  SCPTM = SC.SCPTM,
                                   PTMPurchaseOrderReferencePay = SC.PTMPurchaseOrderReferencePay,
                                   ThirdPartyPurchaseOrderReferencePay = SC.ThirdPartyPurchaseOrderReferencePay,
                                   MFPurchaseOrderReferencePay = SC.MFPurchaseOrderReferencePay,
