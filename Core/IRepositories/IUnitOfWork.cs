@@ -23,6 +23,7 @@
         IAppParameterRepository AppParameter { get; }
         IBusinessRequestRepository BusinessRequest { get; }
         ISprintContractRepository SprintContract { get; }
+        IConfigurationRepository ConfigurationRepository { get; }
 
         Task<int> CompleteAsync();
     }

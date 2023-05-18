@@ -13,9 +13,9 @@ namespace Business.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<object>?> GetSprintContracts()
+        public async Task<IEnumerable<object>?> GetSprintContracts(int UserId, string state, AdvancedSearchViewModel search)
         {
-            return await _unitOfWork.SprintContract.GetAll();
+            return await _unitOfWork.SprintContract.GetSprintContracts(UserId, state, search);
         }
 
         public async Task<SprintContractViewModel?> GetSprintContract(int Id)

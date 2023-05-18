@@ -16,12 +16,12 @@ public sealed class SprintContractController : ControllerBase
         _service = service;
     }
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<object?>>> GetAll()
+    public async Task<ActionResult<IEnumerable<object?>>> GetAll(string state, AdvancedSearchViewModel search)
     {
         try
         {
             _logger.LogInformation("Get Business requests");
-            return Ok(await _service.GetSprintContracts());
+            return Ok(await _service.GetSprintContracts(3251, state, search));
 
         }
         catch (Exception ex)
