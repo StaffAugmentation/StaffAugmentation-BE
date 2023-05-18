@@ -15,6 +15,7 @@ public sealed class SprintContractController : ControllerBase
         _logger = logger;
         _service = service;
     }
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<object?>>> GetAll(string state, AdvancedSearchViewModel search)
     {

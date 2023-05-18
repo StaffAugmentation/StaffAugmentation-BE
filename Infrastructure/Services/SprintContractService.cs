@@ -20,8 +20,7 @@ namespace Business.Services
 
         public async Task<SprintContractViewModel?> GetSprintContract(int Id)
         {
-            return null;
-            //return await _unitOfWork.SprintContract.Find(entity => entity.Id == Id);
+            return await _unitOfWork.SprintContract.GetSprintContract(Id);
         }
 
         public async Task<SprintContractViewModel?> CreateSprintContract(SprintContractViewModel sc)
