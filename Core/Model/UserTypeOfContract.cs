@@ -2,17 +2,17 @@
 
 namespace Core.Model;
 
-public partial class UsersTypeOfContract
+[Table("UsersTypeOfContract")]
+public partial class UserTypeOfContract
 {
     public int Id { get; set; }
 
-    public int IdTypeOfContract { get; set; }
+    [Column("IdTypeOfContract")]
+    public int TypeOfContractId { get; set; }
 
-    public int IdUser { get; set; }
+    [Column("IdUser")]
+    public int UserId { get; set; }
 
-    [ForeignKey("IdTypeOfContract")]
     public virtual TypeOfContract TypeOfContract { get; set; } = null!;
-
-    [ForeignKey("IdUser")]
     public virtual User User { get; set; } = null!;
 }

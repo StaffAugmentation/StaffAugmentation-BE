@@ -34,11 +34,19 @@ namespace Core.Data
         public DbSet<BRProfile> BRProfile => Set<BRProfile>();
         public DbSet<CurrencyRateParam> CurrencyRateParam => Set<CurrencyRateParam>();
         public DbSet<ServiceLevelCategory> ServiceLevelCategory => Set<ServiceLevelCategory>();
-        public DbSet<UsersTypeOfContract> UsersTypeOfContract => Set<UsersTypeOfContract>();
+        public DbSet<UserTypeOfContract> UserTypeOfContract => Set<UserTypeOfContract>();
+        public DbSet<UserParameter> UserParameter => Set<UserParameter>();
         public DbSet<TypeOfContract> TypeOfContract => Set<TypeOfContract>();
         public DbSet<TypeOfContractSC> TypeOfContractSC => Set<TypeOfContractSC>();
         public DbSet<SprintContractOERPCode> SprintContractOERPCode => Set<SprintContractOERPCode>();
         public DbSet<BRProfileConsultant> BRProfileConsultant => Set<BRProfileConsultant>();
         public DbSet<ConsultantContractStatus> ConsultantContractStatus => Set<ConsultantContractStatus>();
+        public DbSet<ContractStatus> ContractStatus => Set<ContractStatus>();
+        public DbSet<SaActivityLog> SaActivityLog => Set<SaActivityLog>();
+        public DbSet<InvoiceSC> InvoiceSC => Set<InvoiceSC>();
+        public DbSet<InvoiceDaysWorked> InvoiceDaysWorked => Set<InvoiceDaysWorked>();
+        public DbSet<PaymentSC> PaymentSC => Set<PaymentSC>();
+        public DbSet<PaymentSCDaysWorked> PaymentSCDaysWorked => Set<PaymentSCDaysWorked>();
+        public DbSet<SCFollowUPTMPTMTransformationNbDays> SCFollowUPTMPTMTransformationNbDays => Set<SCFollowUPTMPTMTransformationNbDays>();
     }
 }

@@ -6,10 +6,10 @@ public partial class UserParameter
 {
     public int Id { get; set; }
 
-    public int IdUser { get; set; }
+    [Column("IdUser")]
+    public int UserId { get; set; }
 
     public string? ExcelSeparator { get; set; }
 
-    [ForeignKey("IdUser")]
     public virtual User User { get; set; } = null!;
 }

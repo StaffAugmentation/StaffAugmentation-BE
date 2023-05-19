@@ -30,6 +30,7 @@ namespace Core.Repositories
         public IBusinessRequestRepository BusinessRequest { get; private set; }
         public ISprintContractRepository SprintContract { get; private set; }
         public IConfigurationRepository ConfigurationRepository { get; private set; }
+        public IActivityLogRepository ActivityLogRepository { get; private set; }
 
         public UnitOfWork(DataContext context, IMapper mapper)
         {
@@ -57,6 +58,7 @@ namespace Core.Repositories
             BusinessRequest = new BusinessRequestRepository(_context, mapper);
             SprintContract = new SprintContractRepository(_context, mapper, this);
             ConfigurationRepository = new ConfigurationRepository(_context, mapper);
+            ActivityLogRepository = new ActivityLogRepository(_context);
         }
 
         public async Task<int> CompleteAsync()

@@ -24,6 +24,7 @@
         IBusinessRequestRepository BusinessRequest { get; }
         ISprintContractRepository SprintContract { get; }
         IConfigurationRepository ConfigurationRepository { get; }
+        IActivityLogRepository ActivityLogRepository { get; }
 
         Task<int> CompleteAsync();
     }

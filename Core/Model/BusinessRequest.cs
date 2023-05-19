@@ -131,17 +131,6 @@ namespace Core.Model
         [Column("dt_DraftApproval")]
         public DateTime? DtDraftApproval { get; set; }
 
-        //public virtual ICollection<BrCandidateList> BrCandidateLists { get; } = new List<BrCandidateList>();
-
-        //public virtual ICollection<BrConsultant> BrConsultants { get; } = new List<BrConsultant>();
-
-        //public virtual ICollection<BrDocument> BrDocuments { get; } = new List<BrDocument>();
-
-        //public virtual ICollection<BrProfile> BrProfiles { get; } = new List<BrProfile>();
-
-        //public virtual ICollection<BrSubontractor> BrSubontractors { get; } = new List<BrSubontractor>();
-
-        //public virtual ICollection<ChangeCompany> ChangeCompanies { get; } = new List<ChangeCompany>();
 
         [ForeignKey("DgDepartmentId")]
         public virtual Department? Department { get; set; }
@@ -164,12 +153,16 @@ namespace Core.Model
         [ForeignKey("idTypeOfContract")]
         public virtual TypeOfContract TypeOfContract { get; set; } = null!;
 
-        //public virtual ICollection<ScfollowUpFp> ScfollowUpFps { get; } = new List<ScfollowUpFp>();
 
-        //public virtual ICollection<ScfollowUpProvision> ScfollowUpProvisions { get; } = new List<ScfollowUpProvision>();
-
-        //public virtual ICollection<ScfollowUpQtm> ScfollowUpQtms { get; } = new List<ScfollowUpQtm>();
-
-        //public virtual ICollection<SprintContract> SprintContracts { get; } = new List<SprintContract>();
+        //public virtual ICollection<BrCandidateList> BrCandidateLists { get; } = new List<BrCandidateList>();
+        public virtual ICollection<BRConsultant> BRConsultant { get; set; } = new List<BRConsultant>();
+        public virtual ICollection<BRProfile> BRProfile { get; set; } = new List<BRProfile>();
+        //public virtual ICollection<BrDocument> BrDocuments { get; } = new List<BrDocument>();
+        //public virtual ICollection<BrSubontractor> BrSubontractors { get; } = new List<BrSubontractor>();
+        //public virtual ICollection<ChangeCompany> ChangeCompanies { get; } = new List<ChangeCompany>();
+        public virtual ICollection<SprintContract> SprintContract { get; } = new List<SprintContract>();
+        public virtual ICollection<SCFollowUPQTM> SCFollowUPQTM { get; } = new List<SCFollowUPQTM>();
+        public virtual ICollection<SCFollowUPFP> SCFollowUPFP { get; } = new List<SCFollowUPFP>();
+        public virtual ICollection<SCFollowUPProvision> SCFollowUPProvision { get; } = new List<SCFollowUPProvision>();
     }
 }
