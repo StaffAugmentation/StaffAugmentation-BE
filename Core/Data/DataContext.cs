@@ -9,7 +9,7 @@ namespace Core.Data
         public DataContext(DbContextOptions<DataContext> options): base(options) { }
 
         public DbSet<Company> Company => Set<Company>();
-        public DbSet<Level> Department => Set<Level>();
+        public DbSet<Department> Department => Set<Department>();
         public DbSet<Approver> Approver => Set<Approver>();
         public DbSet<Profile> Profile => Set<Profile>();
         public DbSet<BrSource> BrSource => Set<BrSource>();
@@ -48,5 +48,35 @@ namespace Core.Data
         public DbSet<PaymentSC> PaymentSC => Set<PaymentSC>();
         public DbSet<PaymentSCDaysWorked> PaymentSCDaysWorked => Set<PaymentSCDaysWorked>();
         public DbSet<SCFollowUPTMPTMTransformationNbDays> SCFollowUPTMPTMTransformationNbDays => Set<SCFollowUPTMPTMTransformationNbDays>();
+        public DbSet<SCFollowUPFP> SCFollowUPFP => Set<SCFollowUPFP>();
+        public DbSet<StatusBr> StatusBr => Set<StatusBr>();
+        public DbSet<SCFollowUPQTM> SCFollowUPQTM => Set<SCFollowUPQTM>();
+        public DbSet<SCFollowUPProvision> SCFollowUPProvision => Set<SCFollowUPProvision>();
+        public DbSet<ChangeCompany> ChangeCompany => Set<ChangeCompany>();
+        public DbSet<FwcBusinessRequestRequiredFields> FwcBusinessRequestRequiredFields => Set<FwcBusinessRequestRequiredFields>();
+        public DbSet<BrDocuments> BrDocuments => Set<BrDocuments>();
+        public DbSet<TypeDocument> TypeDocument => Set<TypeDocument>();
+        public DbSet<BrCandidateList> BrCandidateList => Set<BrCandidateList>();
+        public DbSet<ResourceType> ResourceType => Set<ResourceType>();
+        public DbSet<CandidateDocuments> CandidateDocuments => Set<CandidateDocuments>();
+        public DbSet<BrProfileCandidate> BrProfileCandidate => Set<BrProfileCandidate>();
+        public DbSet<Candidate> Candidate => Set<Candidate>();
+        public DbSet<EverisContractDetail> EverisContractDetail => Set<EverisContractDetail>();
+        public DbSet<SCTMPTMExpense> SCTMPTMExpense => Set<SCTMPTMExpense>();
+        public DbSet<ScDaysWorkedByMonth> ScDaysWorkedByMonth => Set<ScDaysWorkedByMonth>();
+        public DbSet<ChangeConsultantCost> ChangeConsultantCost => Set<ChangeConsultantCost>();
+        public DbSet<SCFollowUPTMPTMDaysWorkedProvision> SCFollowUPTMPTMDaysWorkedProvision => Set<SCFollowUPTMPTMDaysWorkedProvision>();
+        public DbSet<SCFollowUPTMPTMInvoiceDaysWorkedProvision> SCFollowUPTMPTMInvoiceDaysWorkedProvision => Set<SCFollowUPTMPTMInvoiceDaysWorkedProvision>();
+        public DbSet<SCFollowUPTMPTMPaymentDaysWorkedProvision> SCFollowUPTMPTMPaymentDaysWorkedProvision => Set<SCFollowUPTMPTMPaymentDaysWorkedProvision>();
+        public DbSet<SCFollowUPTMPTMGeneralProvision> SCFollowUPTMPTMGeneralProvision => Set<SCFollowUPTMPTMGeneralProvision>();
+        public DbSet<SCFollowUPTMPTMInvoiceGeneralProvision> SCFollowUPTMPTMInvoiceGeneralProvision => Set<SCFollowUPTMPTMInvoiceGeneralProvision>();
+        public DbSet<SCFollowUPTMPTMPaymentGeneralProvision> SCFollowUPTMPTMPaymentGeneralProvision => Set<SCFollowUPTMPTMPaymentGeneralProvision>();
+        public DbSet<SCFollowUPProvisionDaysWorked> SCFollowUPProvisionDaysWorked => Set<SCFollowUPProvisionDaysWorked>();
+        public DbSet<SCFollowUPProvisionInvoiceDaysWorkedDetail> SCFollowUPProvisionInvoiceDaysWorkedDetail => Set<SCFollowUPProvisionInvoiceDaysWorkedDetail>();
+        public DbSet<SCFollowUPProvisionPaymentDaysWorkedDetail> SCFollowUPProvisionPaymentDaysWorkedDetail => Set<SCFollowUPProvisionPaymentDaysWorkedDetail>();
+        public DbSet<ChangeConsultantCostProvision> ChangeConsultantCostProvision => Set<ChangeConsultantCostProvision>();
+        public DbSet<SCFollowUPProvisionGeneralProvision> SCFollowUPProvisionGeneralProvision => Set<SCFollowUPProvisionGeneralProvision>();
+        public DbSet<HistoryBusinessRequest> HistoryBusinessRequest => Set<HistoryBusinessRequest>();
+
     }
 }

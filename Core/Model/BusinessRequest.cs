@@ -12,7 +12,7 @@ namespace Core.Model
 
         public int? IdType { get; set; }
 
-        //public string IdStatus { get; set; } = null!;
+        public string IdStatus { get; set; } = null!;
 
         public int IdTypeOfContract { get; set; }
 
@@ -141,8 +141,8 @@ namespace Core.Model
         [ForeignKey("IdSourceBr")]
         public virtual BrSource? BrSource { get; set; }
 
-        //[ForeignKey("IdStatus")]
-        //public virtual StatusBr StatusBr { get; set; } = null!;
+        [ForeignKey("IdStatus")]
+        public virtual StatusBr StatusBr { get; set; } = null!;
 
         [ForeignKey("IdTypeBR")]
         public virtual BrType BrType { get; set; } = null!;

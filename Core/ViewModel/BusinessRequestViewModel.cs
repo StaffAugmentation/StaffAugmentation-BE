@@ -6,49 +6,49 @@ namespace Core.ViewModel
     {
         public int Id { get; set; }
         public int IdType { get; set; }
-        //public int IdStatus { get; set; }
+        public int IdStatus { get; set; }
         public int IdTypeOfContract { get; set; }
         public int IdPlaceOfDelivery { get; set; }
         public int IdCategorie { get; set; }
         public string? IdSourceBR { get; set; }
         public string? IdRequestFormStatus { get; set; }
-        public string? Request_number { get; set; }
-        public string? DG_Email { get; set; }
-        public string? Final_Candidate_Email { get; set; }
-        public string? Contact_Name { get; set; }
+        public string? Requestnumber { get; set; }
+        public string? DGEmail { get; set; }
+        public string? FinalCandidateEmail { get; set; }
+        public string? ContactName { get; set; }
         public string? RequestOrExtension { get; set; }
-        public DateTime? Dt_RFReceived { get; set; }
-        public DateTime? Dt_Acknowledgement { get; set; }
-        public DateTime? Dt_Deadline { get; set; }
-        public DateTime? Dt_SentToCustomer { get; set; }
-        public DateTime? Dt_ProposalDeadline { get; set; }
-        public DateTime? Dt_Proposal_Is_Submitted_To_Customer { get; set; }
-        public DateTime? Dt_FO_Is_Submitted_To_Customer { get; set; }
+        public DateTime? DtRFReceived { get; set; }
+        public DateTime? DtAcknowledgement { get; set; }
+        public DateTime? DtDeadline { get; set; }
+        public DateTime? DtSentToCustomer { get; set; }
+        public DateTime? DtProposalDeadline { get; set; }
+        public DateTime? DtProposalIsSubmittedToCustomer { get; set; }
+        public DateTime? DtFOIsSubmittedToCustomer { get; set; }
         public bool? Proximity { get; set; }
-        public string? Other_Expertise_Required { get; set; }
-        public DateTime? Expected_Project_Start_Date { get; set; }
-        public double? TOTAL_man_days { get; set; }
+        public string? OtherExpertiseRequired { get; set; }
+        public DateTime? ExpectedProjectStartDate { get; set; }
+        public double? TOTALManDays { get; set; }
 
-        public string? Final_Candidate { get; set; }
+        public string? FinalCandidate { get; set; }
 
-        public string? Specific_Contract_Number { get; set; }
-        public DateTime? Dt_SC_Is_Received { get; set; }
-        public DateTime? Dt_SC_Is_signed { get; set; }
-        public DateTime? Droject_Start_Date { get; set; }
-        public DateTime? Max_End_Date { get; set; }
-        public DateTime? Ext_Max_End_Date { get; set; }
-        public DateTime? Max_End_DateSC { get; set; }
+        public string? SpecificContractNumber { get; set; }
+        public DateTime? DtSCIsReceived { get; set; }
+        public DateTime? DtSCIsSigned { get; set; }
+        public DateTime? ProjectStartDate { get; set; }
+        public DateTime? MaxEndDate { get; set; }
+        public DateTime? ExtMaxEndDate { get; set; }
+        public DateTime? MaxEndDateSC { get; set; }
 
-        public double? Number_Of_Days { get; set; }
-        public string? Bank_Account { get; set; }
-        public DateTime? Validity_Date { get; set; }
-        public double? Daily_Price { get; set; }
-        public double? Total_Price { get; set; }
+        public double? NumberOfDays { get; set; }
+        public string? BankAccount { get; set; }
+        public DateTime? ValidityDate { get; set; }
+        public double? DailyPrice { get; set; }
+        public double? TotalPrice { get; set; }
         public string? LoginCreation { get; set; }
         public DateTime? DateCreation { get; set; }
         public string? LoginUpdate { get; set; }
         public DateTime? DateUpdate { get; set; }
-        public DateTime? Dt_FO_Deadline { get; set; }
+        public DateTime? DtFODeadline { get; set; }
         public string? TechnicalContact { get; set; }
         public string? LinkedBR { get; set; }
         public string? Comment { get; set; }
@@ -60,8 +60,8 @@ namespace Core.ViewModel
         public string? OpenIntendedComment { get; set; }
         public string? SpecificClientCode { get; set; }
         public string? ResponseMessage { get; set; }
-        public DateTime? Dt_ChangeOffer { get; set; }
-        public DateTime? Dt_ChangeOffer_Is_Submitted_To_Customer { get; set; }
+        public DateTime? DtChangeOffer { get; set; }
+        public DateTime? DtChangeOfferIsSubmittedToCustomer { get; set; }
         public double? ConsultantCost { get; set; }
         public double MFRate { get; set; }
         public bool IsCascade { get; set; }
@@ -70,20 +70,20 @@ namespace Core.ViewModel
         public bool SCExist { get; set; }
         public bool HasTransfer { get; set; }
         public double? PTMOwnerRate { get; set; }
-        public DateTime? Dt_Acceptance { get; set; }
-        public DateTime? Dt_Refusal { get; set; }
+        public DateTime? DtAcceptance { get; set; }
+        public DateTime? DtRefusal { get; set; }
 
-        public DateTime? dt_AcknowledgementDeadline { get; set; }
+        public DateTime? DtAcknowledgementDeadline { get; set; }
         public string? GeneralComment { get; set; }
-        public int? AdditionalBudget_idCurrency { get; set; }
+        public int? AdditionalBudgetIdCurrency { get; set; }
         public double? SubtotalPrice { get; set; }
         public double? GeneralBudget { get; set; }
         public int IdSC { get; set; }
-        public int? Id_Service_Level_Category { get; set; }
-        public DateTime? Dt_ReceptionDraft { get; set; }
-        public bool? Draft_Approval { get; set; }
-        public string? Draft_ContractApprover { get; set; }
-        public DateTime? Dt_DraftApproval { get; set; }
+        public int? IdServiceLevelCategory { get; set; }
+        public DateTime? DtReceptionDraft { get; set; }
+        public bool? DraftApproval { get; set; }
+        public string? DraftContractApprover { get; set; }
+        public DateTime? DtDraftApproval { get; set; }
 
         public virtual Department? Department { get; set; }
         public virtual Company? Company { get; set; }

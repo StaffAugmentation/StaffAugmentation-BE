@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Business.IServices;
 using Core.ViewModel;
+using Core.Model;
+using System.Collections.Generic;
 
 namespace API.Controllers;
 
@@ -16,12 +18,12 @@ public sealed class BusinessRequestController : ControllerBase
         _service = service;
     }
     [HttpGet]
-    public async Task<ActionResult<List<BusinessRequestViewModel?>>> GetAll()
+    public async Task<ActionResult<List<BusinessRequestViewModel?>>> GetBusinessRequests(AdvancedSearchViewModel Search, int LocalUTC)
     {
         try
         {
             _logger.LogInformation("Get Business requests");
-            return Ok(await _service.GetBusinessRequests());
+            return Ok(await _service.GetBusinessRequests(3251, Search, LocalUTC));
 
         }
         catch (Exception ex)
@@ -32,12 +34,12 @@ public sealed class BusinessRequestController : ControllerBase
     }
 
     [HttpGet("{Id}")]
-    public async Task<ActionResult<BusinessRequestViewModel?>> getBusinessRequest(int Id)
+    public async Task<ActionResult<BusinessRequestViewModel?>> GetBusinessRequest(int Id, int LocalUTC)
     {
         try
         {
             _logger.LogInformation("Get Business request");
-            return Ok(await _service.GetBusinessRequest(Id));
+            return Ok(await _service.GetBusinessRequest(Id, LocalUTC));
         }
         catch (Exception ex)
         {
@@ -47,12 +49,13 @@ public sealed class BusinessRequestController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<BusinessRequestViewModel?>> CreateBusinessRequest(BusinessRequestViewModel BR)
+    public async Task<ActionResult<AddResultViewModel?>> AddBusinessRequest(BusinessRequest BR, List<ProfileLevelViewModel> Listprofiles, List<BrConsultantViewModel> ListConsultants, List<CandidateDataViewModel> ListCandidates, List<BRAttachmentViewModel> ListAttachments, List<BrSubcontractorViewModel> ListBRSubcontractor)
     {
         try
         {
             _logger.LogInformation("Add Business request");
-            return Accepted(await _service.CreateBusinessRequest(BR));
+            string Login = HttpContext.User.Identity.Name;
+            return Accepted(await _service.AddBusinessRequest(BR, Login, Listprofiles,ListConsultants, ListCandidates, ListAttachments, ListBRSubcontractor));
         }
         catch (Exception ex)
         {

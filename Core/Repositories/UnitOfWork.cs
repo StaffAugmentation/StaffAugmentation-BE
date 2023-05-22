@@ -55,7 +55,7 @@ namespace Core.Repositories
             Type = new TypeRepository(_context, mapper);
             OERPCode = new OERPCodeRepository(_context, mapper);
             AppParameter = new AppParameterRepository(_context, mapper);
-            BusinessRequest = new BusinessRequestRepository(_context, mapper);
+            BusinessRequest = new BusinessRequestRepository(_context, mapper, this);
             SprintContract = new SprintContractRepository(_context, mapper, this);
             ConfigurationRepository = new ConfigurationRepository(_context, mapper);
             ActivityLogRepository = new ActivityLogRepository(_context);
