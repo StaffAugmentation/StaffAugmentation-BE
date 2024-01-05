@@ -54,7 +54,7 @@ public class SendEmail
     //        message.Subject = subjectText;
     //        message.Body = bodyText;
     //        SmtpServer.Port = 587;
-    //        SmtpServer.Credentials = new System.Net.NetworkCredential("rob_hcheouat@emeal.nttdata.com", "MghQ7892389");
+    //        SmtpServer.Credentials = new System.Net.NetworkCredential("email", "pass");
     //        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
     //        SmtpServer.EnableSsl = true;
     //        using (AlternateView alternate = AlternateView.CreateAlternateViewFromString(bodyText, Encoding.UTF8, MediaTypeNames.Text.Html))
@@ -108,7 +108,7 @@ public class SendEmail
     //        message.Subject = subjectText;
     //        message.Body = bodyText;
     //        SmtpServer.Port = 587;
-    //        SmtpServer.Credentials = new System.Net.NetworkCredential("rob_hcheouat@emeal.nttdata.com", "MghQ7892389");
+    //        SmtpServer.Credentials = new System.Net.NetworkCredential("email", "pass");
     //        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
     //        SmtpServer.EnableSsl = true;
     //        using (AlternateView alternate = AlternateView.CreateAlternateViewFromString(bodyText, Encoding.UTF8, MediaTypeNames.Text.Html))
@@ -136,7 +136,7 @@ public class SendEmail
     //        message.Body = bodyText;
     //        SmtpServer.Port = 587;
     //        //Staff(@2017); ;
-    //        SmtpServer.Credentials = new System.Net.NetworkCredential("rob_hcheouat@emeal.nttdata.com", "MghQ7892389");
+    //        SmtpServer.Credentials = new System.Net.NetworkCredential("email", "pass");
     //        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
     //        SmtpServer.EnableSsl = true;
     //        using (AlternateView alternate = AlternateView.CreateAlternateViewFromString(bodyText, Encoding.UTF8, MediaTypeNames.Text.Html))
@@ -205,7 +205,7 @@ public class SendEmail
 
     //        //SmtpServer.UseDefaultCredentials = false;
     //        SmtpServer.Port = 587;
-    //        SmtpServer.Credentials = new System.Net.NetworkCredential("rob_hcheouat@emeal.nttdata.com", "MghQ7892389");
+    //        SmtpServer.Credentials = new System.Net.NetworkCredential("email", "pass");
     //        System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
     //        SmtpServer.EnableSsl = true;
     //        using (AlternateView alternate = AlternateView.CreateAlternateViewFromString(bodyText, Encoding.UTF8, MediaTypeNames.Text.Html))
@@ -269,8 +269,8 @@ public class SendEmail
     //                message.CC.Add(new MailAddress(CCEmail.TrimStart().TrimEnd()));
     //            }
     //        }
-    //        SmtpServer.Credentials = new System.Net.NetworkCredential("rob_hcheouat@emeal.nttdata.com", "MghQ7892389");
-    //        //SmtpServer.Credentials = new System.Net.NetworkCredential(mailFrom, "MghQ7892389");
+    //        SmtpServer.Credentials = new System.Net.NetworkCredential("email", "pass");
+    //        //SmtpServer.Credentials = new System.Net.NetworkCredential(mailFrom, "pass");
     //        SmtpServer.EnableSsl = true;
     //        SmtpServer.Timeout = Int32.MaxValue; ;
     //        using (AlternateView alternate = AlternateView.CreateAlternateViewFromString(bodyText, Encoding.UTF8, MediaTypeNames.Text.Html))
