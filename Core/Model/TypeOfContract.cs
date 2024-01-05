@@ -11,7 +11,7 @@ public partial class TypeOfContract
 
     public bool WithCategory { get; set; }
 
-    public bool EverisLeader { get; set; }
+    public bool StaffLeader { get; set; }
 
     public bool? IsPartner { get; set; }
 
@@ -67,8 +67,8 @@ public partial class TypeOfContract
     [Column("MF_Chargeability")]
     public double? MfChargeability { get; set; }
     
-    [Column("Everis_Invoicing_All")]
-    public bool? EverisInvoicingAll { get; set; }
+    [Column("Staff_Invoicing_All")]
+    public bool? StaffInvoicingAll { get; set; }
 
     [Column("Indexation_Request_Deadline_Date")]
     public DateTime? IndexationRequestDeadlineDate { get; set; }

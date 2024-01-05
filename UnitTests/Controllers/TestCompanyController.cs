@@ -19,9 +19,9 @@ public class TestCompanyController
         var mockCompanyService = new Mock<ICompanyService>();
         mockCompanyService.Setup(svc => svc.GetCompany().Result).Returns(new List<CompanyViewModel>
             {
-                new CompanyViewModel { Id = 1, Name = "Company 1", IsEveris = false },
-                new CompanyViewModel { Id = 2, Name = "Company 2", IsEveris = true },
-                new CompanyViewModel { Id = 3, Name = "Company 3", IsEveris = false }
+                new CompanyViewModel { Id = 1, Name = "Company 1", IsStaff = false },
+                new CompanyViewModel { Id = 2, Name = "Company 2", IsStaff = true },
+                new CompanyViewModel { Id = 3, Name = "Company 3", IsStaff = false }
             });
         _controller = new CompanyController(logger, mockCompanyService.Object);
     }

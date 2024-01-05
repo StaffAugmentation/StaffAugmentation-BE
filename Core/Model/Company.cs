@@ -16,7 +16,7 @@ public partial class Company
 
     public bool IsDeleted { get; set; }
 
-    public bool IsEveris { get; set; }
+    public bool IsStaff { get; set; }
 
     [Column("cmp_VATLegalEntity")]
     public string? VatLegalEntity { get; set; }

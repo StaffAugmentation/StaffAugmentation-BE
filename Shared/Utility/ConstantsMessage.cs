@@ -431,9 +431,9 @@ public class ConstantsMessage
 
 
 
-    // Everis PM :
-    public const string MESSAGE_EverisPM_SUCCESS_ADD = "MAEverisPM-000";
-    public const string ERROR_EverisPM_Exists = "EREverisPM-000";
+    // Staff PM :
+    public const string MESSAGE_StaffPM_SUCCESS_ADD = "MAStaffPM-000";
+    public const string ERROR_StaffPM_Exists = "ERStaffPM-000";
     // create sc in br:
     public const string ERROR_SC_CostNULL = "ERRSC_Cost-00";
     //check timeout session
@@ -720,7 +720,7 @@ public class ConstantsMessage
     public const string ERROR_PAYMENT_NOT_ACCELERATE = "ERPNACC-0001";
     public const string MESSAGE_PAYMENT_ACCELERATE_SUCCESS = "MPACCS-0000";
 
-    // Everis contract detail
+    // Staff contract detail
     public const string MESSAGE_EC_DETAIL_SUCCESS_ADD = "MECDSA-0000";
     public const string ERROR_ECDETAIL_NOTVALID = "EECD-0000";
     public const string ERROR_ECDETAIL_MAXENDDATE_SIGNATUREDATE = "EECD-0001";
@@ -806,7 +806,7 @@ public class ConstantsMessage
     public const string ERROR_FWC_OUTSIDE_HOURSPERDAY_REQUIRED = "ERFWC-0009";
     public const string ERROR_FWC_OUTSIDE_HOURSPERDAY_TYPE = "ERFWC-0010";
     public const string ERROR_FWC_WITHCATEGORY_TYPE = "ERFWC-0011";
-    public const string ERROR_FWC_EVERISLEADER_TYPE = "ERFWC-0012";
+    public const string ERROR_FWC_StaffLEADER_TYPE = "ERFWC-0012";
     public const string ERROR_FWC_ISPARTNER_TYPE = "ERFWC-0013";
     public const string ERROR_FWC_ISACTIVE_TYPE = "ERFWC-0014";
     public const string ERROR_FWC_NOTICEPERIOD_TYPE = "ERFWC-0015";
@@ -824,7 +824,7 @@ public class ConstantsMessage
     public const string ERROR_FWC_END_DATE_PERFORMANCE_TYPE = "ERFWC-0027";
     public const string ERROR_FWC_END_DATE_EXTENSION_TYPE = "ERFWC-0028";
     public const string ERROR_FWC_MF_CHARGEABILITY_TYPE = "ERFWC-0029";
-    public const string ERROR_FWC_EVERIS_INVOICING_ALL_TYPE = "ERFWC-0030";
+    public const string ERROR_FWC_Staff_INVOICING_ALL_TYPE = "ERFWC-0030";
     public const string ERROR_FWC_INDEXATION_REQUEST_DEADLINE_DATE_TYPE = "ERFWC-0031";
     public const string ERROR_FWC_INDEXATION_APPLICABLE_FROM_TYPE = "ERFWC-0032";
     public const string ERROR_FWC_REPORTING_CLIENT_TYPE = "ERFWC-0033";
@@ -832,7 +832,7 @@ public class ConstantsMessage
     public const string ERROR_FWC_ISCASCADE_TYPE = "ERFWC-0035";
     public const string ERROR_FWC_PTM_SURCHARGE_RATE_TYPE = "ERFWC-0036";
     public const string ERROR_FWC_WITHCATEGORY_REQUIRED = "ERFWC-0037";
-    public const string ERROR_FWC_EVERISLEADER_REQUIRED = "ERFWC-0038";
+    public const string ERROR_FWC_StaffLEADER_REQUIRED = "ERFWC-0038";
     public const string ERROR_FWC_ISACTIVE_REQUIRED = "ERFWC-0039";
     public const string ERROR_FWC_ISCASCADE_REQUIRED = "ERFWC-0040";
     public const string ERROR_FWC_PAYMENT_TERMS_ID_REQUIRED = "ERFWC-0041";

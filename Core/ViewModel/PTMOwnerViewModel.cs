@@ -9,7 +9,7 @@ public class PTMOwnerViewModel
     public string? BA { get; set; }
     public string? BICSW { get; set; }
     public double? VatRate { get; set; }
-    public bool IsEveris { get; set; }
+    public bool IsStaff { get; set; }
     public string? VatNumber { get; set; }
     public ApproverViewModel? Approver { get; set; }
 }

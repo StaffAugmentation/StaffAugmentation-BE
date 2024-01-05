@@ -309,15 +309,13 @@ public class SendEmail
     //    switch (FactoryConnection.db_Connection)
     //    {
     //        case DatabaseConnection.LOCALHOST:
-    //            return "http://localhost:59979/";
+    //            return "http://localhost:5000/";
+    //        case DatabaseConnection.TEST.PREPRODUCTION:
+    //            return "https://tst.staffaugmentation.com/";
     //        case DatabaseConnection.PREPRODUCTION:
-    //            return "https://tst_staffaugmentation.everis.com/";               
-    //        case DatabaseConnection.TEST:
-    //            return "http://81.19.99.18:7677/StaffAugmentation_Test/";
-    //        case DatabaseConnection.TEST_ACC:
-    //            return "https://acc_staffaugmentation.everis.com/";
+    //            return "https://pre.staffaugmentation.com/";
     //        case DatabaseConnection.PRODUCTION:
-    //            return "https://staffaugmentation.everis.com/";
+    //            return "https://staffaugmentation.com/";
     //        default: return string.Empty;
     //    }
 
@@ -330,12 +328,12 @@ public class SendEmail
     //        switch (FactoryConnection.db_Connection)
     //        {
     //            case DatabaseConnection.LOCALHOST:
-    //                return  "http://localhost:51975/";
+    //                return  "http://localhost:5005/";
     //            //case DatabaseConnection.TEST:
-    //            //    return "http://81.19.99.18:7677/StaffAugmentation_Test/";
+    //            //    return "";
 
     //            //case DatabaseConnection.PRODUCTION:
-    //            //    return "https://contractmanagement.everis.com/";
+    //            //    return "https://contractmanagement.com/";
     //            default: return string.Empty;
     //        }
     //    }

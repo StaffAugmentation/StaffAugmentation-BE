@@ -19,7 +19,7 @@ public partial class PTMOwner
     [Column("PTMOwner_VAT_Number")]
     public string? VatNumber { get; set; }
 
-    public bool IsEveris { get; set; }
+    public bool IsStaff { get; set; }
 
     [Column("IdApproverPTMOwner")]
     public int? ApproverId { get; set; }
